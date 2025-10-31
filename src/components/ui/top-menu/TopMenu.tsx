@@ -1,48 +1,43 @@
-import { ThemeSwitch } from '@/context/ThemeSwitsh'
+'use client'
+
+
+import { useUIStore } from '@/store/ui/ui-store'
+import Image from 'next/image'
 import Link from 'next/link'
-import { IoSearchOutline } from 'react-icons/io5'
 
 
-const TopMenu = () => {
+
+const Topmenu = () => {
+
+  const openSidemenu = useUIStore((state) => state.openSidemenu);
   return (
-    <nav className='flex justify-between items-center sm:py-10 '>
 
-      <div className=''>
-        <Link
-          href={'/'}>
-          Logo
+    <>
+      <div className='flex justify-between items-center p-2  mb-8 sm:mb-14'>
+        <Link href={'/'}>
+          <div className="relative w-[140px] h-[70px] sm:w-40 sm:h-20 md:w-[170px] md:h-[130px] lg:w-[220px] lg:h-20">
+            <Image
+              src="/imgs/logo-rumpke.png"
+              alt="Rumpke Immobilien Logo"
+              fill
+              priority
+              sizes="(max-width: 640px) 140px, (max-width: 768px) 200px, (max-width: 1024px) 260px, 320px"
+              className="object-contain"
+            />
+          </div>
         </Link>
+
+        <div className='flex items-center justify-center transition-all duration-300 ease-out rounded-md md:h-8 '>
+          <button
+            onClick={openSidemenu}
+            className='mx-2 md:hidden cursor-pointer'>
+            mennü
+          </button>
+        </div>
       </div>
 
-      <div className=' hidden sm:block'>
-
-        <Link className="m-2 p-2 rounded-md transition-all duration-300 ease-out text-xs hover:bg-Bghover-l dark:hover:bg-Bghover-d" href={'/object/wohnungen'}>
-          Wohnung
-        </Link>
-        <Link className="m-2 p-2 rounded-md transition-all duration-300 ease-out text-xs hover:bg-Bghover-l dark:hover:bg-Bghover-d" href={'/object/haus'}>
-          Haus
-        </Link>
-        <Link className="m-2 p-2 rounded-md transition-all duration-300 ease-out text-xs hover:bg-Bghover-l dark:hover:bg-Bghover-d" href={'/object/luxus'}>
-          Luxus
-        </Link>
-        <Link className="m-2 p-2 rounded-md transition-all duration-300 ease-out text-xs hover:bg-Bghover-l dark:hover:bg-Bghover-d" href={'/object/auf-karte-erkunden'}>
-          Auf Karte erkunden
-        </Link>
-
-        <ThemeSwitch />
-      </div>
-      <div className='flex items-center justify-center gap-2 bg-primary dark:bg-primary-dark px-2 text-white transition-all duration-300 ease-out rounded-md md:h-8'>
-        <Link href={'/suchen'} className='flex items-center justify-center p-2 cursor-pointer text-xs'>
-          <IoSearchOutline className='w-5 h-5' />
-        </Link>
-        <span className='flex items-center justify-center text-lg  mx-2'>|</span>
-        <button className='flex items-center justify-center p-2 cursor-pointer text-xs'>
-          Menü
-        </button>
-      </div>
-
-    </nav>
+    </>
   )
 }
 
-export default TopMenu
+export default Topmenu

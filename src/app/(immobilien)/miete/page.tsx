@@ -2,7 +2,7 @@
 export default function() {
   return (
     <div>
-      <h1>Auf Karte erkunden</h1>
+      <h1>Hello Miete Page</h1>
     </div>
   );
 }

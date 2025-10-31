@@ -6,15 +6,14 @@ interface Props {
   className?: string;
 }
 
-const Title = ({ title, subtitle, className }: Props) => {
+export const Title = ({ title, subtitle, className }: Props) => {
   return (
-    <div className={`mt-3 ${className}`}>
-      <h1 className="antialiased text-2xl font-bold my-10 ">{title}</h1>
+    <div className={`${className}  `}>
+      <h1 className="antialiased text-2xl font-bold text-primary">{title}</h1>
 
-
-      {subtitle && <h2 className="antialiased font-semibold  ">{subtitle}</h2>}
+      {subtitle && <h2 className="antialiased font-semibold">{subtitle}</h2>}
     </div>
   )
 }
 
-export default Title
+

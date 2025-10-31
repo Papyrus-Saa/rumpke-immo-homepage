@@ -1,23 +1,23 @@
 import Link from "next/link"
 
 
-const BottomMenu = () => {
+const Bottomwonungenu = () => {
   return (
-    <nav className="hidden sm:flex fixed bottom-0 right-1/2 transform translate-x-1/2">
+    <nav className="hidden w-full sm:hidden fixed top-0 right-1/2 transform translate-x-1/2 bg-primary dark:bg-primary-dark text-white  justify-end items-center">
 
-      <Link className="m-2 p-2  text-xs" href={'/dienstleistungen'}>
+      <Link className="p-2 mr-2 text-xs" href={'/dienstleistungen'}>
         Dienstleistungen
       </Link>
-      <Link className="m-2 p-2  text-xs" href={'/blog'}>
+      <Link className="p-2 mr-2 text-xs" href={'/blog'}>
         Blog
       </Link>
-      <Link className="m-2 p-2  text-xs" href={'/ueber-uns'}>
+      <Link className="p-2 mr-2 text-xs" href={'/ueber-uns'}>
         Über uns
       </Link>
-      <Link className="m-2 p-2  text-xs" href={'/immobilien-bewerten'}>
+      <Link className="p-2 mr-2 text-xs" href={'/immobilien-bewerten'}>
         Immobilienbewertung
       </Link>
-      <Link className="m-2 p-2  text-xs" href={'/kontakt'}>
+      <Link className="p-2 mr-2 text-xs" href={'/kontakt'}>
         Kontakt
       </Link>
 
@@ -25,4 +25,4 @@ const BottomMenu = () => {
   )
 }
 
-export default BottomMenu
+export default Bottomwonungenu
