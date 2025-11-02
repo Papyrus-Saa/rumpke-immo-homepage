@@ -14,7 +14,7 @@ const CategoryButton = ({ name, href, color = "bg-primary", className }: Categor
   return (
     <Link
       href={href}
-      className={`flex items-center justify-center gap-2 px-4 transition-all border-b-2  duration-200 hover:scale-105 ${color} ${className || ""}`}
+      className={`flex items-center justify-center gap-2 px-4 transition-all border-l-4 rounded  duration-200 hover:scale-105 ${color} ${className || ""}`}
     >
 
       {name}

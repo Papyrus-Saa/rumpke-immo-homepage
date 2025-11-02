@@ -6,13 +6,14 @@ export interface Property {
     images: string[];
     inStock: number;
     price: number;
-    sizes: ValidSizes[];
+    sizes: squareMeters[];
     slug: string;
     tags: string[];
     title: string;
-    type: ValidTypes;
-    gender: 'men'|'women'|'kid'|'unisex'
+    type: Typ;
+    gender: PropertyCategory;
 }
 
-export type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
-export type ValidTypes = 'shirts'|'pants'|'hoodies'|'hats';
+export type PropertyCategory = 'wohnung'|'haus'|'luxus'|'auf-karte-erkunden';
+export type squareMeters = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
+export type Typ = 'shirts'|'pants'|'hoodies'|'hats';

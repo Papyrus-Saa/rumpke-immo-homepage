@@ -31,7 +31,7 @@ const Sidebar = () => {
 
       <nav className={
         clsx(
-          "fixed p-3 right-0 top-0 w-[70%] h-screen bg-bg-l dark:bg-bg-d z-20 shadow-2xl transform transition-all duration-300",
+          "fixed p-3 right-0 top-0 w-[80%] h-screen bg-bg-l dark:bg-bg-d z-20 shadow-2xl transform transition-all duration-300",
           {
             "translate-x-full": !isSidemenuOpen,
           }
@@ -60,7 +60,7 @@ const Sidebar = () => {
         </div>
 
         <SidebarItem href="/" icon={<IoPersonOutline size={20} className="mr-2" />}>Profil</SidebarItem>
-        <SidebarItem href="/object/wohnungen" icon={<IoHomeOutline size={20} className="mr-2" />}>Wohnung</SidebarItem>
+        <SidebarItem href="/object/wohnung" icon={<IoHomeOutline size={20} className="mr-2" />}>Wohnung</SidebarItem>
         <SidebarItem href="/object/haus" icon={<IoBusinessOutline size={20} className="mr-2" />}>Haus</SidebarItem>
         <SidebarItem href="/object/luxus" icon={<IoStarOutline size={20} className="mr-2" />}>Luxus</SidebarItem>
         <SidebarItem href="/object/auf-karte-erkunden" icon={<IoMapOutline size={20} className="mr-2" />}>Auf Karte erkunden</SidebarItem>

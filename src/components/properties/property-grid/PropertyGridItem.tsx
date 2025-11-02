@@ -33,7 +33,7 @@ const PropertyGridItem = ({ property }: Props) => {
           className="mb-2 hover:text-blue-700 hover:underline truncate">
           {property.title}
         </Link>
-        <div className="text-primary   font-bold">
+        <div className="text-primary  font-bold">
           {property.price.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}
         </div>
         {/* <span>{property.location}</span>

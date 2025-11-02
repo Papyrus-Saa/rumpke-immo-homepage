@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <div className="bg-bg-l text-zinc-900 dark:bg-bg-d dark:text-white  transition-colors duration-100 ease-out">
+          <div className="bg-bg-l text-zinc-900 dark:bg-bg-d dark:text-white  transition-colors duration-100 ease-out xl:px-20 2xl:px-40">
             {children}
           </div>
         </ThemeProvider>

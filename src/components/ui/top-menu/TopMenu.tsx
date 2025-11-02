@@ -31,7 +31,7 @@ const Topmenu = () => {
           <button
             onClick={openSidemenu}
             className='mx-2 md:hidden cursor-pointer'>
-            mennü
+            Menü
           </button>
         </div>
       </div>

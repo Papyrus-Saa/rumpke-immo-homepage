@@ -16,14 +16,9 @@ const SidebarDesktop = () => {
   return (
 
     <nav className="hidden md:block  h-screen sticky top-0">
-      {/* <Title
-        title="Aktuelle Immobilien"
-        subtitle="Unsere Objekte im Überblick"
-        className="mb-5 md:hidden"
-      /> */}
 
       <SidebarItem href="/" icon={<IoPersonOutline size={20} />} >Profil</SidebarItem>
-      <SidebarItem href="/object/wohnungen" icon={<IoHomeOutline size={20} />} >Wohnung</SidebarItem>
+      <SidebarItem href="/object/wohnung" icon={<IoHomeOutline size={20} />} >Wohnung</SidebarItem>
       <SidebarItem href="/object/haus" icon={<IoBusinessOutline size={20} />} >Haus</SidebarItem>
       <SidebarItem href="/object/luxus" icon={<IoStarOutline size={20} />} >Luxus</SidebarItem>
       <SidebarItem href="/object/auf-karte-erkunden" icon={<IoMapOutline size={20} />} >Auf Karte erkunden</SidebarItem>
