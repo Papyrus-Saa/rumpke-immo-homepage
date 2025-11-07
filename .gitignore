@@ -3,7 +3,7 @@
 # dependencies
 
 .env
-/postgres
+
 
 /node_modules
 /.pnp
