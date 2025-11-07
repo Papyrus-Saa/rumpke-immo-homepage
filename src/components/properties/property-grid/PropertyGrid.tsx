@@ -1,22 +1,18 @@
 import { Property } from "@/interfaces/property-interface"
 import PropertyGridItem from "./PropertyGridItem"
 import Input from "@/components/ui/input/Input"
-import { Title } from "@/components/ui/title/Title"
 
 
 
 
 interface Props {
-  properties: Property[]
+  properties: Property[];
+  title?: string;
 }
 
-const PropertyGrid = ({ properties }: Props) => {
+const PropertyGrid = ({ properties, title }: Props) => {
   return (
-    <div className="">
-      <Title
-        title="Wilkommen bei Rumpke Immobilien"
-        className="bg-primary dark:bg-primary-dark text-white px-3 rounded mb-2"
-      />
+    <div className="rounded-md">
       <Input />
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 sm:place-items-center">
         {properties.map(property => (

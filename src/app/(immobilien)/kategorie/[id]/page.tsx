@@ -1,8 +1,10 @@
+
+
 import PropertyGrid from "@/components/properties/property-grid/PropertyGrid";
 import { Title } from "@/components/ui/title/Title";
-import { Property, PropertyCategory } from "@/interfaces/property-interface";
+import { PropertyCategory } from "@/interfaces/property-interface";
 import { initialData } from "@/seed/seed";
-import { notFound } from "next/navigation";
+
 
 
 const seedProperties = initialData.properties;
@@ -14,9 +16,6 @@ interface Props {
   }
 }
 
-
-
-
 export default async function ({ params }: Props) {
 
   const { id } = await params;
@@ -26,16 +25,16 @@ export default async function ({ params }: Props) {
     'wohnung': 'Wohnungen',
     'haus': 'Häuser',
     'luxus': 'Luxusimmobilien',
-    'auf-karte-erkunden': 'Alle Immobilien'
+    'alle-immobilien': 'Alle Immobilien',
   }
 
 
   return (
-    <div className="">
+    <div className="xl:px-12">
       <Title
         title={`${labels[id]}`}
         subtitle=""
-        className="mb-2 bg-primary dark:bg-primary-dark text-white px-3 rounded"
+        className="mb-1 bg-primary dark:bg-primary-dark text-white px-3 rounded w-full"
       />
 
       <PropertyGrid

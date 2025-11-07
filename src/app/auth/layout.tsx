@@ -1,12 +1,16 @@
 
 export default function PropertiesLayout({
- children
+  children
 }: {
- children: React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
-    <main className="bg-blue-900">
-      {children}
+    <main className="flex justify-center">
+
+      <div className="w-full md:w-[500px]">
+
+        {children}
+      </div>
     </main>
   );
 }

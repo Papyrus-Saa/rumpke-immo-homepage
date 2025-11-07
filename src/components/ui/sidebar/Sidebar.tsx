@@ -6,6 +6,7 @@ import { IoCloseOutline, IoPersonOutline, IoSearchOutline, IoHomeOutline, IoBusi
 import { ThemeSwitch } from "@/context/ThemeSwitsh";
 import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
+import { IoAlbumsOutline } from "react-icons/io5";
 
 
 const Sidebar = () => {
@@ -59,18 +60,18 @@ const Sidebar = () => {
 
         </div>
 
+
+
         <SidebarItem href="/" icon={<IoPersonOutline size={20} className="mr-2" />}>Profil</SidebarItem>
-        <SidebarItem href="/object/wohnung" icon={<IoHomeOutline size={20} className="mr-2" />}>Wohnung</SidebarItem>
-        <SidebarItem href="/object/haus" icon={<IoBusinessOutline size={20} className="mr-2" />}>Haus</SidebarItem>
-        <SidebarItem href="/object/luxus" icon={<IoStarOutline size={20} className="mr-2" />}>Luxus</SidebarItem>
-        <SidebarItem href="/object/auf-karte-erkunden" icon={<IoMapOutline size={20} className="mr-2" />}>Auf Karte erkunden</SidebarItem>
-
-        <hr className="my-4 border-primary dark:border-primary-dark" />
-
-        <SidebarItem href="/ueber-uns" icon={<IoChatbubbleEllipsesOutline size={20} className="mr-2" />}>Über uns</SidebarItem>
-        <SidebarItem href="/kontakt" icon={<IoMailOutline size={20} className="mr-2" />}>Kontakt</SidebarItem>
+        <SidebarItem href="/auf-karte-erkunden" icon={<IoMapOutline size={20} className="mr-2" />}>Auf Karte erkunden</SidebarItem>
+        <SidebarItem href="/kategorie/wohnung" icon={<IoHomeOutline size={20} className="mr-2" />}>Wohnung</SidebarItem>
+        <SidebarItem href="/kategorie/haus" icon={<IoBusinessOutline size={20} className="mr-2" />}>Haus</SidebarItem>
+        <SidebarItem href="/kategorie/luxus" icon={<IoStarOutline size={20} className="mr-2" />}>Luxus</SidebarItem>
+        <SidebarItem href="/kategorie/alle-immobilien" icon={<IoAlbumsOutline size={20} className="mr-2" />}>Alle Immobilien</SidebarItem>
         <SidebarItem href="/immobilien-bewerten" icon={<IoBarChartOutline size={20} className="mr-2" />}>Immobilien bewerten</SidebarItem>
         <SidebarItem href="/dienstleistungen" icon={<IoBriefcaseOutline size={20} className="mr-2" />}>Dienstleistungen</SidebarItem>
+        <SidebarItem href="/ueber-uns" icon={<IoChatbubbleEllipsesOutline size={20} className="mr-2" />}>Über uns</SidebarItem>
+        <SidebarItem href="/kontakt" icon={<IoMailOutline size={20} className="mr-2" />}>Kontakt</SidebarItem>
         <SidebarItem href="/blog" icon={<IoDiamondOutline size={20} className="mr-2" />}>Blog</SidebarItem>
 
         <div className=" flex flex-col gap-2">

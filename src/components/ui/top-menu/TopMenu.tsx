@@ -2,8 +2,9 @@
 
 
 import { useUIStore } from '@/store/ui/ui-store'
-import Image from 'next/image'
+import { RumpkeLogo } from '@/components/ui/logo/RumpkeLogo'
 import Link from 'next/link'
+import CategoryButton from '../category-button/CategoryButton'
 
 
 
@@ -13,26 +14,32 @@ const Topmenu = () => {
   return (
 
     <>
-      <div className='flex justify-between items-center p-2  mb-8 sm:mb-14'>
+      <div className='flex justify-between items-center md:mb-8 py-2'>
         <Link href={'/'}>
-          <div className="relative w-[140px] h-[70px] sm:w-40 sm:h-20 md:w-[170px] md:h-[130px] lg:w-[220px] lg:h-20">
-            <Image
-              src="/imgs/logo-rumpke.png"
-              alt="Rumpke Immobilien Logo"
-              fill
-              priority
-              sizes="(max-width: 640px) 140px, (max-width: 768px) 200px, (max-width: 1024px) 260px, 320px"
-              className="object-contain"
-            />
+          <div className="w-40 h-10 sm:w-65 sm:h-25 flex items-center">
+            <RumpkeLogo className="w-full h-full" aria-label="Rumpke Immobilien Logo" />
           </div>
         </Link>
 
-        <div className='flex items-center justify-center transition-all duration-300 ease-out rounded-md md:h-8 '>
-          <button
-            onClick={openSidemenu}
-            className='mx-2 md:hidden cursor-pointer'>
-            Menü
-          </button>
+        <div className='flex'>
+          <CategoryButton
+            name="Kauf"
+            href="/kauf"
+            color="border-btn-buy hover:bg-btn-buy hover:text-white mr-1"
+          />
+          <CategoryButton
+            name="Miete"
+            href="/miete"
+            color="border-btn-rent hover:bg-btn-rent hover:text-white mr-1"
+          />
+
+          <div className='flex items-center justify-center transition-all duration-300 ease-out rounded-md md:h-8 '>
+            <button
+              onClick={openSidemenu}
+              className='mx-2 md:hidden cursor-pointer'>
+              Menü
+            </button>
+          </div>
         </div>
       </div>
 

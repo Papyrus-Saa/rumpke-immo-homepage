@@ -8,7 +8,7 @@ interface Seedproperty {
   tags: string[];
   title: string;
   type: ValidTypes;
-  gender: 'wohnung' | 'haus' | 'luxus' | 'auf-karte-erkunden'
+  gender: 'wohnung' | 'haus' | 'luxus' | 'alle-immobilien'
 }
 
 type ValidSizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
@@ -326,7 +326,7 @@ export const initialData: SeedData = {
       gender: 'wohnung'
     },
     {
-      description: "Introducing the Tesla Chill Collection. The Chill Pullover Hoodie has a premium, heavyweight exterior and soft fleece interior for comfort in any season. The auf-karte-erkunden hoodie features subtle thermoplastic polyurethane Tesla logos across the chest and on the sleeve, a double layer single seam hood and pockets with custom matte zipper pulls. Made from 60% cotton and 40% recycled polyester.",
+      description: "Introducing the Tesla Chill Collection. The Chill Pullover Hoodie has a premium, heavyweight exterior and soft fleece interior for comfort in any season. The alle-immobilien hoodie features subtle thermoplastic polyurethane Tesla logos across the chest and on the sleeve, a double layer single seam hood and pockets with custom matte zipper pulls. Made from 60% cotton and 40% recycled polyester.",
       images: [
         '1740051-00-A_0_2000.jpg',
         '1740051-00-A_1.jpg',
@@ -338,7 +338,7 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: "Chill Pullover Hoodie",
-      gender: 'auf-karte-erkunden'
+      gender: 'alle-immobilien'
     },
     {
       description: "Introducing the Tesla Chill Collection. The wohnung's Chill Full Zip Hoodie has a premium, heavyweight exterior and soft fleece interior for comfort in any season. The hoodie features subtle thermoplastic polyurethane Tesla logos on the left chest and sleeve, a double layer single seam hood and pockets with custom matte zipper pulls. Made from 60% cotton and 40% recycled polyester.",
@@ -386,7 +386,7 @@ export const initialData: SeedData = {
       gender: 'wohnung'
     },
     {
-      description: "The auf-karte-erkunden 3D Large Wordmark Pullover Hoodie features soft fleece and an adjustable, jersey-lined hood for comfort and coverage. Designed in a auf-karte-erkunden style, the pullover hoodie includes a tone-on-tone 3D silicone-printed wordmark across the chest.",
+      description: "The alle-immobilien 3D Large Wordmark Pullover Hoodie features soft fleece and an adjustable, jersey-lined hood for comfort and coverage. Designed in a alle-immobilien style, the pullover hoodie includes a tone-on-tone 3D silicone-printed wordmark across the chest.",
       images: [
         '8529107-00-A_0_2000.jpg',
         '8529107-00-A_1.jpg',
@@ -398,10 +398,10 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: "3D Large Wordmark Pullover Hoodie",
-      gender: 'auf-karte-erkunden'
+      gender: 'alle-immobilien'
     },
     {
-      description: "As with the iconic Tesla logo, the Cybertruck Graffiti Hoodie is a classic in the making. auf-karte-erkunden style featuring soft fleece and an adjustable, jersey-lined hood for comfortable coverage.",
+      description: "As with the iconic Tesla logo, the Cybertruck Graffiti Hoodie is a classic in the making. alle-immobilien style featuring soft fleece and an adjustable, jersey-lined hood for comfortable coverage.",
       images: [
         '7654420-00-A_0_2000.jpg',
         '7654420-00-A_1_2000.jpg',
@@ -413,7 +413,7 @@ export const initialData: SeedData = {
       type: 'hoodies',
       tags: ['hoodie'],
       title: "Cybertruck Graffiti Hoodie",
-      gender: 'auf-karte-erkunden'
+      gender: 'alle-immobilien'
     },
     {
       description: "The Relaxed T Logo Hat is a classic silhouette combined with modern details, featuring a 3D T logo and a custom metal buckle closure. The ultrasoft design is flexible and abrasion resistant, while the inner sweatband includes quilted padding for extra comfort and moisture wicking. The visor is fully made from recycled plastic bottles. 100% Cotton.",
@@ -428,7 +428,7 @@ export const initialData: SeedData = {
       type: 'hats',
       tags: ['hats'],
       title: "Relaxed T Logo Hat",
-      gender: 'auf-karte-erkunden'
+      gender: 'alle-immobilien'
     },
     {
       description: "The Relaxed T Logo Hat is a classic silhouette combined with modern details, featuring a 3D T logo and a custom metal buckle closure. The ultrasoft design is flexible and abrasion resistant, while the inner sweatband includes quilted padding for extra comfort and moisture wicking. The visor is fully made from recycled plastic bottles. 100% Cotton.",
@@ -443,7 +443,7 @@ export const initialData: SeedData = {
       type: 'hats',
       tags: ['hats'],
       title: "Thermal Cuffed Beanie",
-      gender: 'auf-karte-erkunden'
+      gender: 'alle-immobilien'
     },
     {
       description: "The haus's Cropped Puffer Jacket features a uniquely cropped silhouette for the perfect, modern style while on the go during the cozy season ahead. The puffer features subtle silicone injected Tesla logos below the back collar and on the right sleeve, custom matte metal zipper pulls and a soft, fleece lined collar. Made from 87% nylon and 13% polyurethane.",

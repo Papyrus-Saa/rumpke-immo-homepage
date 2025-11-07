@@ -12,13 +12,14 @@ interface CategoryButtonProps {
 
 const CategoryButton = ({ name, href, color = "bg-primary", className }: CategoryButtonProps) => {
   return (
-    <Link
+   <button>
+     <Link
       href={href}
       className={`flex items-center justify-center gap-2 px-4 transition-all border-l-4 rounded  duration-200 hover:scale-105 ${color} ${className || ""}`}
     >
-
       {name}
     </Link>
+   </button>
   );
 }
 
