@@ -35,7 +35,7 @@ export const ThemeSwitch = () => {
           <RiMoonClearLine className="w-4 h-4 text-white transition-transform duration-200 ease-out hover:rotate-12" />
         )}
       </button>
-      <span className="ml-2 text-xs">Hell | Dunkel</span>
+      <span className="ml-2">Hell | Dunkel</span>
     </div>
   );
 }

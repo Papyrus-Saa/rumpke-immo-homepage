@@ -22,7 +22,7 @@ const SidebarDesktop = () => {
         className='flex-1 text-primary mb-14'
       />
 
-      <SidebarItem href="/" icon={<IoPersonOutline size={20} />} >Profil</SidebarItem>
+
       <SidebarItem href="/auf-karte-erkunden" icon={<IoMapOutline size={20} />} >Auf Karte erkunden</SidebarItem>
       <SidebarItem href="/kategorie/wohnung" icon={<IoHomeOutline size={20} />} >Wohnung</SidebarItem>
       <SidebarItem href="/kategorie/haus" icon={<IoBusinessOutline size={20} />} >Haus</SidebarItem>
@@ -32,15 +32,9 @@ const SidebarDesktop = () => {
       <SidebarItem href="/dienstleistungen" icon={<IoBriefcaseOutline size={20} />} >Dienstleistungen</SidebarItem>
       <SidebarItem href="/ueber-uns" icon={<IoChatbubbleEllipsesOutline size={20} />} >Über uns</SidebarItem>
       <SidebarItem href="/kontakt" icon={<IoMailOutline size={20} />} >Kontakt</SidebarItem>
-
-      <div className="flex flex-col justify-end ">
-        <SidebarItem href="/auth/anmelden" icon={<IoLogInOutline size={20} className="text-primary" />}>Anmelden</SidebarItem>
-        <SidebarItem href="/auth/abmelden" icon={<IoLogOutOutline size={20} className="text-red-600" />}>Abmelden</SidebarItem>
-        <div className="flex py-2 justify-start items-center hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded">
-          <ThemeSwitch />
-        </div>
+      <div className="flex py-1 mt-3 justify-start items-center hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded">
+        <ThemeSwitch />
       </div>
-
     </nav>
 
   )

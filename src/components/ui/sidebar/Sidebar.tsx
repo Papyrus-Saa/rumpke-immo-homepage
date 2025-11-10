@@ -2,7 +2,7 @@
 
 
 import SidebarItem from "./SidebarItem";
-import { IoCloseOutline, IoPersonOutline, IoSearchOutline, IoHomeOutline, IoBusinessOutline, IoDiamondOutline, IoMapOutline, IoLogInOutline, IoLogOutOutline, IoChatbubbleEllipsesOutline, IoBriefcaseOutline, IoStarOutline, IoMailOutline, IoBarChartOutline } from "react-icons/io5"
+import { IoCloseOutline, IoPersonOutline, IoSearchOutline, IoHomeOutline, IoBusinessOutline, IoDiamondOutline, IoMapOutline,IoChatbubbleEllipsesOutline, IoBriefcaseOutline, IoStarOutline, IoMailOutline, IoBarChartOutline } from "react-icons/io5"
 import { ThemeSwitch } from "@/context/ThemeSwitsh";
 import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
@@ -62,7 +62,7 @@ const Sidebar = () => {
 
 
 
-        <SidebarItem href="/" icon={<IoPersonOutline size={20} className="mr-2" />}>Profil</SidebarItem>
+
         <SidebarItem href="/auf-karte-erkunden" icon={<IoMapOutline size={20} className="mr-2" />}>Auf Karte erkunden</SidebarItem>
         <SidebarItem href="/kategorie/wohnung" icon={<IoHomeOutline size={20} className="mr-2" />}>Wohnung</SidebarItem>
         <SidebarItem href="/kategorie/haus" icon={<IoBusinessOutline size={20} className="mr-2" />}>Haus</SidebarItem>
@@ -74,12 +74,8 @@ const Sidebar = () => {
         <SidebarItem href="/kontakt" icon={<IoMailOutline size={20} className="mr-2" />}>Kontakt</SidebarItem>
         <SidebarItem href="/blog" icon={<IoDiamondOutline size={20} className="mr-2" />}>Blog</SidebarItem>
 
-        <div className=" flex flex-col gap-2">
-          <SidebarItem href="/auth/anmelden" icon={<IoLogInOutline size={20} className="mr-2 text-primary" />}>Anmelden</SidebarItem>
-          <SidebarItem href="/auth/abmelden" icon={<IoLogOutOutline size={20} className="mr-2 text-red-600" />}>Abmelden</SidebarItem>
-          <div className="flex p-2 justify-start items-center">
-            <ThemeSwitch />
-          </div>
+        <div className="flex py-1 mt-3 justify-start items-center hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded">
+          <ThemeSwitch />
         </div>
 
       </nav>

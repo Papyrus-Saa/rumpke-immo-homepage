@@ -5,6 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { BorderBars } from "@/components/ui/border-bars/BorderBars";
 import CompanyTitle from "@/components/ui/companyTitle/CompanyTitle";
+import LanguageSwitcher from "@/components/ui/Language-switcher/LanguageSwitcher";
 
 
 const geistSans = Geist({
@@ -31,6 +32,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ThemeProvider>
           <BorderBars />
           <div className="bg-bg-l text-zinc-800 dark:bg-bg-d dark:text-zinc-100  transition-colors duration-100 ease-out xl:px-6">
+          <LanguageSwitcher
+          />
             {children}
           </div>
           <CompanyTitle/>

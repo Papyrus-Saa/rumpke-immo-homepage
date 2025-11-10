@@ -5,6 +5,7 @@ import Sidebar from "@/components/ui/sidebar/Sidebar";
 import SidebarDesktop from "@/components/ui/sidebar/SidebarDesktop";
 import { Title } from "@/components/ui/title/Title";
 
+
 import Topmenu from "@/components/ui/top-menu/TopMenu";
 
 
@@ -19,7 +20,7 @@ export default function PropertiesLayout({ children }: { children: React.ReactNo
           <Topmenu />
         </div>
 
-        <div className="px-4">
+        <div className="md:px-4">
           <Title
             title="Rumpke Immobilien"
             subtitle="Finde deine Traumimmobilie"
