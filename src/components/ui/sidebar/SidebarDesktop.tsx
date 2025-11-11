@@ -4,7 +4,7 @@
 
 import SidebarItem from "./SidebarItem";
 import { useState } from "react";
-import {  IoHomeOutline, IoBusinessOutline,  IoMapOutline, IoChatbubbleEllipsesOutline, IoBriefcaseOutline, IoStarOutline, IoMailOutline, IoAlbumsOutline, IoChevronForwardOutline } from "react-icons/io5"
+import { IoHomeOutline, IoBusinessOutline, IoMapOutline, IoChatbubbleEllipsesOutline, IoBriefcaseOutline, IoStarOutline, IoMailOutline, IoAlbumsOutline, IoChevronForwardOutline } from "react-icons/io5"
 import { ThemeSwitch } from "@/context/ThemeSwitsh";
 import LanguageSwitcher from "@/components/ui/Language-switcher/LanguageSwitcher";
 import { IoLanguageOutline } from "react-icons/io5";
@@ -28,8 +28,8 @@ const SidebarDesktop = () => {
 
 
       <SidebarItem href="/auf-karte-erkunden" icon={<IoMapOutline size={20} />} >Auf Karte erkunden</SidebarItem>
-      <SidebarItem href="/kategorie/wohnung" icon={<IoHomeOutline size={20} />} >Wohnung</SidebarItem>
-      <SidebarItem href="/kategorie/haus" icon={<IoBusinessOutline size={20} />} >Haus</SidebarItem>
+      <SidebarItem href="/kategorie/wohnung" icon={<IoBusinessOutline size={20} />} >Wohnung</SidebarItem>
+      <SidebarItem href="/kategorie/haus" icon={<IoHomeOutline size={20} />} >Haus</SidebarItem>
       <SidebarItem href="/kategorie/luxus" icon={<IoStarOutline size={20} />} >Luxus</SidebarItem>
       <SidebarItem href="/kategorie/alle-immobilien" icon={<IoAlbumsOutline size={20} />} >Alle Immobilien</SidebarItem>
       <button

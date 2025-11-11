@@ -11,7 +11,7 @@ const properties = initialData.properties;
 
 export default function Home() {
   return (
-    <div className="px-2 xl:px-32">
+    <div className="px-2">
       <PropertyGrid properties={properties} />
     </div>
   );

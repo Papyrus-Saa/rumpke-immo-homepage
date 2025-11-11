@@ -30,7 +30,7 @@ export default async function ({ params }: Props) {
 
 
   return (
-    <div className="xl:px-12">
+    <div className="">
       <Title
         title={`${labels[id]}`}
         subtitle=""
