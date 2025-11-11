@@ -19,7 +19,7 @@ export const ThemeSwitch = () => {
 
   return (
     <div
-    className='flex items-center cursor-pointer w-full'
+    className='flex items-center cursor-pointer w-full select-none'
       onClick={toggleTheme}
     >
       <button

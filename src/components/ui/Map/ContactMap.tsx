@@ -35,7 +35,7 @@ export default function ContactMap() {
   }, []);
 
   return (
-    <div className="w-full h-full rounded-2xl overflow-hidden shadow-lg dark:shadow-[0_4px_32px_0_rgba(0,0,0,0.7)] border border-primary/20 bg-white/70 dark:bg-bg-d/70">
+    <div className="w-full h-full rounded overflow-hidden shadow-lg dark:shadow-[0_4px_32px_0_rgba(0,0,0,0.7)] bg-white/70 dark:bg-bg-d/70">
       <MapContainer
         center={position}
         zoom={16}
@@ -43,13 +43,14 @@ export default function ContactMap() {
         className="w-full h-full"
         style={{ minHeight: 300, height: "100%", width: "100%", maxHeight: 480 }}
         attributionControl={false}
-        // @ts-expect-error: react-leaflet types are incorrect, event is passed
-        whenReady={(event) => {
-          const map = event.target;
-          mapRef.current = map;
-          setTimeout(() => {
-            map.invalidateSize();
-          }, 300);
+
+        whenReady={() => {
+          const map = mapRef.current;
+          if (map) {
+            setTimeout(() => {
+              map.invalidateSize();
+            }, 300);
+          }
         }}
       >
         <TileLayer

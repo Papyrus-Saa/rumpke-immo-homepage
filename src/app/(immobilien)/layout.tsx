@@ -29,7 +29,7 @@ export default function PropertiesLayout({ children }: { children: React.ReactNo
           <Sidebar />
           <div className="flex">
             <SidebarDesktop />
-            <div className="flex-1">
+            <div className="flex-1 max-w-[1500px] mx-auto">
               {children}
             </div>
           </div>

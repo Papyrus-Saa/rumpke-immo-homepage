@@ -3,8 +3,11 @@
 
 
 import SidebarItem from "./SidebarItem";
-import { IoPersonOutline, IoHomeOutline, IoBusinessOutline, IoDiamondOutline, IoMapOutline, IoLogInOutline, IoLogOutOutline, IoChatbubbleEllipsesOutline, IoBriefcaseOutline, IoStarOutline, IoMailOutline, IoBarChartOutline, IoAlbumsOutline } from "react-icons/io5"
+import { useState } from "react";
+import {  IoHomeOutline, IoBusinessOutline,  IoMapOutline, IoChatbubbleEllipsesOutline, IoBriefcaseOutline, IoStarOutline, IoMailOutline, IoAlbumsOutline, IoChevronForwardOutline } from "react-icons/io5"
 import { ThemeSwitch } from "@/context/ThemeSwitsh";
+import LanguageSwitcher from "@/components/ui/Language-switcher/LanguageSwitcher";
+import { IoLanguageOutline } from "react-icons/io5";
 import { Title } from "../title/Title";
 
 
@@ -12,8 +15,9 @@ import { Title } from "../title/Title";
 const SidebarDesktop = () => {
 
 
-  return (
+  const [openDienstleistungen, setOpenDienstleistungen] = useState(false);
 
+  return (
     <nav className="hidden md:block  h-screen sticky top-0 px-2 py-6">
 
       <Title
@@ -28,10 +32,37 @@ const SidebarDesktop = () => {
       <SidebarItem href="/kategorie/haus" icon={<IoBusinessOutline size={20} />} >Haus</SidebarItem>
       <SidebarItem href="/kategorie/luxus" icon={<IoStarOutline size={20} />} >Luxus</SidebarItem>
       <SidebarItem href="/kategorie/alle-immobilien" icon={<IoAlbumsOutline size={20} />} >Alle Immobilien</SidebarItem>
-      <SidebarItem href="/immobilien-bewerten" icon={<IoBarChartOutline size={20} />} >Immobilien bewerten</SidebarItem>
-      <SidebarItem href="/dienstleistungen" icon={<IoBriefcaseOutline size={20} />} >Dienstleistungen</SidebarItem>
+      <button
+        type="button"
+        className="flex items-center mt-4 pl-1 py-1 w-full hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded transition-all cursor-pointer focus:outline-none"
+        onClick={() => setOpenDienstleistungen((v) => !v)}
+      >
+        <IoBriefcaseOutline size={20} className="mr-2" />
+        <span>Dienstleistungen</span>
+        <IoChevronForwardOutline size={16} className={`ml-auto transition-transform ${openDienstleistungen ? 'rotate-90' : ''}`} />
+      </button>
+      {openDienstleistungen && (
+        <div className="ml-8 mt-1 space-y-1">
+          <SidebarItem href="/dienstleistungen/verkauf-vermietung" icon={<IoChevronForwardOutline size={14} className="mr-2 text-primary/80" />}>
+            Verkauf & Vermietung
+          </SidebarItem>
+          <SidebarItem href="/dienstleistungen/immobilienbewertung" icon={<IoChevronForwardOutline size={14} className="mr-2 text-primary/80" />}>
+            Immobilienbewertung
+          </SidebarItem>
+          <SidebarItem href="/dienstleistungen/immobilien-kauf" icon={<IoChevronForwardOutline size={14} className="mr-2 text-primary/80" />}>
+            Immobilienkauf
+          </SidebarItem>
+        </div>
+      )}
       <SidebarItem href="/ueber-uns" icon={<IoChatbubbleEllipsesOutline size={20} />} >Über uns</SidebarItem>
       <SidebarItem href="/kontakt" icon={<IoMailOutline size={20} />} >Kontakt</SidebarItem>
+      <SidebarItem
+        href="#"
+        icon={<IoLanguageOutline size={20} className="mr-2" />}
+      >
+        <span className="flex-1">Sprache</span>
+        <LanguageSwitcher />
+      </SidebarItem>
       <div className="flex py-1 mt-3 justify-start items-center hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded">
         <ThemeSwitch />
       </div>

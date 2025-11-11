@@ -8,6 +8,7 @@ export default function AboutPortrait() {
           src="/imgs/ann-christin.png"
           alt="Ann-Christin Rumpke Portrait"
           fill
+          sizes="(max-width: 768px) 128px, 160px"
           className="object-cover"
           priority
         />

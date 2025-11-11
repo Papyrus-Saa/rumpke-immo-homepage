@@ -34,7 +34,7 @@ export default async function ({ params }: Props) {
       <Title
         title={`${labels[id]}`}
         subtitle=""
-        className="mb-1 bg-primary dark:bg-primary-dark text-white px-3 rounded w-full"
+        className="mb-1 bg-primary dark:bg-primary-dark text-white px-3 sm:rounded w-full"
       />
 
       <PropertyGrid
