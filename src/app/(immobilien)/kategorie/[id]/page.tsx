@@ -22,8 +22,8 @@ export default async function ({ params }: Props) {
   const properties = seedProperties.filter(property => property.gender === id);
 
   const labels: Record<PropertyCategory, string> = {
-    'wohnung': 'Wohnungen',
-    'haus': 'Häuser',
+    'wohnungen': 'Wohnungenen',
+    'haeuser': 'Häuser',
     'luxus': 'Luxusimmobilien',
     'alle-immobilien': 'Alle Immobilien',
   }

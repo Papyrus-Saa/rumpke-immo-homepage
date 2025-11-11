@@ -14,6 +14,6 @@ export interface Property {
   gender: PropertyCategory;
 }
 
-export type PropertyCategory = 'wohnung' | 'haus' | 'luxus' | 'alle-immobilien';
+export type PropertyCategory = 'wohnungen' | 'haeuser' | 'luxus' | 'alle-immobilien';
 export type squareMeters = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 export type Typ = 'shirts' | 'pants' | 'hoodies' | 'hats';

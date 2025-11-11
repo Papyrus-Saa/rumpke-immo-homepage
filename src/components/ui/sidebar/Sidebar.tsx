@@ -65,8 +65,8 @@ const Sidebar = () => {
           />
         </div>
         <SidebarItem href="/auf-karte-erkunden" icon={<IoMapOutline size={20} className="mr-2" />}>Auf Karte erkunden</SidebarItem>
-        <SidebarItem href="/kategorie/wohnung" icon={<IoBusinessOutline size={20} className="mr-2" />}>Wohnung</SidebarItem>
-        <SidebarItem href="/kategorie/haus" icon={<IoHomeOutline size={20} className="mr-2" />}>Haus</SidebarItem>
+        <SidebarItem href="/kategorie/wohnungen" icon={<IoBusinessOutline size={20} className="mr-2" />}>Wohnungen</SidebarItem>
+        <SidebarItem href="/kategorie/haeuser" icon={<IoHomeOutline size={20} className="mr-2" />}>Häuser</SidebarItem>
         <SidebarItem href="/kategorie/luxus" icon={<IoStarOutline size={20} className="mr-2" />}>Luxus</SidebarItem>
         <SidebarItem href="/kategorie/alle-immobilien" icon={<IoAlbumsOutline size={20} className="mr-2" />}>Alle Immobilien</SidebarItem>
         <button

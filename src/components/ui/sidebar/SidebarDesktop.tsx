@@ -18,18 +18,18 @@ const SidebarDesktop = () => {
   const [openDienstleistungen, setOpenDienstleistungen] = useState(false);
 
   return (
-    <nav className="hidden md:block  h-screen sticky top-0 px-2 py-6">
-
-      <Title
-        title="Rumpke Immobilien"
-        subtitle="Finde deine Traumimmobilie"
-        className='flex-1 text-primary mb-14'
-      />
-
+    <nav className="hidden md:block  h-screen sticky top-0 px-2 py-6 dark:border-primary-dark">
+      <div className="sticky top-0 z-20 bg-bg-l dark:bg-bg-d pb-4">
+        <Title
+          title="Rumpke Immobilien"
+          subtitle="Finde deine Traumimmobilie"
+          className='flex-1 text-primary mb-14'
+        />
+      </div>
 
       <SidebarItem href="/auf-karte-erkunden" icon={<IoMapOutline size={20} />} >Auf Karte erkunden</SidebarItem>
-      <SidebarItem href="/kategorie/wohnung" icon={<IoBusinessOutline size={20} />} >Wohnung</SidebarItem>
-      <SidebarItem href="/kategorie/haus" icon={<IoHomeOutline size={20} />} >Haus</SidebarItem>
+      <SidebarItem href="/kategorie/wohnungen" icon={<IoBusinessOutline size={20} />} >Wohnungen</SidebarItem>
+      <SidebarItem href="/kategorie/haeuser" icon={<IoHomeOutline size={20} />} >Häuser</SidebarItem>
       <SidebarItem href="/kategorie/luxus" icon={<IoStarOutline size={20} />} >Luxus</SidebarItem>
       <SidebarItem href="/kategorie/alle-immobilien" icon={<IoAlbumsOutline size={20} />} >Alle Immobilien</SidebarItem>
       <button
