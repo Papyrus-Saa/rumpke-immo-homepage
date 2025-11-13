@@ -13,7 +13,7 @@
 
 .swiper-slide {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
   background-size: initial;
   background-position: center;

@@ -32,7 +32,7 @@ const ObjectMobileSlideshow = ({ images, title, className }: Props) => {
         }}
         pagination
         modules={[FreeMode, Pagination]}
-        className="mySwiper2"
+        className=""
       >
 
         {images.map((image, idx) => (
@@ -40,9 +40,10 @@ const ObjectMobileSlideshow = ({ images, title, className }: Props) => {
             <Image
               src={`/properties/${image}`}
               alt={title}
-              width={600}
-              height={500}
-              className="object-cover w-full h-auto"
+              width={800}
+              height={600}
+              style={{ width: '100%', height: 'auto' }}
+              className="object-cover"
               loading={idx === 0 ? "eager" : "lazy"}
               priority={idx === 0}
             />

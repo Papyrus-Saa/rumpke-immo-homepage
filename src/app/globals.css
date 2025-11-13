@@ -23,19 +23,6 @@
   animation-name: fadeIn;
 }
 
-/* .btn-primary {
-  @apply bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition-colors duration-200;
-}
-
-.btn-secondary {
-  @apply bg-gray-600 text-white font-semibold py-2 px-4 rounded hover:bg-gray-700 transition-colors duration-200;
-}
-
-.border-radius-md {
-  @apply rounded-md;
-}
- */
-
 
 
 
@@ -53,5 +40,11 @@
 
 --color-btn-rent: #FAC984;
 --color-btn-buy: #0AA7F5;
+
+--color-card-bg-l: #FFFFFF;
+--color-card-bg-d: #262626;
+
+--color-card-secondary-bg-l: #F9FAFB;
+--color-card-secondary-bg-d: #262626;
 
 }

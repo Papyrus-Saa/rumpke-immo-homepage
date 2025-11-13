@@ -14,14 +14,37 @@ interface Seedproperty {
 type ValidSizes = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 type ValidTypes = 'shirts' | 'pants' | 'hoodies' | 'hats';
 
+import { Agent } from '@/interfaces/agent-interface';
+
 interface SeedData {
   properties: Seedproperty[],
+  agents: Agent[],
 }
 
 
 
 
 export const initialData: SeedData = {
+  agents: [
+    {
+      id: '1',
+      first_name: 'Ann-Christin',
+      last_name: 'Rumpke',
+      email: 'ann-christin.rumpke@rumpke-immobilien.de',
+      phone: '+49 123 456 7890',
+      mobile: '+49 170 123 4567',
+      languages: ['Deutsch', 'English', 'Español'],
+      photo_url: '/imgs/ann-christin.png',
+      position_de: 'Geschäftsführerin & Immobilienmaklerin',
+      position_en: 'CEO & Real Estate Agent',
+      position_es: 'Directora General & Agente Inmobiliaria',
+      bio_de: 'Mit über 15 Jahren Erfahrung im Immobilienmarkt begleite ich Sie professionell bei Ihrem Immobilienkauf oder -verkauf. Meine Leidenschaft ist es, für jeden Kunden die perfekte Immobilie zu finden und den gesamten Prozess so reibungslos wie möglich zu gestalten.',
+      bio_en: 'With over 15 years of experience in the real estate market, I professionally guide you through your property purchase or sale. My passion is finding the perfect property for every client and making the entire process as smooth as possible.',
+      bio_es: 'Con más de 15 años de experiencia en el mercado inmobiliario, te acompaño profesionalmente en la compra o venta de tu propiedad. Mi pasión es encontrar la propiedad perfecta para cada cliente y hacer que todo el proceso sea lo más fluido posible.',
+      is_public: true,
+      is_active: true,
+    },
+  ],
   properties: [
     {
       description: "Introducing the Tesla Chill Collection. The Men’s Chill Crew Neck Sweatshirt has a premium, heavyweight exterior and soft fleece interior for comfort in any season. The sweatshirt features a subtle thermoplastic polyurethane T logo on the chest and a Tesla wordmark below the back collar. Made from 60% cotton and 40% recycled polyester.",
