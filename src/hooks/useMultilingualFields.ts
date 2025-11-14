@@ -1,0 +1,33 @@
+export const languages = [
+  { code: 'de', flag: '🇩🇪', name: 'Deutsch' },
+  { code: 'en', flag: '🇬🇧', name: 'English' },
+  { code: 'es', flag: '🇪🇸', name: 'Español' },
+  { code: 'pt', flag: '🇵🇹', name: 'Português' },
+  { code: 'fr', flag: '🇫🇷', name: 'Français' },
+  { code: 'it', flag: '🇮🇹', name: 'Italiano' },
+  { code: 'nl', flag: '🇳🇱', name: 'Nederlands' },
+  { code: 'pl', flag: '🇵🇱', name: 'Polski' },
+  { code: 'ru', flag: '🇷🇺', name: 'Русский' },
+  { code: 'ar', flag: '🇸🇦', name: 'العربية' },
+  { code: 'zh', flag: '🇨🇳', name: '中文' },
+  { code: 'ja', flag: '🇯🇵', name: '日本語' },
+  { code: 'tr', flag: '🇹🇷', name: 'Türkçe' },
+  { code: 'hi', flag: '🇮🇳', name: 'हिन्दी' },
+];
+
+export const languageOptions = [
+  { value: 'Deutsch', label: '🇩🇪 Deutsch', flag: '🇩🇪' },
+  { value: 'English', label: '🇬🇧 English', flag: '🇬🇧' },
+  { value: 'Español', label: '🇪🇸 Español', flag: '🇪🇸' },
+  { value: 'Português', label: '🇵🇹 Português', flag: '🇵🇹' },
+  { value: 'Français', label: '🇫🇷 Français', flag: '🇫🇷' },
+  { value: 'Italiano', label: '🇮🇹 Italiano', flag: '🇮🇹' },
+  { value: 'Nederlands', label: '🇳🇱 Nederlands', flag: '🇳🇱' },
+  { value: 'Polski', label: '🇵🇱 Polski', flag: '🇵🇱' },
+  { value: 'Русский', label: '🇷🇺 Русский', flag: '🇷🇺' },
+  { value: 'العربية', label: '🇸🇦 العربية', flag: '🇸🇦' },
+  { value: '中文', label: '🇨🇳 中文', flag: '🇨🇳' },
+  { value: '日本語', label: '🇯🇵 日本語', flag: '🇯🇵' },
+  { value: 'Türkçe', label: '🇹🇷 Türkçe', flag: '🇹🇷' },
+  { value: 'हिन्दी', label: '🇮🇳 हिन्दी', flag: '🇮🇳' },
+];
