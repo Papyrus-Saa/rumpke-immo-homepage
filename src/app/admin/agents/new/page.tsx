@@ -54,7 +54,7 @@ export default function NewAgentPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-     console.log(formData.languages);
+    console.log(formData.languages);
     setLoading(true);
     setError('');
 
@@ -208,7 +208,7 @@ export default function NewAgentPage() {
                       if (file) {
                         // TODO: Implementar upload a servidor
                         console.log('File selected:', file);
-                        // Por ahora, crear URL temporal
+
                         const url = URL.createObjectURL(file);
                         setFormData({ ...formData, photo_url: url });
                       }
@@ -228,7 +228,7 @@ export default function NewAgentPage() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Languages *
             </label>
-              <Select
+            <Select
               isMulti
               instanceId="agent-languages"
               options={languageOptions}
@@ -242,15 +242,15 @@ export default function NewAgentPage() {
               placeholder="Select languages..."
               className="react-select-container"
               classNamePrefix="react-select"
-                formatOptionLabel={(option) => {
-                  const [flag, ...rest] = option.label.split(' ');
-                  return (
-                    <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span style={{ fontSize: '1.2em' }}>{flag}</span>
-                      <span>{rest.join(' ')}</span>
-                    </span>
-                  );
-                }}
+              formatOptionLabel={(option) => {
+                const [flag, ...rest] = option.label.split(' ');
+                return (
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontSize: '1.2em' }}>{flag}</span>
+                    <span>{rest.join(' ')}</span>
+                  </span>
+                );
+              }}
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Select all languages the agent can speak
