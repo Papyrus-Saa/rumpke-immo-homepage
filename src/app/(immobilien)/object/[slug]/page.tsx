@@ -71,7 +71,7 @@ export default async function ({ params }: Props) {
             </div>
 
 
-            <div className="bg-card-secondary-bg-l dark:bg-card-secondary-bg-d rounded p-5 md:p-6">
+            <div className="bg-card-bg-l dark:bg-card-bg-d rounded p-5 md:p-6">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
                 Eigenschaften
               </h3>

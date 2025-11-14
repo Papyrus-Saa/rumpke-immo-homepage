@@ -13,7 +13,7 @@ export const AgentCard = ({ agent, locale }: AgentCardProps) => {
   const fullName = `${agent.first_name} ${agent.last_name}`;
 
   return (
-    <div className="bg-card-bg-l dark:bg-card-bg-d rounded shadow-lg p-4 md:p-6  dark:shadow-[#053B22]">
+    <div className="bg-card-bg-l dark:bg-card-bg-d rounded shadow-lg p-4 md:p-6  dark:shadow-primary-dark">
 
       <div className="flex items-start gap-4 mb-4">
 
