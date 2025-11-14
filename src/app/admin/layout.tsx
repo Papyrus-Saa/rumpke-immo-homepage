@@ -2,14 +2,16 @@
 import { ThemeSwitch } from '@/context/ThemeSwitsh';
 import Link from 'next/link';
 import { IoHomeOutline, IoBusinessOutline, IoPeopleOutline, IoMailOutline, IoFolderOutline, IoStarOutline, IoPricetagOutline, IoImageOutline, IoTrendingUpOutline, IoTimerOutline, IoSettingsOutline, IoMenuOutline, IoCloseOutline, IoLogOutOutline } from 'react-icons/io5';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('admin_token');
+      setIsLoggedIn(!!token);
       if (!token) {
         router.replace('/admin/login');
       }
@@ -18,6 +20,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogout = () => {
     localStorage.removeItem('admin_token');
+    setIsLoggedIn(false);
     router.replace('/admin/login');
   };
 
@@ -149,6 +152,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               >
                 View Site
               </Link>
+
               <button
                 type="button"
                 onClick={handleLogout}
@@ -157,6 +161,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <IoLogOutOutline className="text-lg" />
                 Logout
               </button>
+
             </div>
           </div>
         </header>

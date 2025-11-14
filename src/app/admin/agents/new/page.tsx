@@ -54,9 +54,9 @@ export default function NewAgentPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+     console.log(formData.languages);
     setLoading(true);
     setError('');
-
 
     if (!formData.first_name.trim() || !formData.last_name.trim() || !formData.email.trim() || !formData.phone.trim()) {
       setError('Bitte füllen Sie Vorname, Nachname, E-Mail und Telefonnummer aus.');
@@ -66,6 +66,7 @@ export default function NewAgentPage() {
       setError('Bitte wählen Sie mindestens eine Sprache aus.');
       return;
     }
+
 
     try {
       const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
@@ -223,11 +224,11 @@ export default function NewAgentPage() {
           </div>
 
           {/* Languages */}
-          <div className="mt-4">
+          <div className="mt-4 text-black">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Languages *
             </label>
-            <Select
+              <Select
               isMulti
               instanceId="agent-languages"
               options={languageOptions}
@@ -241,55 +242,15 @@ export default function NewAgentPage() {
               placeholder="Select languages..."
               className="react-select-container"
               classNamePrefix="react-select"
-              styles={{
-                control: (base, state) => ({
-                  ...base,
-                  backgroundColor: document.documentElement.classList.contains('dark') ? '#262626' : '#FFFFFF',
-                  borderColor: document.documentElement.classList.contains('dark') ? '#404040' : 'rgb(209 213 219)',
-                  color: document.documentElement.classList.contains('dark') ? '#FFFFFF' : '#000000',
-                  '&:hover': {
-                    borderColor: 'var(--color-primary)'
-                  }
-                }),
-                menu: (base) => ({
-                  ...base,
-                  backgroundColor: document.documentElement.classList.contains('dark') ? '#262626' : '#FFFFFF',
-                }),
-                option: (base, state) => ({
-                  ...base,
-                  backgroundColor: state.isSelected
-                    ? 'var(--color-primary)'
-                    : state.isFocused
-                      ? (document.documentElement.classList.contains('dark') ? '#404040' : '#F3F4F6')
-                      : 'transparent',
-                  color: document.documentElement.classList.contains('dark') ? '#FFFFFF' : '#000000',
-                  cursor: 'pointer'
-                }),
-                singleValue: (base) => ({
-                  ...base,
-                  color: document.documentElement.classList.contains('dark') ? '#FFFFFF' : '#000000',
-                }),
-                input: (base) => ({
-                  ...base,
-                  color: document.documentElement.classList.contains('dark') ? '#FFFFFF' : '#000000',
-                }),
-                multiValue: (base) => ({
-                  ...base,
-                  backgroundColor: 'var(--color-primary)',
-                }),
-                multiValueLabel: (base) => ({
-                  ...base,
-                  color: 'white',
-                }),
-                multiValueRemove: (base) => ({
-                  ...base,
-                  color: 'white',
-                  ':hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    color: 'white',
-                  },
-                }),
-              }}
+                formatOptionLabel={(option) => {
+                  const [flag, ...rest] = option.label.split(' ');
+                  return (
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span style={{ fontSize: '1.2em' }}>{flag}</span>
+                      <span>{rest.join(' ')}</span>
+                    </span>
+                  );
+                }}
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Select all languages the agent can speak
@@ -374,6 +335,13 @@ export default function NewAgentPage() {
           </div>
         </div>
 
+        {/* Previsualización del JSON a enviar */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Preview datos enviados</label>
+          <pre className="bg-gray-100 dark:bg-neutral-800 p-4 rounded text-xs overflow-x-auto max-h-64">
+            {JSON.stringify(formData, null, 2)}
+          </pre>
+        </div>
         {/* Actions */}
         <div className="flex items-center gap-4">
           <button
