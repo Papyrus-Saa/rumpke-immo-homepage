@@ -2,7 +2,10 @@ import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
 import ObjectSlideshow from "../../../../components/slideshow/ObjectSlideshow";
 import ObjectMobileSlideshow from "@/components/slideshow/ObjectMobileSlideshow";
-import { AgentCard } from "@/components/agents/AgentCard";
+import { AgentCard } from "@/app/admin/agents/components/AgentCard";
+import { useAgents } from "@/hooks/useAgents";
+import { Agent } from "http";
+
 
 
 
@@ -13,9 +16,9 @@ interface Props {
 }
 
 
-export default async function ({ params }: Props) {
-
-  const { slug } = await params;
+export default  function ({ params }: Props) {
+// const { agents } = useAgents();
+  const { slug } =  params;
 
   const object = initialData.properties.find(prop => prop.slug === slug);
 
@@ -95,9 +98,12 @@ export default async function ({ params }: Props) {
 
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-6">
+              {/* <AgentCard
+               agent={agents[0]}
+              /> */}
+
               <AgentCard
-                agent={initialData.agents[0]}
-                locale="de"
+               agent={initialData.agents[0]}
               />
             </div>
           </div>

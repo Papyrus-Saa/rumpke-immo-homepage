@@ -26,7 +26,7 @@ export function useAgents(initialAgents: Agent[] = []) {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/agent`);
+      const res = await fetch(`${API_URL}/agent?active=false`);
       if (!res.ok) throw new Error('Failed to fetch agents');
       const data = await res.json();
       setAgents(Array.isArray(data) ? data : []);
