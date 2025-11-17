@@ -10,8 +10,10 @@ import {
   PropertyStatus,
   EnergyLabel
 } from "@/interfaces/property-form-interface";
+
 import InputProperty from "@/components/properties/InputProperty";
 import InputCheckboxProperty from "@/components/properties/InputCheckboxProperty";
+import { useAgentOptions } from "@/hooks/useAgentOptions";
 
 const PropertyCreateForm: React.FC = () => {
   const {
@@ -25,27 +27,90 @@ const PropertyCreateForm: React.FC = () => {
     },
   });
 
-  const onSubmit = (data: PropertyFormValues) => {
-    // Aquí puedes hacer el POST a tu API
-    console.log(data);
+  const [loading, setLoading] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
+  const feedbackRef = React.useRef<HTMLDivElement>(null);
+
+  const onSubmit = async (data: PropertyFormValues) => {
+    setLoading(true);
+    setErrorMsg(null);
+    setSuccess(false);
+    try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+      const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
+      const response = await fetch(`${API_URL}/property`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        let errorText = "Fehler beim Speichern der Immobilie.";
+        try {
+          const errorData = await response.json();
+          errorText = errorData.message || errorText;
+        } catch { }
+        throw new Error(errorText);
+      }
+      setSuccess(true);
+      setTimeout(() => {
+        window.location.href = "/admin/properties";
+      }, 1200);
+    } catch (error: any) {
+      setErrorMsg(error.message || "Fehler beim Speichern der Immobilie.");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  React.useEffect(() => {
+    if (errorMsg && feedbackRef.current) {
+      const y = feedbackRef.current.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, [errorMsg]);
+
+  const { options: agentOptions, loading: loadingAgents, error: errorAgents } = useAgentOptions();
 
   return (
     <div className="w-[90%] max-w-6xl mx-auto p-6 bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow-md">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-variable-primary">Neue Immobilie anlegen</h1>
-        <a href="/admin/properties" className="px-4 py-2 rounded bg-variable-primary text-variable-white font-semibold hover:bg-variable-primary-dark transition cursor-pointer duration-100">Zurück zur Übersicht</a>
+        <h1 className="text-2xl font-bold text-primary">Neue Immobilie anlegen</h1>
+        <a href="/admin/properties" className="px-4 py-2 rounded bg-primary text-white font-semibold hover:bg-primary-dark transition cursor-pointer duration-100">Zurück zur Übersicht</a>
       </div>
+      <div ref={feedbackRef} />
+      {success && (
+        <div className="mb-4 p-3 rounded bg-green-100 text-green-800 border border-green-300 text-center font-semibold">
+          Immobilie erfolgreich angelegt!
+        </div>
+      )}
+      {errorMsg && (
+        <div className="mb-4 p-3 rounded bg-red-100 text-red-800 border border-red-300 text-center font-semibold">
+          {errorMsg}
+        </div>
+      )}
       <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {/* Makler (ID) */}
-        <InputProperty
-          label="Makler (ID)"
-          name="agent"
-          placeholder="Makler-ID"
-          required
-          register={register}
-          error={errors.agent?.message}
-        />
+        <div>
+          <label className="block mb-1 font-medium text-xs dark:text-variable-white">Makler (ID) *</label>
+          <select
+            className="w-full p-2 rounded bg-primary/30 dark:bg-primary-dark/30 text-xs"
+            {...register("agent", { required: true })}
+            disabled={loadingAgents}
+          >
+            <option value="">{loadingAgents ? "Lade Makler..." : "Bitte wählen"}</option>
+            {agentOptions.map((agent) => (
+              <option key={agent.id} value={agent.id}>
+                {agent.name} ({agent.id})
+              </option>
+            ))}
+          </select>
+          {errorAgents && <span className="text-variable-error text-xs">{errorAgents}</span>}
+          {errors.agent && <span className="text-variable-error text-xs">{errors.agent.message}</span>}
+        </div>
         {/* Vorgang */}
         <div>
           <label className="block mb-1 font-medium text-xs  dark:text-variable-white">Vorgang *</label>
@@ -261,7 +326,7 @@ const PropertyCreateForm: React.FC = () => {
           register={register}
           error={errors.orientation?.message}
         />
-        {/* Baujahr, Renovierungsjahr, verfügbar ab, Währung, Preisintervall, Nebenkosten, Grundsteuer, Kaution, Provision */}
+
         <InputProperty
           label="Baujahr"
           name="build_year"
@@ -326,7 +391,7 @@ const PropertyCreateForm: React.FC = () => {
         <div>
           <label className="block mb-1 font-medium  dark:text-variable-white">Energieklasse</label>
           <select className="w-full p-2 rounded bg-variable-input-bg dark:bg-variable-input-bg-dark  bg-primary/30 dark:bg-primary-dark/30" {...register("energy_label")}>
-            <option  value="">Bitte wählen</option>
+            <option value="">Bitte wählen</option>
             {Object.values(EnergyLabel).map((label) => (
               <option key={label} value={label}>{label}</option>
             ))}
@@ -386,8 +451,18 @@ const PropertyCreateForm: React.FC = () => {
         <InputCheckboxProperty label="Neu" name="is_new" register={register} error={errors.is_new?.message} />
         {/* Button */}
         <div className="col-span-full flex justify-end mt-4">
-          <button type="submit" className="py-2 px-6 rounded bg-variable-primary text-variable-white font-semibold hover:bg-variable-primary-dark transition duration-100">
-            Immobilie anlegen
+          <button
+            type="submit"
+            className="py-2 px-6 rounded bg-primary text-white font-semibold hover:bg-primary-dark transition duration-100 cursor-pointer flex items-center gap-2"
+            disabled={loading}
+          >
+            {loading && (
+              <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+              </svg>
+            )}
+            {loading ? "Speichern..." : "Immobilie anlegen"}
           </button>
         </div>
       </form>

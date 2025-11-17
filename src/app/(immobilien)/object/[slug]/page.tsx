@@ -17,7 +17,7 @@ interface Props {
 
 
 export default  function ({ params }: Props) {
-// const { agents } = useAgents();
+
   const { slug } =  params;
 
   const object = initialData.properties.find(prop => prop.slug === slug);
