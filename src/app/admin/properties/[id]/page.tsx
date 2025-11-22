@@ -20,9 +20,9 @@ interface Props {
   };
 }
 
-export default  function EditPropertyPage({ params }: Props) {
+export default function EditPropertyPage({ params }: Props) {
 
-  const { id } =  params;
+  const { id } = params;
   const [loading, setLoading] = React.useState(true);
   const [saving, setSaving] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
