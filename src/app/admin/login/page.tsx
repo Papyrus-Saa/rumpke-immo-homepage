@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
       const data = await res.json();
       if (data.access_token) {
         localStorage.setItem('admin_token', data.access_token);
-        router.push('/admin/agents');
+        router.push('/admin/dashboard');
         router.refresh();
       } else {
         setError('Unbekannter Fehler.');

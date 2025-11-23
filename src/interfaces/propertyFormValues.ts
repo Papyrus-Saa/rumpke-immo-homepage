@@ -1,49 +1,24 @@
-export enum PropertyType {
-  HOUSE = "HOUSE",
-  APARTMENT = "APARTMENT",
-  LAND = "LAND",
-  COMMERCIAL = "COMMERCIAL",
-  OTHER = "OTHER",
-}
-
-export enum PropertyStatus {
-  AVAILABLE = "AVAILABLE",
-  RESERVED = "RESERVED",
-  SOLD = "SOLD",
-  RENTED = "RENTED",
-}
-
-export enum EnergyLabel {
-  A = "A",
-  B = "B",
-  C = "C",
-  D = "D",
-  E = "E",
-  F = "F",
-  G = "G",
-  UNKNOWN = "UNKNOWN",
-}
-
 export interface PropertyFormValues {
-  agent: string;
-  operation: "SELL" | "RENT";
-  type: PropertyType;
+  id?: string;
+  slug: string;
+  reference_code: string;
+  operation: 'SELL' | 'RENT';
+  type: 'APARTMENT' | 'HOUSE' | 'VILLA' | 'PLOT' | 'DUPLEX' | 'PENTHOUSE' | 'STUDIO' | 'OFFICE';
+  is_featured?: boolean;
+  is_new?: boolean;
   address_line: string;
   city: string;
   postal_code: string;
   region: string;
-  built_area_m2: number;
-  rooms: number;
-  bedrooms: number;
-  bathrooms: number;
-  price_amount: number;
-  // Opcionales
-  status?: PropertyStatus;
   country?: string;
   latitude?: number;
   longitude?: number;
+  built_area_m2: number;
   usable_area_m2?: number;
   plot_area_m2?: number;
+  rooms: number;
+  bedrooms: number;
+  bathrooms: number;
   floor?: number;
   floors_total?: number;
   has_elevator?: boolean;
@@ -57,14 +32,16 @@ export interface PropertyFormValues {
   orientation?: string;
   build_year?: number;
   renovation_year?: number;
-  available_from?: string;
+  status: 'PUBLISHED' | 'RESERVED' | 'SOLD' | 'RENTED' | 'DRAFT' | 'HIDDEN';
+  available_from?: Date | string;
+  price_amount: number;
   currency?: string;
   price_frequency?: string;
   community_fees?: number;
   property_tax?: number;
   deposit?: number;
   commission_info?: string;
-  energy_label?: EnergyLabel;
+  energy_label?: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
   energy_consumption_kwh_m2y?: number;
   co2_emissions_kg_m2y?: number;
   energy_certificate_url?: string;
@@ -84,9 +61,15 @@ export interface PropertyFormValues {
   security_door?: boolean;
   cctv?: boolean;
   concierge?: boolean;
+  seo_title?: string;
+  seo_description?: string;
   description?: string;
   notes_internal?: string;
-  title?: string;
-  is_featured?: boolean;
-  is_new?: boolean;
+  published_at?: Date | string;
+  archived_at?: Date | string;
+  agent_id?: string;
+  categories?: string[];
+  amenities?: string[];
+  tags?: string[];
+  media?: string[];
 }

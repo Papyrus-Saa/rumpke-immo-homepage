@@ -1,10 +1,11 @@
-
+import { ReactQueryProvider } from './providers/ReactQueryProvider';
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { BorderBars } from "@/components/ui/border-bars/BorderBars";
 import CompanyTitle from "@/components/ui/companyTitle/CompanyTitle";
+import Script from "next/script";
 
 
 
@@ -25,16 +26,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
+
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Script src="https://widget.cloudinary.com/v2.0/global/all.js" strategy="beforeInteractive" />
         <ThemeProvider>
           <BorderBars />
-          <div className="bg-bg-l text-zinc-800 dark:bg-bg-d dark:text-zinc-100  transition-colors duration-100 ease-out xl:px-6">
-            {children}
-          </div>
-          <CompanyTitle/>
+          <ReactQueryProvider>
+            <div className="bg-bg-l text-zinc-800 dark:bg-bg-d dark:text-zinc-100 transition-colors duration-100 ease-out xl:px-6">
+              {children}
+            </div>
+          </ReactQueryProvider>
+          <CompanyTitle />
           <BorderBars />
         </ThemeProvider>
       </body>

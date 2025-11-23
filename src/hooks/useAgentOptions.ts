@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getAgents } from "@/utils/admin-client";
 
 export interface AgentOption {
   id: string;
@@ -12,10 +13,8 @@ export function useAgentOptions() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:3000/agent?active=false")
-      .then((res) => res.json())
+    getAgents()
       .then((data) => {
-
         setOptions(
           data.map((agent: any) => ({
             id: agent.id,

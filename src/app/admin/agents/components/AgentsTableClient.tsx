@@ -155,14 +155,14 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button
-                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary hover:bg-gray-100 dark:hover:bg-neutral-700 rounded transition-colors"
+                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary hover:bg-gray-100 dark:hover:bg-neutral-700 rounded transition-colors cursor-pointer"
                           title="Edit"
                           onClick={() => handleOpenEdit(agent)}
                         >
                           <IoCreateOutline className="text-lg" />
                         </button>
                         <button
-                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded transition-colors"
+                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded transition-colors cursor-pointer"
                           title="Delete"
                           onClick={() => setDeleteAgent(agent)}
                         >

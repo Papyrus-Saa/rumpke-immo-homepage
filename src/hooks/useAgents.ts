@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getAgents, deleteAgent as apiDeleteAgent } from "@/utils/admin-client";
 
 export interface Agent {
   id: string;
@@ -26,9 +27,7 @@ export function useAgents(initialAgents: Agent[] = []) {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`${API_URL}/agent?active=false`);
-      if (!res.ok) throw new Error('Failed to fetch agents');
-      const data = await res.json();
+      const data = await getAgents();
       setAgents(Array.isArray(data) ? data : []);
     } catch (e: any) {
       setError(e.message || 'Error fetching agents');
@@ -41,14 +40,7 @@ export function useAgents(initialAgents: Agent[] = []) {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem('admin_token');
-      const res = await fetch(`${API_URL}/agent/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      if (!res.ok) throw new Error('Failed to delete agent');
+      await apiDeleteAgent(id);
       setAgents(prev => prev.filter(a => a.id !== id));
       setDeleteAgent(null);
     } catch (e: any) {

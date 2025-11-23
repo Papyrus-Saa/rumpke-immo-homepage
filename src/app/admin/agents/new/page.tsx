@@ -2,12 +2,18 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { createAgent } from '@/utils/admin-client';
 import Link from 'next/link';
 import { IoArrowBackOutline, IoSaveOutline } from 'react-icons/io5';
 import Select from 'react-select';
 import { languages, languageOptions } from '@/hooks/useMultilingualFields';
 
 export default function NewAgentPage() {
+
+  if (typeof window !== 'undefined' && !localStorage.getItem('admin_token')) {
+    window.location.replace('/admin/login');
+    return null;
+  }
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -69,23 +75,7 @@ export default function NewAgentPage() {
 
 
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-      const token = localStorage.getItem('admin_token');
-
-      const res = await fetch(`${API_URL}/agent`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || 'Failed to create agent');
-      }
-
+      await createAgent(formData);
       router.push('/admin/agents');
       router.refresh();
     } catch (err: any) {

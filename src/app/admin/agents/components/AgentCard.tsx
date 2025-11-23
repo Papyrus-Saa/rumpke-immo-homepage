@@ -41,7 +41,7 @@ export const AgentCard: React.FC<AgentCardProps> = ({ agent }) => {
           {agent.is_active ? 'Active' : 'Inactive'}
         </span>
       </div>
-      {/* Mostrar biografías en todos los idiomas disponibles */}
+
       <div className="w-full mt-2">
         {languageCodes.map((code: string) => {
           const bio = agent[`bio_${code}` as keyof Agent] as string | undefined;

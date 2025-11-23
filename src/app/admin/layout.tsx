@@ -3,20 +3,22 @@ import { ThemeSwitch } from '@/context/ThemeSwitsh';
 import Link from 'next/link';
 import { IoHomeOutline, IoBusinessOutline, IoPeopleOutline, IoMailOutline, IoFolderOutline, IoStarOutline, IoPricetagOutline, IoImageOutline, IoTrendingUpOutline, IoTimerOutline, IoSettingsOutline, IoMenuOutline, IoCloseOutline, IoLogOutOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('admin_token');
       setIsLoggedIn(!!token);
-      if (!token) {
+      if (!token && pathname !== '/admin/login') {
         router.replace('/admin/login');
       }
     }
-  }, [router]);
+  }, [router, pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem('admin_token');
@@ -24,10 +26,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     router.replace('/admin/login');
   };
 
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+
+
   return (
     <div className="min-h-screen bg-bg-l dark:bg-bg-d">
       <aside className="fixed left-0 top-0 h-full w-64 bg-card-bg-l dark:bg-card-bg-d border-r border-gray-200 dark:border-neutral-700 overflow-y-auto">
-
         <div className="p-6 border-b border-gray-200 dark:border-neutral-700">
           <h1 className="text-xl font-bold text-gray-900 dark:text-white">
             Rumpke Admin
@@ -36,11 +42,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             Immobilien Management
           </p>
         </div>
-
         {/* Navigation */}
         <nav className="p-4 space-y-1">
           <Link
-            href="/admin"
+            href="/admin/dashboard"
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
           >
             <IoHomeOutline className="text-xl" />
@@ -97,7 +102,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <Link
             href="/admin/media"
-            className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
+            className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors hover:text-primary"
           >
             <IoImageOutline className="text-xl" />
             <span>Media</span>
@@ -127,14 +132,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span>Settings</span>
           </Link>
         </nav>
-        <div className='fixed bottom-2 right-1/2 translate-x-1/2'>
-          <ThemeSwitch />
-        </div>
       </aside>
-
-
       <main className="ml-64 min-h-screen">
-
         <header className="sticky top-0 z-10 bg-card-bg-l dark:bg-card-bg-d border-b border-gray-200 dark:border-neutral-700 px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -146,6 +145,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </h2>
             </div>
             <div className="flex items-center gap-4">
+              <div className=''>
+                <ThemeSwitch />
+              </div>
               <Link
                 href="/"
                 className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-primary transition-colors"
@@ -161,7 +163,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <IoLogOutOutline className="text-lg" />
                 Logout
               </button>
-
             </div>
           </div>
         </header>

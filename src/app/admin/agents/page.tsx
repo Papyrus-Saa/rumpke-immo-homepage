@@ -1,20 +1,31 @@
 
+'use client';
+import { useEffect, useState } from 'react';
+import { getAgents } from '@/utils/admin-client';
 import AgentsTableClient from './components/AgentsTableClient';
 
-async function getAgents() {
-  try {
-    const res = await fetch('http://localhost:3000/agent', {
-      cache: 'no-store'
-    });
-    if (!res.ok) throw new Error('Failed to fetch agents');
-    return res.json();
-  } catch (error) {
-    console.error('Error fetching agents:', error);
-    return [];
-  }
-}
+export default function AgentsPage() {
+  const [agents, setAgents] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-export default async function AgentsPage() {
-  const agents = await getAgents();
+  useEffect(() => {
+    const fetchAgents = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await getAgents();
+        setAgents(Array.isArray(data) ? data : []);
+      } catch (e: any) {
+        setError(e.message || 'Error fetching agents');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAgents();
+  }, []);
+
+  if (loading) return <div className="p-6">Loading agents...</div>;
+  if (error) return <div className="p-6 text-red-600">{error}</div>;
   return <AgentsTableClient initialAgents={agents} />;
 }
