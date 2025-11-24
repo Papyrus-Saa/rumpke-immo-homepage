@@ -102,7 +102,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <Link
             href="/admin/media"
-            className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors hover:text-primary"
+            className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors hover:text-white"
           >
             <IoImageOutline className="text-xl" />
             <span>Media</span>

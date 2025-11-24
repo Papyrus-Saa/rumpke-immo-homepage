@@ -6,7 +6,7 @@ import { createAgent } from '@/utils/admin-client';
 import Link from 'next/link';
 import { IoArrowBackOutline, IoSaveOutline } from 'react-icons/io5';
 import Select from 'react-select';
-import { languages, languageOptions } from '@/hooks/useMultilingualFields';
+import { languages, languageOptions } from '@/hooks/multilingualField/useMultilingualFields';
 
 export default function NewAgentPage() {
 

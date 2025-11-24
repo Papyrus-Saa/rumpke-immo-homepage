@@ -4,7 +4,7 @@ interface InputSelectPropertyProps {
   label: string;
   name: string;
   options: { value: string; label: string }[];
-  register: any;
+  registerProps?: any;
   required?: boolean;
   error?: string;
   className?: string;
@@ -15,7 +15,7 @@ const InputSelectProperty: React.FC<InputSelectPropertyProps> = ({
   label,
   name,
   options,
-  register,
+  registerProps,
   required = false,
   error,
   className = "",
@@ -27,7 +27,7 @@ const InputSelectProperty: React.FC<InputSelectPropertyProps> = ({
     </label>
     <select
       className="w-full px-4 py-2  rounded bg-input-bg dark:bg-input-bg-dark text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
-      {...register(name, { required })}
+      {...registerProps}
       disabled={disabled}
     >
       <option value="">Bitte wählen...</option>

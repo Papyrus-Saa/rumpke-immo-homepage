@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import ObjectSlideshow from "../../../../components/slideshow/ObjectSlideshow";
 import ObjectMobileSlideshow from "@/components/slideshow/ObjectMobileSlideshow";
 import { AgentCard } from "@/app/admin/agents/components/AgentCard";
-import { useAgents } from "@/hooks/useAgents";
+import { useAgents } from "@/hooks/agents/useAgents";
 import { Agent } from "http";
 
 
@@ -16,9 +16,9 @@ interface Props {
 }
 
 
-export default  function ({ params }: Props) {
+export default function ({ params }: Props) {
 
-  const { slug } =  params;
+  const { slug } = params;
 
   const object = initialData.properties.find(prop => prop.slug === slug);
 
@@ -103,7 +103,7 @@ export default  function ({ params }: Props) {
               /> */}
 
               <AgentCard
-               agent={initialData.agents[0]}
+                agent={initialData.agents[0]}
               />
             </div>
           </div>

@@ -4,8 +4,6 @@ import Footer from "@/components/ui/footer/Footer";
 import Sidebar from "@/components/ui/sidebar/Sidebar";
 import SidebarDesktop from "@/components/ui/sidebar/SidebarDesktop";
 import { Title } from "@/components/ui/title/Title";
-
-
 import Topmenu from "@/components/ui/top-menu/TopMenu";
 
 

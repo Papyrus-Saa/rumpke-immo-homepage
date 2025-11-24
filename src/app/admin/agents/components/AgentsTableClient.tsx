@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { IoAddOutline, IoCreateOutline, IoTrashOutline } from 'react-icons/io5';
-import { useAgents, Agent } from '@/hooks/useAgents';
+import { useAgents, Agent } from '@/hooks/agents/useAgents';
 import { useState } from 'react';
 import Select from 'react-select';
-import { languages, languageOptions } from '@/hooks/useMultilingualFields';
+import { languageOptions } from '@/hooks/multilingualField/useMultilingualFields';
 
 export default function AgentsTableClient({ initialAgents }: { initialAgents: Agent[] }) {
   const {
@@ -13,28 +13,23 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
     loading,
     error,
     editAgent,
-    setEditAgent,
+    editAgentStatus,
     deleteAgent,
-    setDeleteAgent,
-    deleteAgentById,
-    updateAgent,
+    deleteAgentStatus,
+    fetchAgents,
   } = useAgents(initialAgents);
 
 
   const [editForm, setEditForm] = useState<Agent | null>(null);
-
+  const [deleteModal, setDeleteModal] = useState<Agent | null>(null);
 
   const handleOpenEdit = (agent: Agent) => {
-    setEditAgent(agent);
     setEditForm({ ...agent });
   };
 
-
   const handleCloseEdit = () => {
-    setEditAgent(null);
     setEditForm(null);
   };
-
 
   const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!editForm) return;
@@ -42,10 +37,9 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
     setEditForm({ ...editForm, [name]: value });
   };
 
-
   const handleEditSave = () => {
     if (editForm) {
-      updateAgent(editForm);
+      editAgent(editForm);
       handleCloseEdit();
     }
   };
@@ -95,7 +89,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
               {loading ? (
                 <tr><td colSpan={5} className="text-center py-8">Loading...</td></tr>
               ) : error ? (
-                <tr><td colSpan={5} className="text-center py-8 text-red-500">{error}</td></tr>
+                <tr><td colSpan={5} className="text-center py-8 text-red-500">{error instanceof Error ? error.message : String(error)}</td></tr>
               ) : agents.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
@@ -164,7 +158,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                         <button
                           className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded transition-colors cursor-pointer"
                           title="Delete"
-                          onClick={() => setDeleteAgent(agent)}
+                          onClick={() => setDeleteModal(agent)}
                         >
                           <IoTrashOutline className="text-lg" />
                         </button>
@@ -179,7 +173,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
       </div>
 
 
-      {editAgent && editForm && (
+      {editForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 w-full max-w-lg relative">
             <button className="absolute top-3 right-3 text-gray-400 hover:text-gray-700" onClick={handleCloseEdit}>&times;</button>
@@ -296,15 +290,15 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
       )}
 
       {/* Delete Modal */}
-      {deleteAgent && (
+      {deleteModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 w-full max-w-md relative">
-            <button className="absolute top-3 right-3 text-gray-400 hover:text-gray-700" onClick={() => setDeleteAgent(null)}>&times;</button>
+            <button className="absolute top-3 right-3 text-gray-400 hover:text-gray-700" onClick={() => setDeleteModal(null)}>&times;</button>
             <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Delete Agent</h2>
-            <p className="mb-4">Are you sure you want to delete <span className="font-semibold">{deleteAgent.first_name} {deleteAgent.last_name}</span>?</p>
+            <p className="mb-4">Are you sure you want to delete <span className="font-semibold">{deleteModal.first_name} {deleteModal.last_name}</span>?</p>
             <div className="flex justify-end gap-2">
-              <button className="px-4 py-2 rounded bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-200" onClick={() => setDeleteAgent(null)}>Cancel</button>
-              <button className="px-4 py-2 rounded bg-red-600 text-white" onClick={() => deleteAgentById(deleteAgent.id)}>Delete</button>
+              <button className="px-4 py-2 rounded bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-200" onClick={() => setDeleteModal(null)}>Cancel</button>
+              <button className="px-4 py-2 rounded bg-red-600 text-white" onClick={() => { deleteAgent(deleteModal.id); setDeleteModal(null); }}>Delete</button>
             </div>
           </div>
         </div>

@@ -38,4 +38,12 @@ export async function deleteAgent(id: string): Promise<any> {
   });
 }
 
+export async function editAgent(agentData: any): Promise<any> {
+  const { id, created_at, updated_at, ...allowedFields } = agentData;
+  return apiFetch<any>(`http://localhost:3000/agent/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(allowedFields),
+  });
+}
+
 

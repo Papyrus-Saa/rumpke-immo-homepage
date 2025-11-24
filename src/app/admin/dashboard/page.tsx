@@ -1,5 +1,5 @@
 'use client';
-import { useDashboardSummary } from '@/hooks/useDashboardSummary';
+import { useDashboardSummary } from '@/hooks/dashboard/useDashboardSummary';
 
 const kpiList = [
   { key: 'totalProperties', label: 'Gesamtobjekte' },
