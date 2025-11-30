@@ -6,20 +6,28 @@ interface CategoryButtonProps {
   name: string;
   href: string;
   color?: string;
-
   className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
-const CategoryButton = ({ name, href, color = "bg-primary", className }: CategoryButtonProps) => {
+const CategoryButton = ({ name, href, color = "bg-primary", className, style, onClick }: CategoryButtonProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onClick) {
+      e.preventDefault();
+      onClick();
+      window.location.href = href;
+    }
+  };
   return (
-   <button>
-     <Link
+    <Link
       href={href}
-      className={`flex items-center justify-center gap-2 px-4 transition-all border-l-4 rounded  duration-200 hover:scale-105 ${color} ${className || ""}`}
+      className={`flex items-center justify-center gap-2 px-4 transition-all border-l-4 rounded duration-200 hover:scale-105 ${color} ${className || ""}`}
+      style={style}
+      onClick={handleClick}
     >
       {name}
     </Link>
-   </button>
   );
 }
 

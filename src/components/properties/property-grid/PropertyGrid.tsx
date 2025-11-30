@@ -1,4 +1,5 @@
-import { Property } from "@/interfaces/property-interface"
+
+import { Property } from "@/interfaces/property-interface";
 import PropertyGridItem from "./PropertyGridItem"
 import Input from "@/components/ui/input/Input"
 

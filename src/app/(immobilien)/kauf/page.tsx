@@ -1,17 +1,16 @@
 "use client";
-
 import { useEffect } from 'react';
-import { useUIStore } from '@/store/ui/ui-store';
+import { useGlobalColor } from '@/context/GlobalColorContext';
 
-export default function () {
-  const setBarBgColor = useUIStore((state) => state.setBarBgColor);
+export default function KaufPage() {
+  const { setColorType } = useGlobalColor();
   useEffect(() => {
-    setBarBgColor('bg-btn-buy');
-    return () => setBarBgColor('bg-primary');
-  }, [setBarBgColor]);
+    setColorType('buy');
+    return () => setColorType('primary');
+  }, [setColorType]);
   return (
     <div className="">
-      <h1>Hello Kauf page</h1>
+      <h1 className="text-white px-4 py-2 rounded">Hello Kauf page</h1>
     </div>
   );
 }

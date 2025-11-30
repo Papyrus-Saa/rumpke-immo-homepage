@@ -1,0 +1,26 @@
+Aquí tienes la lista de pasos para implementar el componente de visualización y gestión de viviendas (propiedades) en el admin:
+
+1. Confirmación de creación en el formulario
+Mostrar aviso verde si la vivienda se crea correctamente.
+Mostrar aviso rojo si hay error al crear.
+2. Componente de Card para vivienda
+Crear un componente PropertyCard que muestre:
+Foto principal (relleno si no hay).
+Nombre del agente (relleno si no hay).
+Todos los campos obligatorios con datos de prueba.
+Botones para editar y borrar la vivienda.
+Botón "Mehr Anzeigen" para abrir el modal con todos los detalles.
+3. Modal de detalles y edición
+Crear un modal que muestre todas las propiedades (64 campos).
+Permitir editar cada campo desde el modal.
+Permitir borrar la vivienda completa desde el modal.
+4. Listado de viviendas
+Crear un listado/grid de PropertyCard para mostrar todas las viviendas creadas.
+Cada card debe ser clickable y abrir el modal de detalles.
+5. Gestión de propiedades
+Permitir editar y borrar propiedades desde la card y el modal.
+Mostrar longitud y latitud en la card y el modal (aunque no sean editables en el formulario).
+6. Estilos y usabilidad
+Usar text-sm y colores de global.css.
+Usar una foto y agente de relleno si no hay datos reales.
+Asegurar que todos los campos obligatorios tengan datos de prueba para testeo.

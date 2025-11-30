@@ -1,13 +1,13 @@
-'use client';
+"use client";
 import { useEffect } from 'react';
-import { useUIStore } from '@/store/ui/ui-store';
+import { useGlobalColor } from '@/context/GlobalColorContext';
 
-export default function () {
-  const setBarBgColor = useUIStore((state) => state.setBarBgColor);
+export default function MietePage() {
+  const { setColorType } = useGlobalColor();
   useEffect(() => {
-    setBarBgColor('bg-btn-rent');
-    return () => setBarBgColor('bg-primary');
-  }, [setBarBgColor]);
+    setColorType('rent');
+    return () => setColorType('primary');
+  }, [setColorType]);
   return (
     <div className="">
       <h1>Hello Miete Page</h1>

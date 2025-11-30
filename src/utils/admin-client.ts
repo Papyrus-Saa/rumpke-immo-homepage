@@ -1,4 +1,14 @@
 
+
+
+
+export async function createProperty(propertyData: any): Promise<any> {
+  return apiFetch<any>('http://localhost:3000/property', {
+    method: 'POST',
+    body: JSON.stringify(propertyData),
+  });
+}
+
 export function getAuthToken() {
   if (typeof window !== 'undefined') {
     return localStorage.getItem('admin_token');

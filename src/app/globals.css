@@ -24,19 +24,16 @@
 }
 
 
-
-
 @theme {
 --color-bg-d: #0E0E12;
 --color-bg-l: #F5F5F5;
 --color-card-secondary-bg-l: #F9FAFB;
 --color-card-secondary-bg-d: #262626;
-/* Colores base y de estado para formularios */
 --color-black: #000000;
 --color-white: #FFFFFF;
 --color-gray-light: #E5E7EB;
---color-gray: #9CA3AF;
 --color-gray-dark: #374151;
+--color-gray: #9CA3AF;
 --color-error: #EF4444;
 --color-success: #22C55E;
 --color-warning: #F59E42;
@@ -50,8 +47,8 @@
 --color-Bghover-l: #EDEDED;
 --color-Bghover-d: #1E1E1E;
 
---color-btn-rent: #FAC984;
---color-btn-buy: #0AA7F5;
+--color-rent: #FAC984;
+--color-buy: #0AA7F5;
 
 --color-card-bg-l: #FFFFFF;
 --color-card-bg-d: #212121;
@@ -61,5 +58,14 @@
 
 --color-primary: #00BA63;
 --color-primary-dark: #053B22;
+
+
+/* Status colors */
+--color-status-published: #22C55E;
+--color-status-reserved: #F59E42;
+--color-status-sold: #EF4444;
+--color-status-rented: #3B82F6;
+--color-status-draft: #9CA3AF;
+--color-status-hidden: #374151;
 
 }
