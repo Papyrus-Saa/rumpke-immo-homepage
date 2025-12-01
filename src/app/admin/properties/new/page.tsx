@@ -1,6 +1,6 @@
 'use client'
 
-import PropertyFormBlock1 from '@/components/properties/PropertyFormBlock1'
+
 import Link from 'next/link'
 
 
@@ -15,7 +15,6 @@ const page = () => {
           Zurück zur Immobilienübersicht
         </button>
       </Link>
-      <PropertyFormBlock1 />
     </div>
   )
 }

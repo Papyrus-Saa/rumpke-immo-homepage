@@ -3,6 +3,7 @@
 import PropertyGrid from "@/components/properties/property-grid/PropertyGrid";
 import { Title } from "@/components/ui/title/Title";
 import { PropertyCategory } from "@/interfaces/property-interface";
+
 import { initialData } from "@/seed/seed";
 
 

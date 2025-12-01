@@ -1,3 +1,4 @@
+export type PropertyCategory = 'wohnungen' | 'haeuser' | 'luxus' | 'alle-immobilien';
 export interface Property {
   description: string;
   images: string[];
