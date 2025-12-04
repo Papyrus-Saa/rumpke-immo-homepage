@@ -1,5 +1,6 @@
 export interface PropertyAdminPanel {
   agent: string;
+  owner: string;
   operation: 'SELL' | 'RENT';
   type: 'haus' | 'wohnung' | 'gewerbe' | 'grundstueck' | 'sonstige';
   status: 'PUBLISHED' | 'RESERVED' | 'SOLD' | 'RENTED' | 'DRAFT' | 'HIDDEN';
@@ -14,8 +15,8 @@ export interface PropertyAdminPanel {
   currency: string;
   // Foto principal
   main_image: string;
-  // Categoría
-  category: 'haus' | 'wohnung' | 'gewerbe' | 'grundstueck' | 'sonstige';
+
+
 
   // --- Opcionales (Mehr anzeigen) ---
 

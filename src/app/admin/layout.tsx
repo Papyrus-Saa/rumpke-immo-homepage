@@ -145,23 +145,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </h2>
             </div>
             <div className="flex items-center gap-4">
-              <div className=''>
+              <div className='text-xs hover:text-blue-400'>
                 <ThemeSwitch />
               </div>
               <Link
                 href="/"
-                className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-primary transition-colors"
+                className="px-4 py-2 text-xs text-gray-700 dark:text-gray-300 hover:text-primary transition-colors flex items-center gap-2"
               >
-                View Site
+                <IoHomeOutline className="text-base" />
+                Webseite ansehen
               </Link>
 
               <button
                 type="button"
                 onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:text-white hover:bg-red-600 dark:hover:bg-red-700 transition-colors rounded-lg cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2 text-red-600 dark:text-red-400 hover:text-white hover:bg-red-600 dark:hover:bg-red-700 transition-colors rounded-lg cursor-pointer text-xs"
               >
                 <IoLogOutOutline className="text-lg" />
-                Logout
+                Abmelden
               </button>
             </div>
           </div>

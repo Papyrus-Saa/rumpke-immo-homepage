@@ -5,7 +5,7 @@ const kpiList = [
   { key: 'totalProperties', label: 'Gesamtobjekte' },
   { key: 'publishedProperties', label: 'Veröffentlicht' },
   { key: 'reservedProperties', label: 'Reserviert' },
-  { key: 'soldProperties', label: 'Verkauft' },
+  { key: 'soldProperties', label: 'kauf' },
   { key: 'rentedProperties', label: 'Vermietet' },
   { key: 'draftProperties', label: 'Entwurf' },
   { key: 'hiddenProperties', label: 'Versteckt' },

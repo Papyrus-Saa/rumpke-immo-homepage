@@ -4,6 +4,7 @@ import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
 
 const mockProperty1: PropertyAdminPanel = {
   agent: "Max Mustermann",
+  owner: "Erika Mustermann",
   operation: "SELL",
   type: "haus",
   status: "RESERVED",
@@ -17,11 +18,11 @@ const mockProperty1: PropertyAdminPanel = {
   price_amount: 450000,
   currency: "EUR",
   main_image: "https://placehold.co/96x96",
-  category: "haus"
 };
 
 const mockProperty2: PropertyAdminPanel = {
   agent: "Anna Beispiel",
+  owner: "Max Beispiel",
   operation: "RENT",
   type: "wohnung",
   status: "PUBLISHED",
@@ -35,7 +36,6 @@ const mockProperty2: PropertyAdminPanel = {
   price_amount: 1200,
   currency: "EUR",
   main_image: "https://placehold.co/96x96",
-  category: "wohnung"
 };
 
 const AdminCardDemo: React.FC = () => (

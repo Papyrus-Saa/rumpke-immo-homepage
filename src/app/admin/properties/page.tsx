@@ -2,10 +2,13 @@
 
 import PropertiesAdminGrid from "@/components/admin/PropertiesAdminGrid";
 import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
+import Link from "next/link";
+import { IoHomeOutline, IoAddOutline } from "react-icons/io5";
 
 const propertiesAdmin: PropertyAdminPanel[] = [
   {
     agent: "Max Mustermann",
+    owner: "Erika Mustermann",
     operation: "SELL",
     type: "haus",
     status: "PUBLISHED",
@@ -19,11 +22,11 @@ const propertiesAdmin: PropertyAdminPanel[] = [
     price_amount: 450000,
     currency: "EUR",
     main_image: "",
-    category: "haus",
     title: "Schönes Einfamilienhaus",
   },
   {
     agent: "Anna Beispiel",
+    owner: "Max Beispiel",
     operation: "RENT",
     type: "wohnung",
     status: "RESERVED",
@@ -37,7 +40,6 @@ const propertiesAdmin: PropertyAdminPanel[] = [
     price_amount: 1200,
     currency: "EUR",
     main_image: "",
-    category: "wohnung",
     title: "Moderne Wohnung im Zentrum",
   },
 ];
@@ -45,7 +47,15 @@ const propertiesAdmin: PropertyAdminPanel[] = [
 export default function PropertiesPage() {
   return (
     <div className="w-full">
-      <h1 className="text-xl font-bold mb-4">Viviendas</h1>
+      <div className="flex justify-between">
+        <h1 className="text-xl font-bold mb-4">Immobilien</h1>
+        <Link href="/admin/properties/new" className="mb-4 text-primary hover:underline text-xs flex items-center justify-center dark:bg-card-bg-d bg-card-bg-l dark:hover:bg-Bghover-d hover:bg-Bghover-l px-3 py-2 rounded-md">
+          <span className="flex items-center gap-1">
+            <IoAddOutline className="text-base" />
+            <IoHomeOutline className="text-base" />
+          </span>
+        </Link>
+      </div>
       <PropertiesAdminGrid properties={propertiesAdmin} />
     </div>
   );

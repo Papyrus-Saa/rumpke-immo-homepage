@@ -27,6 +27,8 @@
 @theme {
 --color-bg-d: #0E0E12;
 --color-bg-l: #F5F5F5;
+--color-card-text-l: #6E6E6E;
+--color-card-text-d: #BDBDBD;
 
 --color-error: #EF4444;
 --color-success: #22C55E;
