@@ -24,12 +24,12 @@ export default function DashboardPage() {
 
   return (
     <div className="px-8 py-4 dark:bg-card-secondary-bg-d bg-card-secondary-bg-l">
-      <h1 className="text-3xl font-semibold mb-2">Admin Dashboard</h1>
+      <h1 className="text-2xl font-semibold mb-2">Admin Dashboard</h1>
       {isLoading && (
-        <div className="text-center text-gray-500">Loading dashboard...</div>
+        <div className="text-center text-admin-text-l dark:text-admin-text-d">Loading dashboard...</div>
       )}
       {error && (
-        <div className="text-center text-red-500">Error loading dashboard.</div>
+        <div className="text-center text-error">Error loading dashboard.</div>
       )}
       {data && (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-7">
@@ -38,7 +38,7 @@ export default function DashboardPage() {
               key={kpi.key}
               className="bg-card-bg-l dark:bg-card-bg-d shadow rounded p-6 flex flex-col items-center"
             >
-              <span className="text-lg font-semibold text-gray-dark dark:text-gray-light mb-2">
+              <span className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-2">
                 {kpi.label}
               </span>
               <span className="text-xl bg-card-secondary-bg-l dark:bg-card-secondary-bg-d px-6 rounded">

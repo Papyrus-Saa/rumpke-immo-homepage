@@ -1,5 +1,6 @@
 'use client';
 
+
 import PropertiesAdminGrid from "@/components/admin/PropertiesAdminGrid";
 import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
 import Link from "next/link";

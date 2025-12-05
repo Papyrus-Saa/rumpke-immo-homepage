@@ -2,7 +2,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { getAgents } from '@/utils/admin-client';
-import AgentsTableClient from './components/AgentsTableClient';
+import AgentsTableClient from '../components/agents/components/AgentsTableClient';
 
 export default function AgentsPage() {
   const [agents, setAgents] = useState<any[]>([]);
@@ -25,7 +25,7 @@ export default function AgentsPage() {
     fetchAgents();
   }, []);
 
-  if (loading) return <div className="p-6">Loading agents...</div>;
-  if (error) return <div className="p-6 text-red-600">{error}</div>;
+  if (loading) return <div className="p-6">Lade Makler...</div>;
+  if (error) return <div className="p-6 text-error">Fehler: {error}</div>;
   return <AgentsTableClient initialAgents={agents} />;
 }

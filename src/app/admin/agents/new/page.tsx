@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createAgent } from '@/utils/admin-client';
 import Link from 'next/link';
-import { IoArrowBackOutline, IoSaveOutline } from 'react-icons/io5';
+import Button from '@/components/ui/Button';
+import { IoArrowBackOutline, IoSaveOutline, IoSchoolOutline } from 'react-icons/io5';
 import Select from 'react-select';
 import { languages, languageOptions } from '@/hooks/multilingualField/useMultilingualFields';
 
@@ -87,25 +88,24 @@ export default function NewAgentPage() {
 
   return (
     <div className="max-w-4xl mx-auto">
-      {/* Header */}
       <div className="mb-6">
         <Link
           href="/admin/agents"
-          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-primary mb-4"
+          className="inline-flex items-center gap-2 hover:text-primary mb-4 text-xs text-primary hover:underline"
         >
           <IoArrowBackOutline />
-          <span>Back to Agents</span>
+          <span>Zurück zu Maklern</span>
         </Link>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Create New Agent</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-          Add a new real estate agent to your team
+        <h1 className="text-2xl font-bold text-admin-text-l dark:text-admin-text-d">Neuen Makler erstellen</h1>
+        <p className="text-sm text-admin-text-l dark:text-admin-text-d mt-1">
+          Fügen Sie einen neuen Immobilienmakler zu Ihrem Team hinzu
         </p>
       </div>
 
       {/* Error Message */}
       {error && (
-        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        <div className="mb-6 p-4 bg-error/10 dark:bg-error/20 border border-error dark:border-error rounded-lg">
+          <p className="text-sm text-error dark:text-error">{error}</p>
         </div>
       )}
 
@@ -113,13 +113,13 @@ export default function NewAgentPage() {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Basic Information */}
         <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Basic Information
+          <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4">
+            Basisinformationen
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                First Name *
+              <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2">
+                Vorname *
               </label>
               <input
                 type="text"
@@ -130,8 +130,8 @@ export default function NewAgentPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Last Name *
+              <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2">
+                Nachname *
               </label>
               <input
                 type="text"
@@ -143,42 +143,42 @@ export default function NewAgentPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Email *
+                E-Mail *
               </label>
               <input
                 type="email"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Phone *
+                Telefon *
               </label>
               <input
-                type="tel"
+                type="text"
                 required
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                value={formData.first_name}
+                onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+                className="w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Mobile
+                Handy
               </label>
               <input
                 type="tel"
                 value={formData.mobile}
                 onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Photo URL
+                Foto-URL
               </label>
               <div className="flex gap-2">
                 <input
@@ -187,8 +187,11 @@ export default function NewAgentPage() {
                   onChange={(e) => setFormData({ ...formData, photo_url: e.target.value })}
                   className="flex-1 px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
-                <button
+                <Button
                   type="button"
+                  variant="primary"
+                  className="whitespace-nowrap cursor-po
+              inter"
                   onClick={() => {
                     const input = document.createElement('input');
                     input.type = 'file';
@@ -197,7 +200,7 @@ export default function NewAgentPage() {
                       const file = (e.target as HTMLInputElement).files?.[0];
                       if (file) {
                         // TODO: Implementar upload a servidor
-                        console.log('File selected:', file);
+                        console.log('Datei ausgewählt:', file);
 
                         const url = URL.createObjectURL(file);
                         setFormData({ ...formData, photo_url: url });
@@ -205,18 +208,17 @@ export default function NewAgentPage() {
                     };
                     input.click();
                   }}
-                  className="px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors font-medium whitespace-nowrap cursor-wait"
                 >
-                  Upload
-                </button>
+                  Hochladen
+                </Button>
               </div>
             </div>
           </div>
 
-          {/* Languages */}
+          {/* Sprachen */}
           <div className="mt-4 text-black">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Languages *
+              Sprachen *
             </label>
             <Select
               isMulti
@@ -229,7 +231,7 @@ export default function NewAgentPage() {
                   languages: selected ? selected.map(s => s.value) : []
                 });
               }}
-              placeholder="Select languages..."
+              placeholder="Sprachen auswählen..."
               className="react-select-container"
               classNamePrefix="react-select"
               formatOptionLabel={(option) => {
@@ -243,15 +245,16 @@ export default function NewAgentPage() {
               }}
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Select all languages the agent can speak
+              Wählen Sie alle Sprachen aus, die der Makler spricht
             </p>
           </div>
         </div>
 
-        {/* Position Information */}
+
         <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Position (Multilingual)
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            <IoSchoolOutline className="text-xl" />
+            Berufsbezeichnung (Mehrsprachig)
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {languages.map((lang) => (
@@ -273,7 +276,7 @@ export default function NewAgentPage() {
         {/* Bio Information */}
         <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Biography (Multilingual)
+            Biografie (Mehrsprachig)
           </h2>
           <div className="space-y-4">
             {languages.map((lang) => (
@@ -295,7 +298,7 @@ export default function NewAgentPage() {
         {/* Settings */}
         <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Settings
+            Einstellungen
           </h2>
           <div className="space-y-4">
             <label className="flex items-center gap-3">
@@ -306,8 +309,8 @@ export default function NewAgentPage() {
                 className="w-5 h-5 text-primary bg-white dark:bg-neutral-800 border-gray-300 dark:border-neutral-700 rounded focus:ring-2 focus:ring-primary"
               />
               <div>
-                <span className="text-sm font-medium text-gray-900 dark:text-white">Active</span>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Agent can receive leads and be contacted</p>
+                <span className="text-sm font-medium text-gray-900 dark:text-white">Aktiv</span>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Makler kann Anfragen erhalten und kontaktiert werden</p>
               </div>
             </label>
             <label className="flex items-center gap-3">
@@ -318,35 +321,30 @@ export default function NewAgentPage() {
                 className="w-5 h-5 text-primary bg-white dark:bg-neutral-800 border-gray-300 dark:border-neutral-700 rounded focus:ring-2 focus:ring-primary"
               />
               <div>
-                <span className="text-sm font-medium text-gray-900 dark:text-white">Public</span>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Display agent on public website</p>
+                <span className="text-sm font-medium text-gray-900 dark:text-white">Öffentlich</span>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Makler auf der öffentlichen Webseite anzeigen</p>
               </div>
             </label>
           </div>
         </div>
 
         {/* Previsualización del JSON a enviar */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Preview datos enviados</label>
           <pre className="bg-gray-100 dark:bg-neutral-800 p-4 rounded text-xs overflow-x-auto max-h-64">
             {JSON.stringify(formData, null, 2)}
           </pre>
-        </div>
-        {/* Actions */}
+        </div> */}
+
         <div className="flex items-center gap-4">
-          <button
-            type="submit"
-            disabled={loading}
-            className="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 disabled:bg-gray-400 text-white rounded-lg transition-colors font-medium cursor-pointer"
-          >
+          <Button type="submit" disabled={loading} variant="primary">
             <IoSaveOutline className="text-xl" />
-            <span>{loading ? 'Creating...' : 'Create Agent'}</span>
-          </button>
-          <Link
-            href="/admin/agents"
-            className="px-6 py-3 bg-gray-200 dark:bg-neutral-700 hover:bg-gray-300 dark:hover:bg-neutral-600 text-gray-900 dark:text-white rounded-lg transition-colors font-medium"
-          >
-            Cancel
+            <span>{loading ? 'Wird erstellt...' : 'Makler erstellen'}</span>
+          </Button>
+          <Link href="/admin/agents">
+            <Button type="button" variant="secondary">
+              Abbrechen
+            </Button>
           </Link>
         </div>
       </form>

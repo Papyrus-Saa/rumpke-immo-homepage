@@ -1,6 +1,8 @@
+
 import React from "react";
-import PropertyAdminCard from "../../app/admin/components/properties/components/PropertyAdminCard";
+
 import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
+import PropertyAdminCard from "@/components/admin/PropertyAdminCard";
 
 const mockProperty1: PropertyAdminPanel = {
   agent: "Max Mustermann",

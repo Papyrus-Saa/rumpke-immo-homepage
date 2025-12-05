@@ -1,11 +1,12 @@
 "use client";
 
 import Link from 'next/link';
-import { IoAddOutline, IoCreateOutline, IoTrashOutline } from 'react-icons/io5';
+import { IoAddOutline, IoCreateOutline, IoTrashOutline, IoPersonOutline } from 'react-icons/io5';
 import { useAgents, Agent } from '@/hooks/agents/useAgents';
 import { useState } from 'react';
 import Select from 'react-select';
 import { languageOptions } from '@/hooks/multilingualField/useMultilingualFields';
+import Button from '@/components/ui/Button';
 
 export default function AgentsTableClient({ initialAgents }: { initialAgents: Agent[] }) {
   const {
@@ -49,56 +50,55 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Agents</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Manage your real estate agents
+          <h1 className="text-2xl font-bold text-admin-text-l dark:text-admin-text-d">Makler</h1>
+          <p className="text-sm text-admin-text-l dark:text-admin-text-d mt-1">
+            Verwalten Sie Ihre Immobilienmakler
           </p>
         </div>
-        <Link
-          href="/admin/agents/new"
-          className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors"
-        >
-          <IoAddOutline className="text-xl" />
-          <span>Add Agent</span>
+        <Link href="/admin/agents/new">
+          <Button variant="primary" className="flex items-center">
+            <IoAddOutline className="" />
+            <IoPersonOutline className="" />
+          </Button>
         </Link>
       </div>
 
       <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-neutral-800 border-b border-gray-200 dark:border-neutral-700">
+            <thead className="bg-card-bg-l dark:bg-card-bg-d border-b border-admin-border-l dark:border-admin-border-d">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  Agent
+                <th className="px-6 py-3 text-left text-xs font-medium text-admin-text-l dark:text-admin-text-d uppercase tracking-wider">
+                  Makler
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  Contact
+                <th className="px-6 py-3 text-left text-xs font-medium text-admin-text-l dark:text-admin-text-d uppercase tracking-wider">
+                  Kontakt
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  Languages
+                <th className="px-6 py-3 text-left text-xs font-medium text-admin-text-l dark:text-admin-text-d uppercase tracking-wider">
+                  Sprachen
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-admin-text-l dark:text-admin-text-d uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  Actions
+                <th className="px-6 py-3 text-right text-xs font-medium text-admin-text-l dark:text-admin-text-d uppercase tracking-wider">
+                  Aktionen
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
+            <tbody className="divide-y divide-admin-border-l dark:divide-admin-border-d">
               {loading ? (
-                <tr><td colSpan={5} className="text-center py-8">Loading...</td></tr>
+                <tr><td colSpan={5} className="text-center py-8">Lade...</td></tr>
               ) : error ? (
-                <tr><td colSpan={5} className="text-center py-8 text-red-500">{error instanceof Error ? error.message : String(error)}</td></tr>
+                <tr><td colSpan={5} className="text-center py-8 text-error">{error instanceof Error ? error.message : String(error)}</td></tr>
               ) : agents.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
-                    No agents found. Create your first agent to get started.
+                  <td colSpan={5} className="px-6 py-8 text-center text-admin-text-l dark:text-admin-text-d">
+                    Keine Makler gefunden. Erstellen Sie Ihren ersten Makler, um zu beginnen.
                   </td>
                 </tr>
               ) : (
                 agents.map((agent) => (
-                  <tr key={agent.id} className="hover:bg-gray-50 dark:hover:bg-neutral-800/50">
+                  <tr key={agent.id} className="hover:bg-admin-hover-l dark:hover:bg-admin-hover-d">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         {agent.photo_url && (
@@ -109,11 +109,11 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                           />
                         )}
                         <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                          <div className="text-sm font-medium text-admin-text-l dark:text-admin-text-d">
                             {agent.first_name} {agent.last_name}
                           </div>
                           {agent.position_de && (
-                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                            <div className="text-xs text-admin-text-l dark:text-admin-text-d">
                               {agent.position_de}
                             </div>
                           )}
@@ -121,15 +121,15 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="text-sm text-gray-900 dark:text-white">{agent.email}</div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400">{agent.phone}</div>
+                      <div className="text-sm text-admin-text-l dark:text-admin-text-d">{agent.email}</div>
+                      <div className="text-xs text-admin-text-l dark:text-admin-text-d">{agent.phone}</div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-wrap gap-1">
                         {agent.languages?.map((lang) => (
                           <span
                             key={lang}
-                            className="px-2 py-1 text-[10px] bg-gray-100 dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded"
+                            className="px-2 py-1 text-[10px] bg-admin-hover-l dark:bg-admin-hover-d text-admin-text-l dark:text-admin-text-d rounded"
                           >
                             {lang}
                           </span>
@@ -139,25 +139,25 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                     <td className="px-6 py-4">
                       <span
                         className={`px-2 py-1 text-xs font-medium rounded ${agent.is_active
-                          ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-400'
-                          : 'bg-gray-100 dark:bg-neutral-700 text-gray-800 dark:text-gray-300'
+                          ? 'bg-primary text-admin-text-d font-bold'
+                          : 'bg-admin-hover-l dark:bg-admin-hover-d text-admin-text-l dark:text-admin-text-d'
                           }`}
                       >
-                        {agent.is_active ? 'Active' : 'Inactive'}
+                        {agent.is_active ? 'Aktiv' : 'Inaktiv'}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button
-                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary hover:bg-gray-100 dark:hover:bg-neutral-700 rounded transition-colors cursor-pointer"
-                          title="Edit"
+                          className="p-2 text-admin-text-l dark:text-admin-text-d hover:text-primary hover:bg-admin-hover-l dark:hover:bg-admin-hover-d rounded transition-colors cursor-pointer"
+                          title="Bearbeiten"
                           onClick={() => handleOpenEdit(agent)}
                         >
                           <IoCreateOutline className="text-lg" />
                         </button>
                         <button
-                          className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded transition-colors cursor-pointer"
-                          title="Delete"
+                          className="p-2 text-admin-text-l dark:text-admin-text-d hover:text-red-600 hover:bg-admin-hover-l dark:hover:bg-admin-hover-d rounded transition-colors cursor-pointer"
+                          title="Löschen"
                           onClick={() => setDeleteModal(agent)}
                         >
                           <IoTrashOutline className="text-lg" />
@@ -176,11 +176,11 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
       {editForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 w-full max-w-lg relative">
-            <button className="absolute top-3 right-3 text-gray-400 hover:text-gray-700" onClick={handleCloseEdit}>&times;</button>
-            <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Edit Agent</h2>
+            <button className="absolute top-3 right-3 text-admin-text-l dark:text-admin-text-d hover:text-gray-700" onClick={handleCloseEdit}>&times;</button>
+            <h2 className="text-xl font-bold mb-4 text-admin-text-l dark:text-admin-text-d">Makler bearbeiten</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold mb-1">First Name</label>
+                <label className="block text-sm font-semibold mb-1">Vorname</label>
                 <input
                   type="text"
                   name="first_name"
@@ -190,7 +190,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-1">Last Name</label>
+                <label className="block text-sm font-semibold mb-1">Nachname</label>
                 <input
                   type="text"
                   name="last_name"
@@ -200,7 +200,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-1">Email</label>
+                <label className="block text-sm font-semibold mb-1">E-Mail</label>
                 <input
                   type="email"
                   name="email"
@@ -210,7 +210,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-1">Phone</label>
+                <label className="block text-sm font-semibold mb-1">Telefon</label>
                 <input
                   type="text"
                   name="phone"
@@ -220,7 +220,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-1">Photo URL</label>
+                <label className="block text-sm font-semibold mb-1">Foto-URL</label>
                 <input
                   type="text"
                   name="photo_url"
@@ -230,7 +230,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-1">Position (DE)</label>
+                <label className="block text-sm font-semibold mb-1">Berufsbezeichnung (DE)</label>
                 <input
                   type="text"
                   name="position_de"
@@ -240,7 +240,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-1">Languages</label>
+                <label className="block text-sm font-semibold mb-1">Sprachen</label>
                 <Select
                   isMulti
                   options={languageOptions}
@@ -253,7 +253,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                   }
                   className="react-select-container text-black"
                   classNamePrefix="react-select"
-                  placeholder="Select languages..."
+                  placeholder="Sprachen auswählen..."
                   formatOptionLabel={option => (
                     <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       <span style={{ fontSize: '1.2em' }}>{option.flag}</span>
@@ -263,7 +263,7 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold mb-1">Active</label>
+                <label className="block text-sm font-semibold mb-1">Aktiv</label>
                 <select
                   name="is_active"
                   value={editForm.is_active ? 'true' : 'false'}
@@ -275,15 +275,15 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
                   }
                   className="w-full px-3 py-2 border rounded text-gray-600"
                 >
-                  <option value="true">Active</option>
-                  <option value="false">Inactive</option>
+                  <option value="true">Aktiv</option>
+                  <option value="false">Inaktiv</option>
                 </select>
               </div>
 
             </div>
             <div className="mt-6 flex justify-end gap-2">
-              <button className="px-4 py-2 rounded bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-200" onClick={handleCloseEdit}>Cancel</button>
-              <button className="px-4 py-2 rounded bg-primary text-white" onClick={handleEditSave}>Save</button>
+              <Button variant="secondary" onClick={handleCloseEdit}>Abbrechen</Button>
+              <Button variant="primary" onClick={handleEditSave}>Speichern</Button>
             </div>
           </div>
         </div>
@@ -293,12 +293,12 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
       {deleteModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white dark:bg-neutral-900 rounded-lg shadow-lg p-8 w-full max-w-md relative">
-            <button className="absolute top-3 right-3 text-gray-400 hover:text-gray-700" onClick={() => setDeleteModal(null)}>&times;</button>
-            <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Delete Agent</h2>
-            <p className="mb-4">Are you sure you want to delete <span className="font-semibold">{deleteModal.first_name} {deleteModal.last_name}</span>?</p>
+            <button className="absolute top-3 right-3 text-admin-text-l dark:text-admin-text-d hover:text-gray-700" onClick={() => setDeleteModal(null)}>&times;</button>
+            <h2 className="text-xl font-bold mb-4 text-admin-text-l dark:text-admin-text-d">Makler löschen</h2>
+            <p className="mb-4">Sind Sie sicher, dass Sie <span className="font-semibold">{deleteModal.first_name} {deleteModal.last_name}</span> löschen möchten?</p>
             <div className="flex justify-end gap-2">
-              <button className="px-4 py-2 rounded bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-200" onClick={() => setDeleteModal(null)}>Cancel</button>
-              <button className="px-4 py-2 rounded bg-red-600 text-white" onClick={() => { deleteAgent(deleteModal.id); setDeleteModal(null); }}>Delete</button>
+              <Button variant="secondary" onClick={() => setDeleteModal(null)}>Abbrechen</Button>
+              <Button variant="danger" onClick={() => { deleteAgent(deleteModal.id); setDeleteModal(null); }}>Löschen</Button>
             </div>
           </div>
         </div>
