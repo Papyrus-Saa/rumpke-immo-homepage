@@ -1,10 +1,9 @@
 'use client';
 
-
-import PropertiesAdminGrid from "@/components/admin/PropertiesAdminGrid";
 import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
 import Link from "next/link";
 import { IoHomeOutline, IoAddOutline } from "react-icons/io5";
+import PropertiesAdminGrid from "../components/properties/components/PropertiesAdminGrid";
 
 const propertiesAdmin: PropertyAdminPanel[] = [
   {
