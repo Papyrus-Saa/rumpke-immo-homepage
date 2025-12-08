@@ -1,9 +1,9 @@
 "use client";
 
 import Link from 'next/link';
-import { IoAddOutline, IoCreateOutline, IoTrashOutline, IoPersonOutline } from 'react-icons/io5';
+import { IoAddOutline, IoCreateOutline, IoTrashOutline, IoPersonOutline, IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
 import { useAgents, Agent } from '@/hooks/agents/useAgents';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { languageOptions } from '@/hooks/multilingualField/useMultilingualFields';
 import Button from '@/components/ui/Button';
@@ -23,6 +23,33 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
 
   const [editForm, setEditForm] = useState<Agent | null>(null);
   const [deleteModal, setDeleteModal] = useState<Agent | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  // Línea 28: Efecto para mostrar toast cuando cambia el estado de edición
+  useEffect(() => {
+    if (editAgentStatus === 'success') {
+      setToast({ message: 'Makler erfolgreich aktualisiert', type: 'success' });
+    } else if (editAgentStatus === 'error') {
+      setToast({ message: 'Fehler beim Aktualisieren des Maklers', type: 'error' });
+    }
+  }, [editAgentStatus]);
+
+  // Línea 35: Efecto para mostrar toast cuando cambia el estado de eliminación
+  useEffect(() => {
+    if (deleteAgentStatus === 'success') {
+      setToast({ message: 'Makler erfolgreich gelöscht', type: 'success' });
+    } else if (deleteAgentStatus === 'error') {
+      setToast({ message: 'Fehler beim Löschen des Maklers', type: 'error' });
+    }
+  }, [deleteAgentStatus]);
+
+  // Línea 43: Auto-ocultar toast después de 3 segundos
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
 
   const handleOpenEdit = (agent: Agent) => {
     setEditForm({ ...agent });
@@ -47,6 +74,27 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
 
   return (
     <div>
+
+      {toast && (
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-3 px-2 py-1 rounded-lg shadow-lg animate-slide-in ${toast.type === 'success'
+            ? 'bg-green-500 text-white'
+            : 'bg-red-500 text-white'
+          }`}>
+          {toast.type === 'success' ? (
+            <IoCheckmarkCircle className="text-2xl" />
+          ) : (
+            <IoCloseCircle className="text-2xl" />
+          )}
+          <span className="font-medium">{toast.message}</span>
+          <button
+            onClick={() => setToast(null)}
+            className="ml-2 hover:opacity-80"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>

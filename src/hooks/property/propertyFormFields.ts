@@ -1,0 +1,90 @@
+export const allFields = [
+  { key: 'title', label: 'Titel' },
+  { key: 'agent', label: 'Makler' },
+  { key: 'owner', label: 'Eigentümer' },
+  { key: 'operation', label: 'Operation' },
+  { key: 'type', label: 'Typ' },
+  { key: 'status', label: 'Status' },
+  { key: 'address_line', label: 'Adresse' },
+  { key: 'city', label: 'Stadt' },
+  { key: 'postal_code', label: 'Postleitzahl' },
+  { key: 'built_area_m2', label: 'Wohnfläche' },
+  { key: 'rooms', label: 'Zimmer' },
+  { key: 'bedrooms', label: 'Schlafzimmer' },
+  { key: 'bathrooms', label: 'Badezimmer' },
+  { key: 'price_amount', label: 'Preis' },
+  { key: 'currency', label: 'Währung' },
+  { key: 'main_image', label: 'Hauptbild' },
+  { key: 'country', label: 'Land' },
+  { key: 'latitude', label: 'Breitengrad' },
+  { key: 'longitude', label: 'Längengrad' },
+  { key: 'community_fees', label: 'Nebenkosten' },
+  { key: 'deposit', label: 'Kaution' },
+  { key: 'commission_info', label: 'Provisionsinfo' },
+  { key: 'usable_area_m2', label: 'Nutzfläche' },
+  { key: 'plot_area_m2', label: 'Grundstücksfläche' },
+  { key: 'floor', label: 'Etage' },
+  { key: 'floors_total', label: 'Etagen gesamt' },
+  { key: 'parking_spaces', label: 'Parkplätze' },
+  { key: 'build_year', label: 'Baujahr' },
+  { key: 'renovation_year', label: 'Renovierungsjahr' },
+  { key: 'has_elevator', label: 'Aufzug' },
+  { key: 'garage', label: 'Garage' },
+  { key: 'storage_room', label: 'Abstellraum' },
+  { key: 'air_conditioning', label: 'Klimaanlage' },
+  { key: 'balcony', label: 'Balkon' },
+  { key: 'terrace', label: 'Terrasse' },
+  { key: 'garden', label: 'Garten' },
+  { key: 'pool', label: 'Pool' },
+  { key: 'fireplace', label: 'Kamin' },
+  { key: 'floor_heating', label: 'Fußbodenheizung' },
+  { key: 'solar_panels', label: 'Solarpaneele' },
+  { key: 'concierge', label: 'Concierge' },
+  { key: 'sea_view', label: 'Meerblick' },
+  { key: 'mountain_view', label: 'Bergblick' },
+  { key: 'city_view', label: 'Stadtblick' },
+  { key: 'is_new', label: 'Neubau' },
+  { key: 'kitchen_type', label: 'Küchentyp' },
+  { key: 'heating', label: 'Heizung' },
+  { key: 'furnished', label: 'Möblierung' },
+  { key: 'energy_label', label: 'Energieeffizienzklasse' },
+  { key: 'energy_consumption_kwh_m2y', label: 'Energieverbrauch' },
+  { key: 'available_from', label: 'Verfügbar ab' },
+  { key: 'description', label: 'Beschreibung' },
+  { key: 'notes_internal', label: 'Interne Notizen' },
+];
+
+export const operationOptions = [
+  { value: 'SELL', label: 'Verkauf' },
+  { value: 'RENT', label: 'Miete' },
+];
+
+export const typeOptions = [
+  { value: 'wohnung', label: 'Wohnung' },
+  { value: 'haus', label: 'Haus' },
+  { value: 'gewerbe', label: 'Gewerbe' },
+  { value: 'grundstueck', label: 'Grundstück' },
+  { value: 'sonstige', label: 'Sonstige' },
+];
+
+export const statusOptions = [
+  { value: 'DRAFT', label: 'Entwurf' },
+  { value: 'PUBLISHED', label: 'Veröffentlicht' },
+  { value: 'RESERVED', label: 'Reserviert' },
+  { value: 'SOLD', label: 'Verkauft' },
+  { value: 'RENTED', label: 'Vermietet' },
+  { value: 'HIDDEN', label: 'Versteckt' },
+];
+
+export const currencyOptions = [
+  { value: 'EUR', label: 'EUR (€)' },
+  { value: 'USD', label: 'USD ($)' },
+  { value: 'GBP', label: 'GBP (£)' },
+];
+
+export const furnishedOptions = [
+  { value: '', label: 'Nicht angegeben' },
+  { value: 'unmöbliert', label: 'Unmöbliert' },
+  { value: 'teilmöbliert', label: 'Teilmöbliert' },
+  { value: 'voll möbliert', label: 'Voll möbliert' },
+];

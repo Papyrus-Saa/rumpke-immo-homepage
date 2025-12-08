@@ -1,34 +1,27 @@
 
-import React from "react";
-import { UseFormRegister, FieldError } from "react-hook-form";
+import React, { SelectHTMLAttributes } from "react";
 
 interface Option {
-  value: string;
+  value: string | number;
   label: string;
 }
 
-interface InputSelectProps {
+interface InputSelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
-  name: string;
   options: Option[];
-  register: UseFormRegister<any>;
-  required?: boolean;
-  error?: FieldError;
+  error?: string;
   placeholder?: string;
-  disabled?: boolean;
-  multiple?: boolean;
 }
 
 const InputSelect: React.FC<InputSelectProps> = ({
   label,
   name,
   options,
-  register,
-  required = false,
   error,
+  required,
   placeholder = "",
-  disabled = false,
   multiple = false,
+  ...rest
 }) => {
   return (
     <div>
@@ -37,9 +30,10 @@ const InputSelect: React.FC<InputSelectProps> = ({
       </label>
       <select
         id={name}
-        {...register(name, { required })}
-        disabled={disabled}
+        name={name}
+        required={required}
         multiple={multiple}
+        {...rest}
         className={`w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
       >
         {placeholder && !multiple && <option value="">{placeholder}</option>}
@@ -49,7 +43,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
           </option>
         ))}
       </select>
-      {error && <p className="mt-1 text-xs text-error">{error.message}</p>}
+      {error && <p className="mt-1 text-xs text-error">{error}</p>}
     </div>
   );
 };

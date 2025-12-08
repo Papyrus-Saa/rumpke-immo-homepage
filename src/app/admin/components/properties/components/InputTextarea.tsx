@@ -1,27 +1,19 @@
 
-import React from "react";
-import { UseFormRegister, FieldError } from "react-hook-form";
+import React, { TextareaHTMLAttributes } from "react";
 
-interface InputTextareaProps {
+interface InputTextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string;
-  name: string;
-  register: UseFormRegister<any>;
-  required?: boolean;
-  error?: FieldError;
-  placeholder?: string;
-  rows?: number;
-  disabled?: boolean;
+  error?: string;
 }
 
 const InputTextarea: React.FC<InputTextareaProps> = ({
   label,
   name,
-  register,
-  required = false,
   error,
-  placeholder = "",
+  required,
   rows = 3,
-  disabled = false,
+  placeholder = "",
+  ...rest
 }) => {
   return (
     <div>
@@ -30,13 +22,14 @@ const InputTextarea: React.FC<InputTextareaProps> = ({
       </label>
       <textarea
         id={name}
+        name={name}
+        required={required}
         rows={rows}
         placeholder={placeholder}
-        disabled={disabled}
-        {...register(name, { required })}
+        {...rest}
         className={`w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
       />
-      {error && <p className="mt-1 text-xs text-error">{error.message}</p>}
+      {error && <p className="mt-1 text-xs text-error">{error}</p>}
     </div>
   );
 };

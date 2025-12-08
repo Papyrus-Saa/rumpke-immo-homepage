@@ -1,23 +1,17 @@
 
-import React from "react";
-import { UseFormRegister, FieldError } from "react-hook-form";
+import React, { InputHTMLAttributes } from "react";
 
-interface InputDateProps {
+interface InputDateProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  name: string;
-  register: UseFormRegister<any>;
-  required?: boolean;
-  error?: FieldError;
-  disabled?: boolean;
+  error?: string;
 }
 
 const InputDate: React.FC<InputDateProps> = ({
   label,
   name,
-  register,
-  required = false,
   error,
-  disabled = false,
+  required,
+  ...rest
 }) => {
   return (
     <div>
@@ -26,12 +20,13 @@ const InputDate: React.FC<InputDateProps> = ({
       </label>
       <input
         id={name}
+        name={name}
         type="date"
-        disabled={disabled}
-        {...register(name, { required })}
+        required={required}
+        {...rest}
         className={`w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
       />
-      {error && <p className="mt-1 text-xs text-error">{error.message}</p>}
+      {error && <p className="mt-1 text-xs text-error">{error}</p>}
     </div>
   );
 };

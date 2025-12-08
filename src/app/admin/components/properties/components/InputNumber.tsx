@@ -1,31 +1,17 @@
 
-import React from "react";
-import { UseFormRegister, FieldError } from "react-hook-form";
+import React, { InputHTMLAttributes } from "react";
 
-interface InputNumberProps {
+interface InputNumberProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  name: string;
-  register: UseFormRegister<any>;
-  required?: boolean;
-  error?: FieldError;
-  min?: number;
-  max?: number;
-  step?: number;
-  placeholder?: string;
-  disabled?: boolean;
+  error?: string;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
   label,
   name,
-  register,
-  required = false,
   error,
-  min,
-  max,
-  step,
-  placeholder = "",
-  disabled = false,
+  required,
+  ...rest
 }) => {
   return (
     <div>
@@ -34,18 +20,16 @@ const InputNumber: React.FC<InputNumberProps> = ({
       </label>
       <input
         id={name}
+        name={name}
         type="number"
-        min={min}
-        max={max}
-        step={step}
-        placeholder={placeholder}
-        disabled={disabled}
-        {...register(name, { required })}
+        required={required}
+        {...rest}
         className={`w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
       />
-      {error && <p className="mt-1 text-xs text-error">{error.message}</p>}
+      {error && <p className="mt-1 text-xs text-error">{error}</p>}
     </div>
   );
 };
+
 
 export default InputNumber;

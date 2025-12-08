@@ -4,6 +4,9 @@ import { IoPencil } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import InputText from "./InputText";
+import InputNumber from "./InputNumber";
+import InputSelect from "./InputSelect";
 
 
 interface InlineEditFieldProps {
@@ -80,15 +83,24 @@ const InlineEditField: React.FC<InlineEditFieldProps> = ({ label, value, type = 
         {editing ? (
           <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-2 w-full">
             {type === "select" && options ? (
-              <select
+              <InputSelect
+                label={label}
+                options={options.map(opt => ({ value: opt, label: opt }))}
+                error={errors.field?.message as string}
                 {...register("field")}
                 className="border border-admin-border-l dark:border-admin-border-d rounded px-2 py-1 bg-card-bg-l dark:bg-card-bg-d"
-              >
-                {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-              </select>
+              />
+            ) : type === "number" ? (
+              <InputNumber
+                label={label}
+                error={errors.field?.message as string}
+                {...register("field")}
+                className="border border-admin-border-l dark:border-admin-border-d rounded px-2 py-1 bg-card-bg-l dark:bg-card-bg-d"
+              />
             ) : (
-              <input
-                type={type}
+              <InputText
+                label={label}
+                error={errors.field?.message as string}
                 {...register("field")}
                 className="border border-admin-border-l dark:border-admin-border-d rounded px-2 py-1 bg-card-bg-l dark:bg-card-bg-d"
               />

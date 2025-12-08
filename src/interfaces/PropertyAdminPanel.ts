@@ -1,4 +1,6 @@
 export interface PropertyAdminPanel {
+  category: 'haus' | 'wohnung' | 'gewerbe' | 'grundstueck' | 'sonstige';
+  title: string;
   agent: string;
   owner: string;
   operation: 'SELL' | 'RENT';
@@ -56,6 +58,5 @@ export interface PropertyAdminPanel {
   concierge?: boolean;
   description?: string;
   notes_internal?: string;
-  title?: string;
   is_new?: boolean;
 }

@@ -1,37 +1,31 @@
 // moved from src/components/form-fields/CheckboxBoolean.tsx
-import React from "react";
-import { UseFormRegister, FieldError } from "react-hook-form";
+import React, { InputHTMLAttributes } from "react";
 
-interface CheckboxBooleanProps {
+interface CheckboxBooleanProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  name: string;
-  register: UseFormRegister<any>;
-  required?: boolean;
-  error?: FieldError;
-  disabled?: boolean;
+  error?: string;
 }
-
 const CheckboxBoolean: React.FC<CheckboxBooleanProps> = ({
   label,
   name,
-  register,
-  required = false,
   error,
-  disabled = false,
+  required,
+  ...rest
 }) => {
   return (
     <div className="flex items-center gap-3">
       <input
         id={name}
+        name={name}
         type="checkbox"
-        disabled={disabled}
-        {...register(name, { required })}
+        required={required}
+        {...rest}
         className={`w-5 h-5 text-primary bg-card-bg-l dark:bg-card-bg-d border-admin-border-l dark:border-admin-border-d rounded focus:ring-2 focus:ring-primary ${error ? 'border-error' : ''}`}
       />
       <label htmlFor={name} className="text-sm font-medium text-admin-text-l dark:text-admin-text-d">
         {label} {required && <span className="text-error">*</span>}
       </label>
-      {error && <p className="mt-1 text-xs text-error">{error.message}</p>}
+      {error && <p className="mt-1 text-xs text-error">{error}</p>}
     </div>
   );
 };

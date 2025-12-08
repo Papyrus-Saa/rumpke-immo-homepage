@@ -1,49 +1,106 @@
 'use client';
 import { useDashboardSummary } from '@/hooks/dashboard/useDashboardSummary';
+import { IoHomeOutline, IoCheckmarkCircle, IoTimeOutline, IoKeyOutline, IoDocumentTextOutline, IoEyeOffOutline, IoPeopleOutline, IoPersonOutline, IoMailOutline, IoPricetagOutline, IoGridOutline, IoCalendarOutline } from 'react-icons/io5';
 
-const kpiList = [
-  { key: 'totalProperties', label: 'Gesamtobjekte' },
-  { key: 'publishedProperties', label: 'Veröffentlicht' },
-  { key: 'reservedProperties', label: 'Reserviert' },
-  { key: 'soldProperties', label: 'kauf' },
-  { key: 'rentedProperties', label: 'Vermietet' },
-  { key: 'draftProperties', label: 'Entwurf' },
-  { key: 'hiddenProperties', label: 'Versteckt' },
-  { key: 'totalAgents', label: 'Gesamtmakler' },
-  { key: 'activeAgents', label: 'Aktive Makler' },
-  { key: 'inactiveAgents', label: 'Inaktive Makler' },
-  { key: 'totalLeads', label: 'Gesamtanfragen' },
-  { key: 'leadsThisMonth', label: 'Anfragen diesen Monat' },
-  { key: 'totalCategories', label: 'Kategorien' },
-  { key: 'totalTags', label: 'Tags' },
-  { key: 'totalAmenities', label: 'Ausstattung' },
+// Línea 4: Configuración de KPIs con iconos y colores
+const kpiSections = [
+  {
+    title: 'Immobilien',
+    items: [
+      { key: 'totalProperties', label: 'Gesamtobjekte', icon: IoHomeOutline, color: 'text-primary' },
+      { key: 'publishedProperties', label: 'Veröffentlicht', icon: IoCheckmarkCircle, color: 'text-success' },
+      { key: 'reservedProperties', label: 'Reserviert', icon: IoTimeOutline, color: 'text-warning' },
+      { key: 'soldProperties', label: 'Verkauft', icon: IoKeyOutline, color: 'text-error' },
+      { key: 'rentedProperties', label: 'Vermietet', icon: IoKeyOutline, color: 'text-rent' },
+      { key: 'draftProperties', label: 'Entwurf', icon: IoDocumentTextOutline, color: 'text-admin-text-l dark:text-admin-text-d' },
+      { key: 'hiddenProperties', label: 'Versteckt', icon: IoEyeOffOutline, color: 'text-admin-text-l dark:text-admin-text-d' },
+    ]
+  },
+  {
+    title: 'Team',
+    items: [
+      { key: 'totalAgents', label: 'Gesamtmakler', icon: IoPeopleOutline, color: 'text-primary' },
+      { key: 'activeAgents', label: 'Aktive Makler', icon: IoPersonOutline, color: 'text-success' },
+      { key: 'inactiveAgents', label: 'Inaktive Makler', icon: IoPersonOutline, color: 'text-admin-text-l dark:text-admin-text-d' },
+    ]
+  },
+  {
+    title: 'Anfragen',
+    items: [
+      { key: 'totalLeads', label: 'Gesamtanfragen', icon: IoMailOutline, color: 'text-primary' },
+      { key: 'leadsThisMonth', label: 'Diesen Monat', icon: IoCalendarOutline, color: 'text-success' },
+    ]
+  },
+  {
+    title: 'Verwaltung',
+    items: [
+      { key: 'totalCategories', label: 'Kategorien', icon: IoGridOutline, color: 'text-primary' },
+      { key: 'totalTags', label: 'Tags', icon: IoPricetagOutline, color: 'text-primary' },
+      { key: 'totalAmenities', label: 'Ausstattung', icon: IoGridOutline, color: 'text-primary' },
+    ]
+  }
 ];
 
 export default function DashboardPage() {
   const { data, isLoading, error } = useDashboardSummary();
 
   return (
-    <div className="px-8 py-4 dark:bg-card-secondary-bg-d bg-card-secondary-bg-l">
-      <h1 className="text-2xl font-semibold mb-2">Admin Dashboard</h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Línea 49: Header con gradiente */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-admin-text-l dark:text-admin-text-d mb-2">
+          Dashboard
+        </h1>
+        <p className="text-admin-text-l dark:text-admin-text-d">
+          Überblick über Ihre Immobilienverwaltung
+        </p>
+      </div>
+
       {isLoading && (
-        <div className="text-center text-admin-text-l dark:text-admin-text-d">Loading dashboard...</div>
+        <div className="text-center text-admin-text-l dark:text-admin-text-d py-12">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <p className="mt-4">Lade Dashboard...</p>
+        </div>
       )}
+      
       {error && (
-        <div className="text-center text-error">Error loading dashboard.</div>
+        <div className="bg-error/10 border border-error rounded-lg p-6 text-center text-error">
+          Fehler beim Laden des Dashboards
+        </div>
       )}
+
+      {/* Línea 74: Grid de secciones con tarjetas mejoradas */}
       {data && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-7">
-          {kpiList.map((kpi) => (
-            <div
-              key={kpi.key}
-              className="bg-card-bg-l dark:bg-card-bg-d shadow rounded p-6 flex flex-col items-center"
-            >
-              <span className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-2">
-                {kpi.label}
-              </span>
-              <span className="text-xl bg-card-secondary-bg-l dark:bg-card-secondary-bg-d px-6 rounded">
-                {data[kpi.key as keyof typeof data]}
-              </span>
+        <div className="space-y-8">
+          {kpiSections.map((section) => (
+            <div key={section.title}>
+              <h2 className="text-xl font-semibold text-admin-text-l dark:text-admin-text-d mb-4 flex items-center gap-2">
+                <span className="w-1 h-6 bg-primary rounded"></span>
+                {section.title}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                {section.items.map((kpi) => {
+                  const Icon = kpi.icon;
+                  return (
+                    <div
+                      key={kpi.key}
+                      className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border border-transparent hover:border-primary/20"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`p-3 rounded-lg bg-card-secondary-bg-l dark:bg-card-secondary-bg-d ${kpi.color}`}>
+                          <Icon className="text-2xl" />
+                        </div>
+                        <span className="text-3xl font-bold text-admin-text-l dark:text-admin-text-d">
+                          {data[kpi.key as keyof typeof data]}
+                        </span>
+                      </div>
+                      <p className="text-sm font-medium text-admin-text-l dark:text-admin-text-d">
+                        {kpi.label}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           ))}
         </div>

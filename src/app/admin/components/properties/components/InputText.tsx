@@ -1,27 +1,17 @@
 
-import React from "react";
-import { UseFormRegister, FieldError } from "react-hook-form";
+import React, { InputHTMLAttributes } from "react";
 
-interface InputTextProps {
+interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  name: string;
-  register: UseFormRegister<any>;
-  required?: boolean;
-  error?: FieldError;
-  type?: string;
-  placeholder?: string;
-  disabled?: boolean;
+  error?: string;
 }
 
 const InputText: React.FC<InputTextProps> = ({
   label,
   name,
-  register,
-  required = false,
   error,
-  type = "text",
-  placeholder = "",
-  disabled = false,
+  required,
+  ...rest
 }) => {
   return (
     <div>
@@ -30,13 +20,12 @@ const InputText: React.FC<InputTextProps> = ({
       </label>
       <input
         id={name}
-        type={type}
-        placeholder={placeholder}
-        disabled={disabled}
-        {...register(name, { required })}
+        name={name}
+        required={required}
+        {...rest}
         className={`w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
       />
-      {error && <p className="mt-1 text-xs text-error">{error.message}</p>}
+      {error && <p className="mt-1 text-xs text-error">{error}</p>}
     </div>
   );
 };
