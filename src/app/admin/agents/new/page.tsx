@@ -1,13 +1,24 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { IoClose } from 'react-icons/io5';
+import Select from 'react-select';
+import { Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { useState as useLocalState } from 'react';
+
 import { createAgent } from '@/utils/admin-client';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import { IoArrowBackOutline, IoSaveOutline, IoSchoolOutline } from 'react-icons/io5';
-import Select from 'react-select';
 import { languages, languageOptions } from '@/hooks/multilingualField/useMultilingualFields';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import AgentInputText from '../../components/agents/components/AgentInputText';
+import { useRouter } from 'next/navigation';
+import AgentCheckboxBoolean from '../../components/agents/components/AgentCheckboxBoolean';
+
+
 
 export default function NewAgentPage() {
 
@@ -16,78 +27,107 @@ export default function NewAgentPage() {
     return null;
   }
   const router = useRouter();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone: '',
-    mobile: '',
-    languages: [] as string[],
-    photo_url: '',
-    position_de: '',
-    position_en: '',
-    position_es: '',
-    position_pt: '',
-    position_fr: '',
-    position_it: '',
-    position_nl: '',
-    position_pl: '',
-    position_ru: '',
-    position_ar: '',
-    position_zh: '',
-    position_ja: '',
-    position_tr: '',
-    position_hi: '',
-    bio_de: '',
-    bio_en: '',
-    bio_es: '',
-    bio_pt: '',
-    bio_fr: '',
-    bio_it: '',
-    bio_nl: '',
-    bio_pl: '',
-    bio_ru: '',
-    bio_ar: '',
-    bio_zh: '',
-    bio_ja: '',
-    bio_tr: '',
-    bio_hi: '',
-    is_active: true,
-    is_public: true,
+  const schema = yup.object().shape({
+    first_name: yup.string().required("Vorname ist erforderlich"),
+    last_name: yup.string().required("Nachname ist erforderlich"),
+    email: yup.string().email("Ungültige E-Mail").required("E-Mail ist erforderlich"),
+    phone: yup.string().required("Telefon ist erforderlich"),
+    mobile: yup.string().notRequired(),
+    photo_url: yup.string().url('Foto-URL muss gültig sein').required('Foto-URL ist erforderlich'),
+    languages: yup.array().of(yup.string()).min(1, "Mindestens eine Sprache auswählen").required(),
+    is_active: yup.boolean().notRequired(),
+    is_public: yup.boolean().notRequired(),
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(formData.languages);
-    setLoading(true);
-    setError('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+    setValue,
+    setError: setFormError,
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone: "",
+      mobile: "",
+      photo_url: '',
+      languages: [],
+      is_active: false,
+      is_public: true,
+    },
+  });
 
-    if (!formData.first_name.trim() || !formData.last_name.trim() || !formData.email.trim() || !formData.phone.trim()) {
-      setError('Bitte füllen Sie Vorname, Nachname, E-Mail und Telefonnummer aus.');
-      return;
+  useEffect(() => {
+    const firstErrorKey = Object.keys(errors)[0];
+    if (firstErrorKey) {
+      const errorElement = document.getElementsByName(firstErrorKey)[0];
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        errorElement.focus();
+      }
     }
-    if (!formData.languages || formData.languages.length === 0) {
-      setError('Bitte wählen Sie mindestens eine Sprache aus.');
-      return;
-    }
+  }, [errors]);
 
 
-    try {
-      await createAgent(formData);
-      router.push('/admin/agents');
-      router.refresh();
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
-    } finally {
-      setLoading(false);
+  const onSubmit = async (data: any) => {
+  setLoading(true);
+  setError("");
+  setSuccess("");
+  try {
+    await createAgent(data);
+    setSuccess("Makler erfolgreich erstellt!");
+    router.push("/admin/agents");
+  } catch (err: any) {
+    // Error del backend con array de errores
+    if (err?.response?.data?.errors && Array.isArray(err.response.data.errors)) {
+      err.response.data.errors.forEach((error: any, index: number) => {
+        if (error.field && error.message) {
+          setFormError(error.field as any, { type: "manual", message: error.message });
+          // Scroll al primer campo con error
+          if (index === 0) {
+            setTimeout(() => {
+              const errorElement = document.getElementsByName(error.field)[0];
+              if (errorElement) {
+                errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                errorElement.focus();
+              }
+            }, 100);
+          }
+        }
+      });
     }
-  };
+    // Mensaje general del backend
+    else if (err?.response?.data?.message) {
+      const msg = Array.isArray(err.response.data.message)
+        ? err.response.data.message.join(' ')
+        : err.response.data.message;
+      setError(msg);
+    }
+    // Error genérico JS
+    else if (err?.message) {
+      setError(err.message);
+    }
+    // Fallback
+    else {
+      setError("API-Anfrage fehlgeschlagen");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
+  const [previewUrl, setPreviewUrl] = useLocalState("");
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-6xl mx-auto">
       <div className="mb-6">
         <Link
           href="/admin/agents"
@@ -102,252 +142,265 @@ export default function NewAgentPage() {
         </p>
       </div>
 
-      {/* Error Message */}
       {error && (
         <div className="mb-6 p-4 bg-error/10 dark:bg-error/20 border border-error dark:border-error rounded-lg">
           <p className="text-sm text-error dark:text-error">{error}</p>
         </div>
       )}
 
-      {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Basic Information */}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4">
             Basisinformationen
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2">
-                Vorname *
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.first_name}
-                onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-                className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2">
-                Nachname *
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.last_name}
-                onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
-                className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                E-Mail *
-              </label>
-              <input
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Telefon *
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.first_name}
-                onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-                className="w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Handy
-              </label>
-              <input
-                type="tel"
-                value={formData.mobile}
-                onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                className="w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Foto-URL
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="url"
-                  value={formData.photo_url}
-                  onChange={(e) => setFormData({ ...formData, photo_url: e.target.value })}
-                  className="flex-1 px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                />
-                <Button
-                  type="button"
-                  variant="primary"
-                  className="whitespace-nowrap cursor-po
-              inter"
-                  onClick={() => {
-                    const input = document.createElement('input');
-                    input.type = 'file';
-                    input.accept = 'image/*';
-                    input.onchange = (e) => {
-                      const file = (e.target as HTMLInputElement).files?.[0];
-                      if (file) {
-                        // TODO: Implementar upload a servidor
-                        console.log('Datei ausgewählt:', file);
+            <AgentInputText
+              label="Vorname"
+              name="first_name"
+              required
+              register={register}
+              error={errors.first_name}
+            />
+            <AgentInputText
+              label="Nachname"
+              name="last_name"
+              required
+              register={register}
+              error={errors.last_name}
+            />
+            <AgentInputText
+              label="E-Mail"
+              name="email"
+              type="email"
+              required
+              register={register}
+              error={errors.email}
+            />
+            <AgentInputText
+              label="Telefon"
+              name="phone"
+              required
+              register={register}
+              error={errors.phone}
+            />
+            <AgentInputText
+              label="Handy"
+              name="mobile"
+              type="tel"
+              register={register}
+              error={errors.mobile}
+            />
+          </div>
 
-                        const url = URL.createObjectURL(file);
-                        setFormData({ ...formData, photo_url: url });
-                      }
-                    };
-                    input.click();
-                  }}
-                >
-                  Hochladen
-                </Button>
-              </div>
+          {/* Foto-URL y subida */}
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2">
+              Foto-URL
+            </label>
+            <div className="flex gap-2 items-center">
+              <Controller
+                name="photo_url"
+                control={control}
+                render={({ field }) => (
+                  <div className="flex flex-1 items-center gap-2">
+                    <input
+                      type="url"
+                      {...field}
+                      value={field.value ?? ""}
+                      className={`flex-1 px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${errors.photo_url ? 'border-error' : ''}`}
+                      placeholder="https://..."
+                    />
+                    {field.value && (
+                      <button
+                        type="button"
+                        className="p-1 text-error hover:bg-error/10 rounded"
+                        onClick={() => {
+                          field.onChange("");
+                          setPreviewUrl("");
+                        }}
+                        title="Foto entfernen"
+                      >
+                        <IoClose size={20} />
+                      </button>
+                    )}
+                  </div>
+                )}
+              />
+              {errors.photo_url && (
+                <p className="text-xs text-error mt-1">{errors.photo_url.message}</p>
+              )}
+              <Button
+                type="button"
+                variant="primary"
+                className="whitespace-nowrap"
+                onClick={() => {
+                  const input = document.createElement('input');
+                  input.type = 'file';
+                  input.accept = 'image/*';
+                  input.onchange = (e) => {
+                    const file = (e.target as HTMLInputElement).files?.[0];
+                    if (file) {
+                      const url = URL.createObjectURL(file);
+                      setPreviewUrl(url);
+                      setValue('photo_url', url);
+                    }
+                  };
+                  input.click();
+                }}
+              >
+                Hochladen
+              </Button>
+              <Controller
+                name="photo_url"
+                control={control}
+                render={({ field }) => (
+                  field.value ? (
+                    <img
+                      src={field.value}
+                      alt="Preview"
+                      width={58}
+                      height={58}
+                      className="rounded object-cover ml-2"
+                    />
+                  ) : <></>
+                )}
+              />
             </div>
           </div>
 
-          {/* Sprachen */}
+
           <div className="mt-4 text-black">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2">
               Sprachen *
             </label>
-            <Select
-              isMulti
-              instanceId="agent-languages"
-              options={languageOptions}
-              value={languageOptions.filter(opt => formData.languages.includes(opt.value))}
-              onChange={(selected) => {
-                setFormData({
-                  ...formData,
-                  languages: selected ? selected.map(s => s.value) : []
-                });
-              }}
-              placeholder="Sprachen auswählen..."
-              className="react-select-container"
-              classNamePrefix="react-select"
-              formatOptionLabel={(option) => {
-                const [flag, ...rest] = option.label.split(' ');
-                return (
-                  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{ fontSize: '1.2em' }}>{flag}</span>
-                    <span>{rest.join(' ')}</span>
-                  </span>
-                );
-              }}
+            <Controller
+              name="languages"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  isMulti
+                  instanceId="agent-languages"
+                  options={languageOptions}
+                  value={languageOptions.filter(opt => field.value?.includes(opt.value))}
+                  onChange={(selected) => field.onChange(selected ? selected.map(s => s.value) : [])}
+                  placeholder="Sprachen auswählen..."
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  formatOptionLabel={(option) => {
+                    const [flag, ...rest] = option.label.split(' ');
+                    return (
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ fontSize: '1.2em' }}>{flag}</span>
+                        <span>{rest.join(' ')}</span>
+                      </span>
+                    );
+                  }}
+                />
+              )}
             />
+            {errors.languages && (
+              <p className="text-xs text-error mt-1">{errors.languages.message as string}</p>
+            )}
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Wählen Sie alle Sprachen aus, die der Makler spricht
             </p>
           </div>
-        </div>
 
+          {/* Berufsbezeichnung (Mehrsprachig) */}
+          <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <IoSchoolOutline className="text-xl" />
+              Berufsbezeichnung (Mehrsprachig)
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {languages.map((lang) => (
+                <div key={`position-${lang.code}`}>
+                  <AgentInputText
+                    label={`${lang.flag} ${lang.name}`}
+                    name={`position_${lang.code}`}
+                    register={register}
+                    error={(errors as any)[`position_${lang.code}`] as import('react-hook-form').FieldError | undefined}
+                    placeholder={`Berufsbezeichnung auf ${lang.name}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-            <IoSchoolOutline className="text-xl" />
-            Berufsbezeichnung (Mehrsprachig)
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {languages.map((lang) => (
-              <div key={`position-${lang.code}`}>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {lang.flag} {lang.name}
-                </label>
-                <input
-                  type="text"
-                  value={(formData[`position_${lang.code}` as keyof typeof formData] as string) || ''}
-                  onChange={(e) => setFormData({ ...formData, [`position_${lang.code}`]: e.target.value })}
-                  className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+          {/* Biografie (Mehrsprachig) */}
+          <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6 mt-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <span className="text-xl">📝</span>
+              Biografie (Mehrsprachig)
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {languages.map((lang) => (
+                <div key={`bio-${lang.code}`}>
+                  <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2">
+                    {`${lang.flag} ${lang.name}`}
+                  </label>
+                  <textarea
+                    {...register(`bio_${lang.code}` as any)}
+                    className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent min-h-20 resize-vertical"
+                    placeholder={`Biografie auf ${lang.name}`}
+                  />
+                  {(errors as any)[`bio_${lang.code}`] && (
+                    <p className="text-xs text-error mt-1">
+                      {(errors as any)[`bio_${lang.code}`]?.message}
+                    </p>
+                  )}
+                </div>
+              ))}
+              {/* Aktiv (Checkbox) */}
+              <div className="mt-6">
+                <AgentCheckboxBoolean
+                  label="Aktiv"
+                  name="is_active"
+                  register={register}
+                  error={(errors as any).is_active}
                 />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 ml-8">
+                  Makler kann Anfragen erhalten und kontaktiert werden
+                </p>
+                <div className="mt-4">
+                  <h3 className="text-xs font-semibold text-admin-text-l dark:text-admin-text-d mb-1">Sichtbarkeit</h3>
+                  <AgentCheckboxBoolean
+                    label="Makler auf der öffentlichen Webseite anzeigen"
+                    name="is_public"
+                    register={register}
+                    error={(errors as any).is_public}
+                  />
+                </div>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
 
-        {/* Bio Information */}
-        <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Biografie (Mehrsprachig)
-          </h2>
-          <div className="space-y-4">
-            {languages.map((lang) => (
-              <div key={`bio-${lang.code}`}>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  {lang.flag} {lang.name}
-                </label>
-                <textarea
-                  rows={3}
-                  value={(formData[`bio_${lang.code}` as keyof typeof formData] as string) || ''}
-                  onChange={(e) => setFormData({ ...formData, [`bio_${lang.code}`]: e.target.value })}
-                  className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                />
+          <div className="grid grid-cols-1 gap-4 mt-6">
+            <div className="flex items-center gap-4">
+              <Button type="submit" disabled={loading} variant="primary">
+                <IoSaveOutline className="text-xl" />
+                <span>{loading ? "Wird erstellt..." : "Makler erstellen"}</span>
+              </Button>
+              <Link href="/admin/agents">
+                <Button type="button" variant="secondary">
+                  Abbrechen
+                </Button>
+              </Link>
+            </div>
+            {success && (
+              <div className="mt-2 p-3 bg-green-100 border border-green-400 text-green-700 rounded text-sm">
+                {success}
               </div>
-            ))}
+            )}
+            {error && (
+              <div className="px-3 py-2 bg-error/10 border border-error text-error rounded text-sm col-span-1">
+                {error}
+              </div>
+            )}
           </div>
-        </div>
-
-        {/* Settings */}
-        <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-            Einstellungen
-          </h2>
-          <div className="space-y-4">
-            <label className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                checked={formData.is_active}
-                onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                className="w-5 h-5 text-primary bg-white dark:bg-neutral-800 border-gray-300 dark:border-neutral-700 rounded focus:ring-2 focus:ring-primary"
-              />
-              <div>
-                <span className="text-sm font-medium text-gray-900 dark:text-white">Aktiv</span>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Makler kann Anfragen erhalten und kontaktiert werden</p>
-              </div>
-            </label>
-            <label className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                checked={formData.is_public}
-                onChange={(e) => setFormData({ ...formData, is_public: e.target.checked })}
-                className="w-5 h-5 text-primary bg-white dark:bg-neutral-800 border-gray-300 dark:border-neutral-700 rounded focus:ring-2 focus:ring-primary"
-              />
-              <div>
-                <span className="text-sm font-medium text-gray-900 dark:text-white">Öffentlich</span>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Makler auf der öffentlichen Webseite anzeigen</p>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        {/* Previsualización del JSON a enviar */}
-        {/* <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Preview datos enviados</label>
-          <pre className="bg-gray-100 dark:bg-neutral-800 p-4 rounded text-xs overflow-x-auto max-h-64">
-            {JSON.stringify(formData, null, 2)}
-          </pre>
-        </div> */}
-
-        <div className="flex items-center gap-4">
-          <Button type="submit" disabled={loading} variant="primary">
-            <IoSaveOutline className="text-xl" />
-            <span>{loading ? 'Wird erstellt...' : 'Makler erstellen'}</span>
-          </Button>
-          <Link href="/admin/agents">
-            <Button type="button" variant="secondary">
-              Abbrechen
-            </Button>
-          </Link>
         </div>
       </form>
     </div>
   );
+
 }

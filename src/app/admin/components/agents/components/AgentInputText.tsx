@@ -25,8 +25,8 @@ const AgentInputText: React.FC<AgentInputTextProps> = ({
 }) => {
   return (
     <div>
-      <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2" htmlFor={name}>
-        {label} {required && <span className="text-error">*</span>}
+      <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-1" htmlFor={name}>
+        {label} {required && <span className="text-black dark:text-white">*</span>}
       </label>
       <input
         id={name}

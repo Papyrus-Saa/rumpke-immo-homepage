@@ -24,7 +24,12 @@ export async function apiFetch<T>(url: string, options: RequestInit = {}): Promi
     'Content-Type': 'application/json',
   };
   const res = await fetch(url, { ...options, headers });
-  if (!res.ok) throw new Error('API request failed');
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    const error: any = new Error(errorData.message || 'API-Anfrage fehlgeschlagen');
+    error.response = { data: errorData };
+    throw error;
+  }
   return res.json();
 }
 
