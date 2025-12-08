@@ -106,7 +106,10 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
                   <span className="text-xs text-gray-400">Kein Bild</span>
                 )}
               </div>
-              AQUI
+              <div className="flex-1 ml-4">
+                <h2 className="text-2xl font-bold">{editValues.title}</h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{editValues.address_line}, {editValues.city}</p>
+              </div>
               </div>
             <div className="flex gap-16 items-start">
               <div className="flex-1 flex flex-col gap-4">

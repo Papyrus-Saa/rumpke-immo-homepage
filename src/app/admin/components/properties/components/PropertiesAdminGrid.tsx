@@ -24,9 +24,7 @@ const PropertiesAdminGrid: React.FC<PropertiesAdminGridProps> = ({ properties })
       ))}
       {/* Fondo modal */}
       {expandedIndex !== null && (
-        <div className="fixed inset-0 bg-white opacity-50 dark:bg-black dark:opacity-70
-
-        0 z-40" />
+        <div className="fixed inset-0 bg-white opacity-50 dark:bg-black dark:opacity-70 z-40" />
       )}
     </div>
   );
