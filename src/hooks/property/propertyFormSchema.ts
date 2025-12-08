@@ -1,8 +1,8 @@
 import * as yup from 'yup';
 
 export const propertyFormSchema = yup.object().shape({
-      deposit: yup.number().typeError('Kaution muss eine Zahl sein').positive('Muss positiv sein'),
-    build_year: yup.number().typeError('Baujahr muss eine Zahl sein').integer('Muss ganzzahlig sein'),
+  deposit: yup.number().typeError('Kaution muss eine Zahl sein').positive('Muss positiv sein'),
+  build_year: yup.number().typeError('Baujahr muss eine Zahl sein').integer('Muss ganzzahlig sein'),
   category: yup.string().oneOf(['haus', 'wohnung', 'gewerbe', 'grundstueck', 'sonstige'], 'Ungültige Kategorie').required('Kategorie ist erforderlich'),
   agent: yup.string().required('Makler ist erforderlich'),
   owner: yup.string().required('Eigentümer ist erforderlich'),
