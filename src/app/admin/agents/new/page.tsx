@@ -5,13 +5,14 @@ import { IoClose } from 'react-icons/io5';
 import Select from 'react-select';
 import { Controller } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { useState as useLocalState } from 'react';
+
+import ImageUrlOrUploadInput from '../../hooks/properties/components/ImageUrlOrUploadInput';
 
 import { createAgent } from '@/utils/admin-client';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import { IoArrowBackOutline, IoSaveOutline, IoSchoolOutline } from 'react-icons/io5';
-import { languages, languageOptions } from '@/hooks/multilingualField/useMultilingualFields';
+import { languages, languageOptions } from '@/app/admin/hooks/multilingualField/components/useMultilingualFields';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import AgentInputText from '../../components/agents/components/AgentInputText';
@@ -78,53 +79,53 @@ export default function NewAgentPage() {
 
 
   const onSubmit = async (data: any) => {
-  setLoading(true);
-  setError("");
-  setSuccess("");
-  try {
-    await createAgent(data);
-    setSuccess("Makler erfolgreich erstellt!");
-    router.push("/admin/agents");
-  } catch (err: any) {
-    // Error del backend con array de errores
-    if (err?.response?.data?.errors && Array.isArray(err.response.data.errors)) {
-      err.response.data.errors.forEach((error: any, index: number) => {
-        if (error.field && error.message) {
-          setFormError(error.field as any, { type: "manual", message: error.message });
-          // Scroll al primer campo con error
-          if (index === 0) {
-            setTimeout(() => {
-              const errorElement = document.getElementsByName(error.field)[0];
-              if (errorElement) {
-                errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                errorElement.focus();
-              }
-            }, 100);
+    setLoading(true);
+    setError("");
+    setSuccess("");
+    try {
+      await createAgent(data);
+      setSuccess("Makler erfolgreich erstellt!");
+      router.push("/admin/agents");
+    } catch (err: any) {
+      // Error del backend con array de errores
+      if (err?.response?.data?.errors && Array.isArray(err.response.data.errors)) {
+        err.response.data.errors.forEach((error: any, index: number) => {
+          if (error.field && error.message) {
+            setFormError(error.field as any, { type: "manual", message: error.message });
+            // Scroll al primer campo con error
+            if (index === 0) {
+              setTimeout(() => {
+                const errorElement = document.getElementsByName(error.field)[0];
+                if (errorElement) {
+                  errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  errorElement.focus();
+                }
+              }, 100);
+            }
           }
-        }
-      });
+        });
+      }
+      // Mensaje general del backend
+      else if (err?.response?.data?.message) {
+        const msg = Array.isArray(err.response.data.message)
+          ? err.response.data.message.join(' ')
+          : err.response.data.message;
+        setError(msg);
+      }
+      // Error genérico JS
+      else if (err?.message) {
+        setError(err.message);
+      }
+      // Fallback
+      else {
+        setError("API-Anfrage fehlgeschlagen");
+      }
+    } finally {
+      setLoading(false);
     }
-    // Mensaje general del backend
-    else if (err?.response?.data?.message) {
-      const msg = Array.isArray(err.response.data.message)
-        ? err.response.data.message.join(' ')
-        : err.response.data.message;
-      setError(msg);
-    }
-    // Error genérico JS
-    else if (err?.message) {
-      setError(err.message);
-    }
-    // Fallback
-    else {
-      setError("API-Anfrage fehlgeschlagen");
-    }
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
-  const [previewUrl, setPreviewUrl] = useLocalState("");
+
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -160,6 +161,7 @@ export default function NewAgentPage() {
               required
               register={register}
               error={errors.first_name}
+              placeholder="Max"
             />
             <AgentInputText
               label="Nachname"
@@ -167,6 +169,7 @@ export default function NewAgentPage() {
               required
               register={register}
               error={errors.last_name}
+              placeholder="Mustermann"
             />
             <AgentInputText
               label="E-Mail"
@@ -175,6 +178,7 @@ export default function NewAgentPage() {
               required
               register={register}
               error={errors.email}
+              placeholder="max@email.de"
             />
             <AgentInputText
               label="Telefon"
@@ -182,6 +186,7 @@ export default function NewAgentPage() {
               required
               register={register}
               error={errors.phone}
+              placeholder="0123 4567890"
             />
             <AgentInputText
               label="Handy"
@@ -189,83 +194,25 @@ export default function NewAgentPage() {
               type="tel"
               register={register}
               error={errors.mobile}
+              placeholder="0176 1234567"
             />
           </div>
 
+
           {/* Foto-URL y subida */}
           <div className="mt-4">
-            <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2">
-              Foto-URL
-            </label>
-            <div className="flex gap-2 items-center">
-              <Controller
-                name="photo_url"
-                control={control}
-                render={({ field }) => (
-                  <div className="flex flex-1 items-center gap-2">
-                    <input
-                      type="url"
-                      {...field}
-                      value={field.value ?? ""}
-                      className={`flex-1 px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${errors.photo_url ? 'border-error' : ''}`}
-                      placeholder="https://..."
-                    />
-                    {field.value && (
-                      <button
-                        type="button"
-                        className="p-1 text-error hover:bg-error/10 rounded"
-                        onClick={() => {
-                          field.onChange("");
-                          setPreviewUrl("");
-                        }}
-                        title="Foto entfernen"
-                      >
-                        <IoClose size={20} />
-                      </button>
-                    )}
-                  </div>
-                )}
-              />
-              {errors.photo_url && (
-                <p className="text-xs text-error mt-1">{errors.photo_url.message}</p>
+            <Controller
+              name="photo_url"
+              control={control}
+              render={({ field }) => (
+                <ImageUrlOrUploadInput
+                  label="Foto-URL"
+                  field={field}
+                  error={errors.photo_url}
+                  required
+                />
               )}
-              <Button
-                type="button"
-                variant="primary"
-                className="whitespace-nowrap"
-                onClick={() => {
-                  const input = document.createElement('input');
-                  input.type = 'file';
-                  input.accept = 'image/*';
-                  input.onchange = (e) => {
-                    const file = (e.target as HTMLInputElement).files?.[0];
-                    if (file) {
-                      const url = URL.createObjectURL(file);
-                      setPreviewUrl(url);
-                      setValue('photo_url', url);
-                    }
-                  };
-                  input.click();
-                }}
-              >
-                Hochladen
-              </Button>
-              <Controller
-                name="photo_url"
-                control={control}
-                render={({ field }) => (
-                  field.value ? (
-                    <img
-                      src={field.value}
-                      alt="Preview"
-                      width={58}
-                      height={58}
-                      className="rounded object-cover ml-2"
-                    />
-                  ) : <></>
-                )}
-              />
-            </div>
+            />
           </div>
 
 

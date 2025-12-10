@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { IoAddOutline, IoCreateOutline, IoTrashOutline, IoPersonOutline, IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
-import { useAgents, Agent } from '@/hooks/agents/useAgents';
+import { useAgents, Agent } from '@/app/admin/hooks/agents/components/useAgents';
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
-import { languageOptions } from '@/hooks/multilingualField/useMultilingualFields';
+import { languageOptions } from '@/app/admin/hooks/multilingualField/components/useMultilingualFields';
 import Button from '@/components/ui/Button';
 
 export default function AgentsTableClient({ initialAgents }: { initialAgents: Agent[] }) {
@@ -77,8 +77,8 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
 
       {toast && (
         <div className={`fixed top-4 right-4 z-50 flex items-center gap-3 px-2 py-1 rounded-lg shadow-lg animate-slide-in ${toast.type === 'success'
-            ? 'bg-green-500 text-white'
-            : 'bg-red-500 text-white'
+          ? 'bg-green-500 text-white'
+          : 'bg-red-500 text-white'
           }`}>
           {toast.type === 'success' ? (
             <IoCheckmarkCircle className="text-2xl" />

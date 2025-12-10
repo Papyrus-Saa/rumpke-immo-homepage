@@ -1,22 +1,36 @@
 
+
 import InputNumber from '@/app/admin/components/properties/components/InputNumber';
 import InputSelect from '@/app/admin/components/properties/components/InputSelect';
 import InputText from '@/app/admin/components/properties/components/InputText';
-import { operationOptions, typeOptions, statusOptions, currencyOptions } from '@/hooks/property/propertyFormFields';
-import { InferType } from 'yup';
-import { propertyFormSchema } from '@/hooks/property/propertyFormSchema';
+import { operationOptions, typeOptions, statusOptions, currencyOptions } from '@/app/admin/hooks/properties/components/propertyFormFields';
+import { z } from 'zod';
+import { propertyFormSchemaZod } from '@/app/admin/hooks/properties/components/propertyFormSchema.zod';
+import { Controller } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { getAgents } from '@/utils/admin-client';
+
 
 interface Props {
   register: any;
-  errors: Partial<Record<keyof InferType<typeof propertyFormSchema>, any>>;
-  getInputClassName: (field: keyof InferType<typeof propertyFormSchema>) => string;
+  errors: Partial<Record<keyof z.infer<typeof propertyFormSchemaZod>, any>>;
+  getInputClassName: (field: keyof z.infer<typeof propertyFormSchemaZod>) => string;
+  control: any;
 }
 
-export default function PropertyBasicInfoSection({ register, errors, getInputClassName }: Props) {
+export default function PropertyBasicInfoSection({ register, errors, getInputClassName, control }: Props) {
+  const [agentOptions, setAgentOptions] = useState<{ value: string; label: string }[]>([]);
+  useEffect(() => {
+    getAgents().then((data) => {
+      if (Array.isArray(data)) {
+        setAgentOptions(data.map((a: any) => ({ value: a.id, label: a.first_name + ' ' + a.last_name })));
+      }
+    });
+  }, []);
+
   return (
     <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
       <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4 flex items-center gap-2">
-        {/* Icono puede ser pasado por prop si se desea */}
         Grundinformationen (Pflichtfelder)
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -30,12 +44,21 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
           />
         </div>
         <div>
-          <InputText
-            label="Makler *"
-            placeholder="Makler Name"
-            {...register('agent')}
-            error={errors.agent?.message}
-            className={getInputClassName('agent')}
+          <Controller
+            name="agent"
+            control={control}
+            render={({ field }) => (
+              <InputSelect
+                label={<span>Makler <span className="align-super" style={{ color: 'inherit' }}>*</span></span>}
+                options={Array.isArray(agentOptions) ? agentOptions : []}
+                value={field.value ?? ''}
+                onChange={e => field.onChange(e.target.value)}
+                error={errors.agent?.message}
+                required
+                placeholder="Makler auswählen"
+                className={getInputClassName('agent')}
+              />
+            )}
           />
         </div>
         <div>
@@ -49,7 +72,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
         </div>
         <div>
           <InputSelect
-            label="Operation *"
+            label="Vermarktungsart *"
             options={operationOptions}
             {...register('operation')}
             error={errors.operation?.message}
@@ -101,20 +124,31 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
             className={getInputClassName('postal_code')}
           />
         </div>
+
         <div>
-          <InputNumber
-            label="Wohnfläche (m²) *"
-            placeholder="120"
-            {...register('built_area_m2')}
-            error={errors.built_area_m2?.message}
-            className={getInputClassName('built_area_m2')}
+          <Controller
+            name="built_area_m2"
+            control={control}
+            render={({ field }) => (
+              <InputNumber
+                {...field}
+                label="Wohnfläche (m²) *"
+                placeholder="190"
+                onChange={e => {
+                  const value = e.target.value;
+                  field.onChange(value === '' ? undefined : Number(value));
+                }}
+                error={errors.built_area_m2?.message}
+                className={getInputClassName('built_area_m2')}
+              />
+            )}
           />
         </div>
         <div>
           <InputNumber
             label="Zimmer *"
             placeholder="3"
-            {...register('rooms')}
+            {...register('rooms', { valueAsNumber: true, setValueAs: (v: string | number) => v === '' ? undefined : v })}
             error={errors.rooms?.message}
             className={getInputClassName('rooms')}
           />
@@ -123,7 +157,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
           <InputNumber
             label="Schlafzimmer *"
             placeholder="2"
-            {...register('bedrooms')}
+            {...register('bedrooms', { valueAsNumber: true, setValueAs: (v: string | number) => v === '' ? undefined : v })}
             error={errors.bedrooms?.message}
             className={getInputClassName('bedrooms')}
           />
@@ -132,7 +166,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
           <InputNumber
             label="Badezimmer *"
             placeholder="1"
-            {...register('bathrooms')}
+            {...register('bathrooms', { valueAsNumber: true, setValueAs: (v: string | number) => v === '' ? undefined : v })}
             error={errors.bathrooms?.message}
             className={getInputClassName('bathrooms')}
           />
@@ -141,7 +175,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
           <InputNumber
             label="Preis *"
             placeholder="450000"
-            {...register('price_amount')}
+            {...register('price_amount', { valueAsNumber: true, setValueAs: (v: string | number) => v === '' ? undefined : v })}
             error={errors.price_amount?.message}
             className={getInputClassName('price_amount')}
           />
@@ -152,6 +186,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
             options={currencyOptions}
             {...register('currency')}
             error={errors.currency?.message}
+            defaultChecked="EUR"
             className={getInputClassName('currency')}
           />
         </div>

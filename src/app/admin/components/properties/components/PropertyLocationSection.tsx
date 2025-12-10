@@ -1,14 +1,13 @@
 
-import { InferType } from 'yup';
-import { propertyFormSchema } from '@/hooks/property/propertyFormSchema';
-import InputTextarea from './InputTextarea';
+import { z } from 'zod';
+import { propertyFormSchemaZod } from '@/app/admin/hooks/properties/components/propertyFormSchema.zod';
 import InputText from './InputText';
 import InputNumber from './InputNumber';
 
 interface Props {
   register: any;
-  errors: Partial<Record<keyof InferType<typeof propertyFormSchema>, any>>;
-  getInputClassName: (field: keyof InferType<typeof propertyFormSchema>) => string;
+  errors: Partial<Record<keyof z.infer<typeof propertyFormSchemaZod>, any>>;
+  getInputClassName: (field: keyof z.infer<typeof propertyFormSchemaZod>) => string;
 }
 
 const PropertyLocationSection = ({ register, errors, getInputClassName }: Props) => {
@@ -32,8 +31,12 @@ const PropertyLocationSection = ({ register, errors, getInputClassName }: Props)
           <InputNumber
             label="Breitengrad"
             placeholder="z.B. 52.520008"
-            {...register('latitude')}
-            error={errors.latitude?.message}
+            value={typeof (register('latitude').value) === 'number' && register('latitude').value !== null ? register('latitude').value : ''}
+            onChange={e => {
+              const value = e.target.value;
+              register('latitude').onChange(value === '' ? undefined : Number(value));
+            }}
+            error={register('latitude').value !== undefined && register('latitude').value !== null && errors.latitude?.message ? errors.latitude?.message : ''}
             className={getInputClassName('latitude')}
             step="any"
           />
@@ -42,8 +45,12 @@ const PropertyLocationSection = ({ register, errors, getInputClassName }: Props)
           <InputNumber
             label="Längengrad"
             placeholder="z.B. 13.404954"
-            {...register('longitude')}
-            error={errors.longitude?.message}
+            value={typeof (register('longitude').value) === 'number' && register('longitude').value !== null ? register('longitude').value : ''}
+            onChange={e => {
+              const value = e.target.value;
+              register('longitude').onChange(value === '' ? undefined : Number(value));
+            }}
+            error={register('longitude').value !== undefined && register('longitude').value !== null && errors.longitude?.message ? errors.longitude?.message : ''}
             className={getInputClassName('longitude')}
             step="any"
           />

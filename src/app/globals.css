@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Placeholder color for admin forms */
+input::placeholder, textarea::placeholder {
+  color: #9CA3AF; /* gray-400 for light mode */
+  opacity: 1;
+}
+.dark input::placeholder, .dark textarea::placeholder {
+  color: #D1D5DB; /* gray-300 for dark mode */
+  opacity: 1;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 

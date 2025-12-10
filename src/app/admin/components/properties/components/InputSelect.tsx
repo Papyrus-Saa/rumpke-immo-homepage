@@ -7,7 +7,7 @@ interface Option {
 }
 
 interface InputSelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  label: string;
+  label: React.ReactNode;
   options: Option[];
   error?: string;
   placeholder?: string;
@@ -26,7 +26,7 @@ const InputSelect: React.FC<InputSelectProps> = ({
   return (
     <div>
       <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2" htmlFor={name}>
-        {label} {required && <span className="text-error">*</span>}
+        {label}
       </label>
       <select
         id={name}

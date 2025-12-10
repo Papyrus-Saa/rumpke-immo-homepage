@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { propertyOptionalGroups } from "./propertyOptionalGroups";
 import { IoChevronDown, IoChevronUp, IoClose } from "react-icons/io5";
-import { useAgents } from "@/hooks/agents/useAgents";
+import { useAgents } from "@/app/admin/hooks/agents/components/useAgents";
 import ErrorToast from "./ErrorToast";
 import InlineEditField from "./InlineEditField";
 import SuccessToast from "./SuccessToast";
@@ -98,8 +98,8 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
             >
               <IoClose className="w-4 h-4 text-primary hover:text-error cursor-pointer" />
             </button>
-              <div className="flex justify-between items-center">
-                <div className="w-20 h-20 bg-gray-600 rounded-lg flex items-center justify-center overflow-hidden">
+            <div className="flex justify-between items-center">
+              <div className="w-20 h-20 bg-gray-600 rounded-lg flex items-center justify-center overflow-hidden">
                 {editValues.main_image ? (
                   <img src={editValues.main_image} alt="Immobilienfoto" className="object-cover w-full h-full" />
                 ) : (
@@ -107,7 +107,7 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
                 )}
               </div>
               AQUI
-              </div>
+            </div>
             <div className="flex gap-16 items-start">
               <div className="flex-1 flex flex-col gap-4">
                 <h2 className="text-xl font-bold mb-2">Hauptdaten</h2>
@@ -129,7 +129,7 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
                 </div>
 
                 <div className="grid grid-cols-4 gap-6">
-                      {propertyOptionalGroups.filter(g => g.title === "Geografische Angaben").map(group => (
+                  {propertyOptionalGroups.filter(g => g.title === "Geografische Angaben").map(group => (
                     <div key={group.title}>
                       <h3 className="font-bold">{group.title}</h3>
                       <div className="flex flex-col gap-0 pt-2">

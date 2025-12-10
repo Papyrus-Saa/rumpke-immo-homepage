@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import ObjectSlideshow from "../../../../components/slideshow/ObjectSlideshow";
 import ObjectMobileSlideshow from "@/components/slideshow/ObjectMobileSlideshow";
 import { AgentCard } from "@/app/admin/components/agents/components/AgentCard";
-import { useAgents } from "@/hooks/agents/useAgents";
+import { useAgents } from "@/app/admin/hooks/agents/components/useAgents";
 import { Agent } from "http";
 
 

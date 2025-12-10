@@ -1,5 +1,5 @@
 'use client';
-import { useDashboardSummary } from '@/hooks/dashboard/useDashboardSummary';
+import { useDashboardSummary } from '@/app/admin/hooks/dashboard/components/useDashboardSummary';
 import { IoHomeOutline, IoCheckmarkCircle, IoTimeOutline, IoKeyOutline, IoDocumentTextOutline, IoEyeOffOutline, IoPeopleOutline, IoPersonOutline, IoMailOutline, IoPricetagOutline, IoGridOutline, IoCalendarOutline } from 'react-icons/io5';
 
 // Línea 4: Configuración de KPIs con iconos y colores
@@ -62,7 +62,7 @@ export default function DashboardPage() {
           <p className="mt-4">Lade Dashboard...</p>
         </div>
       )}
-      
+
       {error && (
         <div className="bg-error/10 border border-error rounded-lg p-6 text-center text-error">
           Fehler beim Laden des Dashboards
