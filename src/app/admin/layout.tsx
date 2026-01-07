@@ -57,7 +57,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
           >
             <IoBusinessOutline className="text-xl" />
-            <span>Properties</span>
+            <span>Immobilien</span>
           </Link>
 
           <Link
@@ -65,7 +65,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
           >
             <IoPeopleOutline className="text-xl" />
-            <span>Agents</span>
+            <span>Makler</span>
           </Link>
 
           <Link
@@ -73,7 +73,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
           >
             <IoMailOutline className="text-xl" />
-            <span>Leads</span>
+            <span>Anfragen</span>
           </Link>
 
           <Link
@@ -81,7 +81,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
           >
             <IoFolderOutline className="text-xl" />
-            <span>Categories</span>
+            <span>Kategorien</span>
           </Link>
 
           <Link
@@ -89,7 +89,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
           >
             <IoStarOutline className="text-xl" />
-            <span>Amenities</span>
+            <span>Ausstattung</span>
           </Link>
 
           <Link
@@ -105,7 +105,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors hover:text-white"
           >
             <IoImageOutline className="text-xl" />
-            <span>Media</span>
+            <span>Medien</span>
           </Link>
 
           <Link
@@ -113,7 +113,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
           >
             <IoTrendingUpOutline className="text-xl" />
-            <span>Price History</span>
+            <span>Preisverlauf</span>
           </Link>
 
           <Link
@@ -121,7 +121,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
           >
             <IoTimerOutline className="text-xl" />
-            <span>Status History</span>
+            <span>Statusverlauf</span>
           </Link>
 
           <Link
@@ -129,7 +129,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded-lg transition-colors"
           >
             <IoSettingsOutline className="text-xl" />
-            <span>Settings</span>
+            <span>Einstellungen</span>
           </Link>
         </nav>
       </aside>

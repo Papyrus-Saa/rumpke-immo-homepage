@@ -1,4 +1,15 @@
 
+export async function getPropertyById(id: string): Promise<any> {
+  return apiFetch<any>(`http://localhost:3000/property/${id}`);
+}
+
+export async function updateProperty(id: string, propertyData: any): Promise<any> {
+  return apiFetch<any>(`http://localhost:3000/property/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(propertyData),
+  });
+}
+
 
 
 
@@ -59,6 +70,12 @@ export async function editAgent(agentData: any): Promise<any> {
     method: 'PATCH',
     body: JSON.stringify(allowedFields),
   });
+
 }
+
+export async function getProperties(): Promise<any[]> {
+  return apiFetch<any[]>('http://localhost:3000/property');
+}
+
 
 

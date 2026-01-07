@@ -34,6 +34,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
         Grundinformationen (Pflichtfelder)
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* ...existing code... */}
         <div>
           <InputText
             label="Titel *"
@@ -49,7 +50,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
             control={control}
             render={({ field }) => (
               <InputSelect
-                label={<span>Makler <span className="align-super" style={{ color: 'inherit' }}>*</span></span>}
+                label="Makler *"
                 options={Array.isArray(agentOptions) ? agentOptions : []}
                 value={field.value ?? ''}
                 onChange={e => field.onChange(e.target.value)}
@@ -82,7 +83,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
         <div>
           <InputSelect
             label="Typ *"
-            options={typeOptions}
+            options={typeOptions.map(opt => ({ value: opt.value, label: opt.label.charAt(0).toUpperCase() + opt.label.slice(1) }))}
             {...register('type')}
             error={errors.type?.message}
             className={getInputClassName('type')}
@@ -145,39 +146,79 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
           />
         </div>
         <div>
-          <InputNumber
-            label="Zimmer *"
-            placeholder="3"
-            {...register('rooms', { valueAsNumber: true, setValueAs: (v: string | number) => v === '' ? undefined : v })}
-            error={errors.rooms?.message}
-            className={getInputClassName('rooms')}
+          <Controller
+            name="rooms"
+            control={control}
+            render={({ field }) => (
+              <InputNumber
+                label="Zimmer *"
+                placeholder="3"
+                value={field.value ?? ''}
+                onChange={e => {
+                  const value = e.target.value;
+                  field.onChange(value === '' ? undefined : Number(value));
+                }}
+                error={errors.rooms?.message}
+                className={getInputClassName('rooms')}
+              />
+            )}
           />
         </div>
         <div>
-          <InputNumber
-            label="Schlafzimmer *"
-            placeholder="2"
-            {...register('bedrooms', { valueAsNumber: true, setValueAs: (v: string | number) => v === '' ? undefined : v })}
-            error={errors.bedrooms?.message}
-            className={getInputClassName('bedrooms')}
+          <Controller
+            name="bedrooms"
+            control={control}
+            render={({ field }) => (
+              <InputNumber
+                label="Schlafzimmer *"
+                placeholder="2"
+                value={field.value ?? ''}
+                onChange={e => {
+                  const value = e.target.value;
+                  field.onChange(value === '' ? undefined : Number(value));
+                }}
+                error={errors.bedrooms?.message}
+                className={getInputClassName('bedrooms')}
+              />
+            )}
           />
         </div>
         <div>
-          <InputNumber
-            label="Badezimmer *"
-            placeholder="1"
-            {...register('bathrooms', { valueAsNumber: true, setValueAs: (v: string | number) => v === '' ? undefined : v })}
-            error={errors.bathrooms?.message}
-            className={getInputClassName('bathrooms')}
+          <Controller
+            name="bathrooms"
+            control={control}
+            render={({ field }) => (
+              <InputNumber
+                label="Badezimmer *"
+                placeholder="1"
+                value={field.value ?? ''}
+                onChange={e => {
+                  const value = e.target.value;
+                  field.onChange(value === '' ? undefined : Number(value));
+                }}
+                error={errors.bathrooms?.message}
+                className={getInputClassName('bathrooms')}
+              />
+            )}
           />
         </div>
         <div>
-          <InputNumber
-            label="Preis *"
-            placeholder="450000"
-            {...register('price_amount', { valueAsNumber: true, setValueAs: (v: string | number) => v === '' ? undefined : v })}
-            error={errors.price_amount?.message}
-            className={getInputClassName('price_amount')}
+          <Controller
+            name="price_amount"
+            control={control}
+            render={({ field }) => (
+              <InputNumber
+                label="Preis *"
+                placeholder="450000"
+                value={field.value ?? ''}
+                onChange={e => {
+                  const value = e.target.value;
+                  field.onChange(value === '' ? undefined : Number(value));
+                }}
+                error={errors.price_amount?.message}
+                className={getInputClassName('price_amount')}
+              />
+            )}
           />
         </div>
         <div>
@@ -203,16 +244,6 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
             {...register('category')}
             error={errors.category?.message}
             className={getInputClassName('category')}
-          />
-        </div>
-        <div className="md:col-span-3">
-          <InputText
-            label="Hauptbild URL *"
-            placeholder="https://example.com/image.jpg"
-            {...register('main_image')}
-            error={errors.main_image?.message}
-            className={getInputClassName('main_image')}
-            type="url"
           />
         </div>
       </div>

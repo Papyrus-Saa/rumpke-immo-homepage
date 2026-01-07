@@ -15,7 +15,7 @@ const PropertiesAdminGrid: React.FC<PropertiesAdminGridProps> = ({ properties })
     <div className="w-full grid grid-cols-2 gap-4 relative">
       {properties.map((property, idx) => (
         <PropertyAdminCard
-          key={property.title + property.address_line}
+          key={property.id || property._id || idx}
           property={property}
           expanded={expandedIndex === idx}
           onExpand={() => setExpandedIndex(idx)}

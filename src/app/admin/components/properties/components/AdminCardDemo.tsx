@@ -2,7 +2,8 @@
 import React from "react";
 
 import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
-import PropertyAdminCard from "@/components/admin/PropertyAdminCard";
+import PropertyAdminCard from "./PropertyAdminCard";
+
 
 const mockProperty1: PropertyAdminPanel = {
   agent: "Max Mustermann",
@@ -20,6 +21,8 @@ const mockProperty1: PropertyAdminPanel = {
   price_amount: 450000,
   currency: "EUR",
   main_image: "https://placehold.co/96x96",
+  category: "haus",
+  title: ""
 };
 
 const mockProperty2: PropertyAdminPanel = {
@@ -38,6 +41,8 @@ const mockProperty2: PropertyAdminPanel = {
   price_amount: 1200,
   currency: "EUR",
   main_image: "https://placehold.co/96x96",
+  category: "haus",
+  title: ""
 };
 
 const AdminCardDemo: React.FC = () => (

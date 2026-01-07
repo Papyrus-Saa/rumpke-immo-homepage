@@ -1,50 +1,34 @@
 'use client';
 
+
 import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
 import Link from "next/link";
 import { IoHomeOutline, IoAddOutline } from "react-icons/io5";
 import PropertiesAdminGrid from "../components/properties/components/PropertiesAdminGrid";
-
-const propertiesAdmin: PropertyAdminPanel[] = [
-  {
-    agent: "Max Mustermann",
-    owner: "Erika Mustermann",
-    operation: "SELL",
-    type: "haus",
-    status: "PUBLISHED",
-    address_line: "Musterstraße 1",
-    city: "Berlin",
-    postal_code: "10115",
-    built_area_m2: 120,
-    rooms: 5,
-    bedrooms: 3,
-    bathrooms: 2,
-    price_amount: 450000,
-    currency: "EUR",
-    main_image: "",
-    title: "Schönes Einfamilienhaus",
-  },
-  {
-    agent: "Anna Beispiel",
-    owner: "Max Beispiel",
-    operation: "RENT",
-    type: "wohnung",
-    status: "RESERVED",
-    address_line: "Beispielweg 5",
-    city: "Hamburg",
-    postal_code: "20095",
-    built_area_m2: 80,
-    rooms: 3,
-    bedrooms: 2,
-    bathrooms: 1,
-    price_amount: 1200,
-    currency: "EUR",
-    main_image: "",
-    title: "Moderne Wohnung im Zentrum",
-  },
-];
+import { useEffect, useState } from "react";
+import { getProperties } from "@/utils/admin-client";
 
 export default function PropertiesPage() {
+  const [properties, setProperties] = useState<PropertyAdminPanel[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+useEffect(() => {
+  async function fetchProperties() {
+    setLoading(true);
+    setError("");
+    try {
+      const data = await getProperties();
+      setProperties(data);
+    } catch (err: any) {
+      setError(err.message || "Unbekannter Fehler");
+    } finally {
+      setLoading(false);
+    }
+  }
+  fetchProperties();
+}, []);
+
   return (
     <div className="w-full">
       <div className="flex justify-between">
@@ -56,7 +40,13 @@ export default function PropertiesPage() {
           </span>
         </Link>
       </div>
-      <PropertiesAdminGrid properties={propertiesAdmin} />
+      {loading ? (
+        <div className="text-center py-8">Lade Immobilien...</div>
+      ) : error ? (
+        <div className="text-center text-error py-8">{error}</div>
+      ) : (
+        <PropertiesAdminGrid properties={properties} />
+      )}
     </div>
   );
 }

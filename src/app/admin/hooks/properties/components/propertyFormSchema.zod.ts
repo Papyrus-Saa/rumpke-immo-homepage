@@ -41,7 +41,7 @@ export const propertyFormSchemaZod = z.object({
   community_fees: z.number().optional().nullable(),
   deposit: z.number().optional().nullable(),
   commission_info: z.string().optional(),
-  energy_label: z.string().optional(),
+  energy_label: z.enum(['A', 'B', 'C', 'D', 'E', 'F', 'G']).optional(),
   energy_consumption_kwh_m2y: z.number().optional().nullable(),
   balcony: z.boolean().optional(),
   terrace: z.boolean().optional(),

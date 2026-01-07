@@ -23,8 +23,9 @@ const InputNumber: React.FC<InputNumberProps> = ({
         name={name}
         type="number"
         required={required}
-        {...rest}
-        className={`w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
+        value={rest.value ?? ''}
+        onChange={rest.onChange}
+        className={`w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent ${error ? 'border-error' : ''}`}
       />
       {error && <p className="mt-1 text-xs text-error">{error}</p>}
     </div>

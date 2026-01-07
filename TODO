@@ -31,11 +31,27 @@ Confirmación antes de eliminar.
 Logs de cambios y auditoría (opcional).
 Pruebas unitarias y de integración.
 
+--- pasos a seguir ----
 
-paso a seguir:
 
-1 - Usa el tipo inferido de Yup (InferType<typeof propertyFormSchema>) en el formulario y validación.
-2 - Mantén la interface para el backend.
-3 - Antes de enviar los datos, haz un type assertion: const payload: PropertyAdminPanel = data as PropertyAdminPanel;
-4 - Envía payload al backend.
-5 - Así evitas errores de tipos y cumples con los requisitos del backend.
+Claro, aquí tienes los pasos profesionales y ordenados para implementar la edición de viviendas en tu admin:
+
+1. Crear la ruta de edición
+
+Crea una carpeta: page.tsx
+Esta página será el formulario de edición.
+2. Obtener los datos de la vivienda
+
+Al cargar la página, usa el id de la URL para hacer GET /property/:id y precargar los datos en el formulario.
+3. Reutilizar el formulario
+
+Usa el mismo formulario que para crear, pero con los datos precargados y el botón de guardar llamando a updateProperty.
+4. Conectar el botón de editar
+
+En PropertyAdminCard, haz que el botón de editar redirija a /admin/properties/edit/[id] usando el id de la vivienda.
+5. Guardar cambios
+
+Al enviar el formulario, llama a updateProperty(id, data) y muestra feedback de éxito/error.
+6. Refrescar la lista
+
+Tras editar, redirige a /admin/properties y refresca la lista para ver los cambios.

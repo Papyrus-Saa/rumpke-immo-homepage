@@ -43,7 +43,7 @@ export interface PropertyAdminPanel {
   community_fees?: number;
   deposit?: number;
   commission_info?: string;
-  energy_label?: string;
+  energy_label?: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
   energy_consumption_kwh_m2y?: number;
   balcony?: boolean;
   terrace?: boolean;
