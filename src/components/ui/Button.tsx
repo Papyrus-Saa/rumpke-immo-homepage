@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <button
-      className={`px-3 py-2 rounded font-medium transition-colors flex items-center gap-2 cursor-pointer ${variantClasses[variant]} ${className}`}
+      className={`px-2 py-1 rounded font-medium transition-colors flex items-center gap-2 cursor-pointer ${variantClasses[variant]} ${className}`}
       {...props}
     >
       {children}

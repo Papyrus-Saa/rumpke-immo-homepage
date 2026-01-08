@@ -1,3 +1,8 @@
+export async function deleteProperty(id: string): Promise<any> {
+  return apiFetch<any>(`http://localhost:3000/property/${id}`, {
+    method: 'DELETE',
+  });
+}
 
 export async function getPropertyById(id: string): Promise<any> {
   return apiFetch<any>(`http://localhost:3000/property/${id}`);
@@ -9,7 +14,6 @@ export async function updateProperty(id: string, propertyData: any): Promise<any
     body: JSON.stringify(propertyData),
   });
 }
-
 
 
 

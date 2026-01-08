@@ -55,7 +55,7 @@ export const allFields = [
 ];
 
 export const operationOptions = [
-  { value: 'SELL', label: 'Verkauf' },
+  { value: 'SELL', label: 'Kauf' },
   { value: 'RENT', label: 'Miete' },
 ];
 

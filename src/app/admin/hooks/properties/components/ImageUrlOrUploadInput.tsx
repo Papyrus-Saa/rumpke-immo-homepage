@@ -24,7 +24,7 @@ const ImageUrlOrUploadInput: React.FC<ImageUrlOrUploadInputProps> = ({ label, fi
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 mb-4">
       <label className="block text-sm font-medium text-admin-text-l dark:text-admin-text-d mb-2">
         {label} {required && <span className="">*</span>}
       </label>

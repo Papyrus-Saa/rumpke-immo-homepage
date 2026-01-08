@@ -33,7 +33,6 @@ export const propertyOptionalGroups = [
   {
     title: "Ausstattung & Komfort",
     fields: [
-      { key: "has_elevator", label: "Aufzug" },
       { key: "parking_spaces", label: "Parkplätze" },
       { key: "garage", label: "Garage" },
       { key: "storage_room", label: "Abstellraum" },

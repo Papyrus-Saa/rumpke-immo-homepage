@@ -1,4 +1,5 @@
 export interface PropertyAdminPanel {
+  id: string; // UUID único para cada propiedad
   category: 'haus' | 'wohnung' | 'gewerbe' | 'grundstueck' | 'sonstige';
   title: string;
   agent: string;

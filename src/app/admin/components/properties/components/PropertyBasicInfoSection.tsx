@@ -29,7 +29,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
   }, []);
 
   return (
-    <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
+    <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6 mb-4">
       <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4 flex items-center gap-2">
         Grundinformationen (Pflichtfelder)
       </h2>
@@ -50,6 +50,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
             control={control}
             render={({ field }) => (
               <InputSelect
+                name={field.name}
                 label="Makler *"
                 options={Array.isArray(agentOptions) ? agentOptions : []}
                 value={field.value ?? ''}
@@ -151,6 +152,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
             control={control}
             render={({ field }) => (
               <InputNumber
+                name={field.name}
                 label="Zimmer *"
                 placeholder="3"
                 value={field.value ?? ''}
@@ -170,6 +172,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
             control={control}
             render={({ field }) => (
               <InputNumber
+                name={field.name}
                 label="Schlafzimmer *"
                 placeholder="2"
                 value={field.value ?? ''}
@@ -189,6 +192,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
             control={control}
             render={({ field }) => (
               <InputNumber
+                name={field.name}
                 label="Badezimmer *"
                 placeholder="1"
                 value={field.value ?? ''}
@@ -208,6 +212,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
             control={control}
             render={({ field }) => (
               <InputNumber
+                name={field.name}
                 label="Preis *"
                 placeholder="450000"
                 value={field.value ?? ''}

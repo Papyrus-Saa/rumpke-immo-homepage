@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, ReactNode } from "react";
 import { IoPencil } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -12,6 +12,7 @@ import InputSelect from "./InputSelect";
 interface InlineEditFieldProps {
   label: string;
   value: string | number;
+  displayValue?: ReactNode;
   type?: "text" | "number" | "select";
   options?: string[];
   required?: boolean;
@@ -37,7 +38,7 @@ const getYupSchema = (type: "text" | "number" | "select", required?: boolean, op
   return schema;
 };
 
-const InlineEditField: React.FC<InlineEditFieldProps> = ({ label, value, type = "text", options, required = true, onSave }) => {
+const InlineEditField: React.FC<InlineEditFieldProps> = ({ label, value, displayValue, type = "text", options, required = true, onSave }) => {
   const [editing, setEditing] = useState(false);
   const editRef = useRef<HTMLDivElement>(null);
 
@@ -118,7 +119,7 @@ const InlineEditField: React.FC<InlineEditFieldProps> = ({ label, value, type = 
           </form>
         ) : (
           <>
-            <span className="font-bold">{value}</span>
+            <span className="font-bold">{displayValue ?? value}</span>
             <button
               onClick={() => setEditing(true)}
               className="ml-2 bg-transparent hover:text-primary border-none cursor-pointer flex items-center"
