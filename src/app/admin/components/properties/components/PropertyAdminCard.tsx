@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { propertyOptionalGroups } from "./propertyOptionalGroups";
 import { IoChevronDown, IoChevronUp, IoClose } from "react-icons/io5";
 import { useAgents } from "@/app/admin/hooks/agents/components/useAgents";
@@ -10,6 +11,7 @@ import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
 import { PiPencilCircleDuotone } from "react-icons/pi";
 import Button from "@/components/ui/Button";
 import { deleteProperty } from "@/utils/admin-client";
+import Link from "next/link";
 
 const statusColorVars: Record<PropertyAdminPanel["status"], string> = {
   PUBLISHED: "var(--color-status-published)",
@@ -102,11 +104,15 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
               <IoClose className="w-4 h-4 text-primary hover:text-error cursor-pointer" />
             </button>
             <div className="flex justify-between items-center">
-              <div className="w-20 h-20 bg-gray-600 rounded-lg flex items-center justify-center overflow-hidden">
-                {editValues.main_image ? (
-                  <img src={editValues.main_image} alt="Immobilienfoto" className="object-cover w-full h-full" />
-                ) : (
-                  <span className="text-xs text-gray-400">Kein Bild</span>
+              <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+                {editValues.main_image && (
+                  <Image
+                    src={editValues.main_image}
+                    alt="Immobilienfoto"
+                    width={80}
+                    height={80}
+                    className="object-cover w-full h-full"
+                  />
                 )}
               </div>
               AQUI
@@ -150,7 +156,6 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
                   <InlineEditField label="Aufzug" value={editValues.has_elevator === true ? 'Ja' : editValues.has_elevator === false ? 'Nein' : '-'} type="text" onSave={val => handleInlineSave('has_elevator', val === 'Ja')} />
                   <InlineEditField label="Garage" value={editValues.garage === true ? 'Ja' : editValues.garage === false ? 'Nein' : '-'} type="text" onSave={val => handleInlineSave('garage', val === 'Ja')} />
                   <InlineEditField label="Abstellraum" value={editValues.storage_room === true ? 'Ja' : editValues.storage_room === false ? 'Nein' : '-'} type="text" onSave={val => handleInlineSave('storage_room', val === 'Ja')} />
-
                 </div>
 
                 <div className="grid grid-cols-4 gap-6">
@@ -264,14 +269,13 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
                 >
                   {capitalize(statusLabels[editValues.status])}
                 </span>
-                <button
-                  type="button"
-                  onClick={onEdit}
-                  className="px-3 py-1 rounded bg-card-secondary-bg-l dark:bg-card-secondary-bg-d dark:hover:bg-Bghover-d hover:bg-Bghover-l text-xs font-semibold flex items-center justify-center shadow-md cursor-pointer border-admin-border-l dark:border-admin-border-d"
+                <Link
+                  href={`/admin/properties/edit/${property.id}`}
+                  className="bg-blue-400 px-3 py-1 rounded hover:bg-blue-500 cursor-pointer text-white hover:text-gray-300 flex items-center justify-center"
                   title="Bearbeiten"
                 >
-                  <PiPencilCircleDuotone className="w-4 h-4" />
-                </button>
+                  Bearbeiten
+                </Link>
               </div>
             </div>
             {showToast && <SuccessToast message={toastMsg} />}
@@ -285,6 +289,10 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
 
   const borderColor = editValues.operation === 'SELL' ? 'var(--color-buy)' : 'var(--color-rent)';
 
+  // Obtener el objeto agente a partir del id
+  const agentObj = agents.find(a => a.id === editValues.agent);
+  const agentName = agentObj ? `${agentObj.first_name} ${agentObj.last_name}` : "Ohne Namen";
+
   return (
     <div
       style={{ borderLeft: `2px solid ${borderColor}` }}
@@ -292,11 +300,15 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
     >
 
       <div className="flex gap-4 items-start">
-        <div className="w-16 h-16 bg-gray-600 rounded-lg flex items-center justify-center overflow-hidden">
-          {editValues.main_image ? (
-            <img src={editValues.main_image} alt="Immobilienfoto" className="object-cover w-full h-full" />
-          ) : (
-            <span className="text-xs text-gray-400">Kein Bild</span>
+        <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+          {editValues.main_image && (
+            <Image
+              src={editValues.main_image}
+              alt="Immobilienfoto"
+              width={64}
+              height={64}
+              className="object-cover w-full h-full"
+            />
           )}
         </div>
         <div className="flex-1 flex flex-col gap-0">
@@ -313,15 +325,25 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
               ))}
             </div>
           </div>
+
           <InlineEditField
-            label="Agent"
-            value={editValues.agent}
+            label="Titel"
+            value={editValues.title && editValues.title.trim() !== '' ? editValues.title : "Ohne Titel"}
+            type="text"
+            onSave={val => handleInlineSave('title', val)}
+          />
+          <InlineEditField
+            label="Makler"
+            value={agentName}
             type="select"
-            options={agentsLoading || agentsError ? [] : agents.map(a => `${a.first_name} ${a.last_name}`)}
-            onSave={val => handleInlineSave('agent', val)}
+            options={agentsLoading || agentsError ? [] : agents.map(a => a.first_name + ' ' + a.last_name)}
+            onSave={val => {
+              const selectedAgent = agents.find(a => a.first_name + ' ' + a.last_name === val);
+              if (selectedAgent) handleInlineSave('agent', selectedAgent.id);
+            }}
           />
           <InlineEditField label="Eingentümer" value={editValues.owner || "-"} type="text" onSave={val => handleInlineSave('owner', val)} />
-          <InlineEditField label="Vermarktungsart" value={editValues.operation === "SELL" ? "Kauf" : "Miete"} type="select" options={["Kauf", "Miete"]} onSave={val => handleInlineSave('operation', val === "Kauf" ? "SELL" : "RENT")} />
+          {/* <InlineEditField label="Vermarktungsart" value={editValues.operation === "SELL" ? "Kauf" : "Miete"} type="select" options={["Kauf", "Miete"]} onSave={val => handleInlineSave('operation', val === "Kauf" ? "SELL" : "RENT")} /> */}
           <InlineEditField
             label="Vermarktungsart"
             value={editValues.operation === "SELL" ? "Kauf" : "Miete"}
@@ -355,14 +377,14 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
             {capitalize(statusLabels[editValues.status])}
           </span>
           <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={onEdit}
-              className=" bg-blue-400 px-3 py-1 rounded hover:bg-blue-500 cursor-pointer text-white hover:text-gray-300"
+
+            <Link
+              href={`/admin/properties/edit/${property.id}`}
+              className=" bg-blue-400 px-3 py-1 rounded hover:bg-blue-500 cursor-pointer text-white hover:text-gray-300 flex items-center justify-center"
               title="Bearbeiten"
             >
               Bearbeiten
-            </button>
+            </Link>
             <Button variant="danger" onClick={() => setShowConfirm(true)}>Löschen</Button>
             {showConfirm && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">

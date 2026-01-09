@@ -59,8 +59,12 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   errors,
   highlightedField,
 }) => {
+  console.log('PropertyForm render, errors:', errors, 'form values:', form.getValues());
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="property-form">
+    <form onSubmit={form.handleSubmit((data) => {
+      console.log('Datos del formulario antes de validación:', data);
+      onSubmit(data);
+    })} className="property-form">
       {/* Main image field */}
       <Controller
         name="main_image"
@@ -92,6 +96,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
         register={form.register}
         errors={errors}
         getInputClassName={getInputClassName}
+        control={form.control}
       />
 
       <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6 mb-4">
