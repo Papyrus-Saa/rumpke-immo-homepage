@@ -16,10 +16,12 @@ import { usePropertyForm } from "@/app/admin/hooks/properties/components/useProp
 
 function parseEuroNumber(val: any, allowNull = false, isLatLng = false): number | undefined | null {
   if (val === '' && allowNull) return null;
-  if (typeof val === 'number') return val;
+  if (val === null || val === undefined) return allowNull ? null : undefined;
+
+  if (typeof val === 'number' && isFinite(val)) return val;
+
   if (typeof val !== 'string') return allowNull ? null : undefined;
   if (isLatLng) {
-
     const num = Number(val);
     if (isNaN(num)) return allowNull ? null : undefined;
     return num;
@@ -87,7 +89,6 @@ export default function EditPropertyPage() {
     setError("");
     getPropertyById(id)
       .then(data => {
-        console.log('Respuesta cruda de getPropertyById:', data); // DEBUG
         const normalized = normalizePropertyNumbers(data);
         setProperty(normalized);
       })
@@ -95,11 +96,13 @@ export default function EditPropertyPage() {
       .finally(() => setLoading(false));
   }, [id]);
 
+
   useEffect(() => {
-    if (property && !form.formState.isDirty) {
+    if (property) {
       const normalized = normalizePropertyNumbers(property);
       form.reset(normalized);
     }
+
   }, [property]);
 
   const handleSubmit = async (data: any) => {
@@ -113,8 +116,10 @@ export default function EditPropertyPage() {
     }
     try {
       const normalized = normalizePropertyNumbers(data);
-      // DEBUG
       await updateProperty(id, normalized);
+      // Refrescar datos desde el backend tras guardar
+      const updated = await getPropertyById(id);
+      setProperty(normalizePropertyNumbers(updated));
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 2000);
     } catch (err: any) {

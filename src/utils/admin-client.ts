@@ -9,15 +9,22 @@ export async function getPropertyById(id: string): Promise<any> {
 }
 
 export async function updateProperty(id: string, propertyData: any): Promise<any> {
+  let payload = { ...propertyData };
+  if ('agent_id' in payload) {
+    payload.agent = payload.agent_id;
+    delete payload.agent_id;
+  }
+  console.log('[updateProperty] PATCH payload:', payload);
   return apiFetch<any>(`http://localhost:3000/property/${id}`, {
     method: 'PATCH',
-    body: JSON.stringify(propertyData),
+    body: JSON.stringify(payload),
   });
 }
 
 
 
 export async function createProperty(propertyData: any): Promise<any> {
+  console.log('[createProperty] POST payload:', propertyData);
   return apiFetch<any>('http://localhost:3000/property', {
     method: 'POST',
     body: JSON.stringify(propertyData),
