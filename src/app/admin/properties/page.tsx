@@ -2,8 +2,10 @@
 
 
 import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
-import Link from "next/link";
-import { IoHomeOutline, IoAddOutline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import { IoAddOutline } from "react-icons/io5";
+import { useUIStore, OperationType, getOperationTypeColor } from "@/store/ui/ui-store";
+import Button from "@/components/ui/Button";
 import PropertiesAdminGrid from "../components/properties/components/PropertiesAdminGrid";
 import { useEffect, useState } from "react";
 import { getProperties } from "@/utils/admin-client";
@@ -13,32 +15,56 @@ export default function PropertiesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-useEffect(() => {
-  async function fetchProperties() {
-    setLoading(true);
-    setError("");
-    try {
-      const data = await getProperties();
-      setProperties(data);
-    } catch (err: any) {
-      setError(err.message || "Unbekannter Fehler");
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    async function fetchProperties() {
+      setLoading(true);
+      setError("");
+      try {
+        const data = await getProperties();
+        setProperties(data);
+      } catch (err: any) {
+        setError(err.message || "Unbekannter Fehler");
+      } finally {
+        setLoading(false);
+      }
     }
-  }
-  fetchProperties();
-}, []);
+    fetchProperties();
+  }, []);
+
+  const router = useRouter();
+  const setOperationType = useUIStore(s => s.setOperationType);
+
+  const handleCreate = (type: OperationType) => {
+    setOperationType(type);
+    router.push("/admin/properties/new");
+  };
 
   return (
     <div className="w-full">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold mb-4">Immobilien</h1>
-        <Link href="/admin/properties/new" className="mb-4 text-primary hover:underline text-xs flex items-center justify-center dark:bg-card-bg-d bg-card-bg-l dark:hover:bg-Bghover-d hover:bg-Bghover-l px-3 py-2 rounded-md">
-          <span className="flex items-center gap-1">
+        <div className="flex gap-2">
+          <Button
+            type="button"
+            variant="primary"
+            onClick={() => handleCreate(OperationType.SELL)}
+            className="mb-4 text-xs font-semibold transition-colors flex items-center gap-2 bg-white dark:bg-neutral-900"
+            style={{ minWidth: 80, borderLeft: `4px solid ${getOperationTypeColor(OperationType.SELL)}` }}
+          >
             <IoAddOutline className="text-base" />
-            <IoHomeOutline className="text-base" />
-          </span>
-        </Link>
+            Kauf
+          </Button>
+          <Button
+            type="button"
+            variant="primary"
+            onClick={() => handleCreate(OperationType.RENT)}
+            className="mb-4 text-xs font-semibold transition-colors flex items-center gap-2 bg-white dark:bg-neutral-900"
+            style={{ minWidth: 80, borderLeft: `4px solid ${getOperationTypeColor(OperationType.RENT)}` }}
+          >
+            <IoAddOutline className="text-base" />
+            Miete
+          </Button>
+        </div>
       </div>
       {loading ? (
         <div className="text-center py-8">Lade Immobilien...</div>

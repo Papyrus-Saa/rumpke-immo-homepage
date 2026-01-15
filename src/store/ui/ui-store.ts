@@ -1,23 +1,36 @@
 import { create } from "zustand";
 
 
+export enum OperationType {
+  SELL = 'SELL',
+  RENT = 'RENT',
+}
+
+export function getOperationTypeColor(type: OperationType | null | undefined): string {
+  return type ? OPERATION_TYPE_COLOR[type] : '';
+}
+
+export const OPERATION_TYPE_COLOR: Record<OperationType, string> = {
+  [OperationType.SELL]: 'var(--color-buy)',
+  [OperationType.RENT]: 'var(--color-rent)',
+};
 
 
-type BarBgColor = 'bg-primary' | 'bg-btn-buy' | 'bg-btn-rent';
 
-export interface State {
+interface UIStoreState {
   isSidemenuOpen: boolean;
-  barBgColor: BarBgColor;
-  setBarBgColor: (color: BarBgColor) => void;
+  operationType: OperationType | null;
+  setOperationType: (type: OperationType) => void;
+  clearOperationType: () => void;
   openSidemenu: () => void;
   closeSidemenu: () => void;
 }
 
-
-export const useUIStore = create<State>()((set) => ({
+export const useUIStore = create<UIStoreState>()((set) => ({
   isSidemenuOpen: false,
-  barBgColor: 'bg-primary',
-  setBarBgColor: (color) => set({ barBgColor: color }),
+  operationType: null,
+  setOperationType: (type) => set({ operationType: type }),
+  clearOperationType: () => set({ operationType: null }),
   openSidemenu: () => set({ isSidemenuOpen: true }),
   closeSidemenu: () => set({ isSidemenuOpen: false }),
 }));

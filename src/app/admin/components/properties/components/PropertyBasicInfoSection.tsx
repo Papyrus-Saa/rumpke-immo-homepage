@@ -36,12 +36,19 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* ...existing code... */}
         <div>
-          <InputText
-            label="Titel *"
-            placeholder="z.B. Schöne 3-Zimmer-Wohnung"
-            {...register('title')}
-            error={errors.title?.message}
-            className={getInputClassName('title')}
+          <Controller
+            name="title"
+            control={control}
+            render={({ field }) => (
+              <InputText
+                label="Titel *"
+                placeholder="z.B. Schöne 3-Zimmer-Wohnung"
+                value={field.value ?? ''}
+                onChange={field.onChange}
+                error={errors.title?.message}
+                className={getInputClassName('title')}
+              />
+            )}
           />
         </div>
         <div>
@@ -64,12 +71,19 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
           />
         </div>
         <div>
-          <InputText
-            label="Eigentümer *"
-            placeholder="Eigentümer Name"
-            {...register('owner')}
-            error={errors.owner?.message}
-            className={getInputClassName('owner')}
+          <Controller
+            name="owner"
+            control={control}
+            render={({ field }) => (
+              <InputText
+                label="Eigentümer *"
+                placeholder="Eigentümer Name"
+                value={field.value ?? ''}
+                onChange={field.onChange}
+                error={errors.owner?.message}
+                className={getInputClassName('owner')}
+              />
+            )}
           />
         </div>
         <div>
