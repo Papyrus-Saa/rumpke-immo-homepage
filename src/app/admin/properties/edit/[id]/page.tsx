@@ -27,7 +27,8 @@ function parseEuroNumber(val: any, allowNull = false, isLatLng = false): number 
     return num;
   }
 
-  const normalized = val.replace(/\./g, '').replace(',', '.');
+
+  const normalized = val.replace(',', '.');
   const num = Number(normalized);
   if (isNaN(num)) return allowNull ? null : undefined;
   return num;
@@ -91,24 +92,17 @@ export default function EditPropertyPage() {
       .then(data => {
         const normalized = normalizePropertyNumbers(data);
         setProperty(normalized);
+        form.reset(normalized);
       })
       .catch(err => setError(err.message || "Error al cargar la vivienda"))
       .finally(() => setLoading(false));
   }, [id]);
 
-
-  useEffect(() => {
-    if (property) {
-      const normalized = normalizePropertyNumbers(property);
-      form.reset(normalized);
-    }
-
-  }, [property]);
-
   const handleSubmit = async (data: any) => {
     setSaving(true);
     setSaveError("");
     setSaveSuccess(false);
+    console.log('DATOS A ENVIAR AL BACKEND:', data);
     if (!id || typeof id !== 'string') {
       setSaveError("Ungültige Immobilien-ID.");
       setSaving(false);

@@ -14,7 +14,6 @@ export async function updateProperty(id: string, propertyData: any): Promise<any
     payload.agent = payload.agent_id;
     delete payload.agent_id;
   }
-  console.log('[updateProperty] PATCH payload:', payload);
   return apiFetch<any>(`http://localhost:3000/property/${id}`, {
     method: 'PATCH',
     body: JSON.stringify(payload),

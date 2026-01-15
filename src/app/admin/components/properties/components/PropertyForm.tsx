@@ -59,10 +59,8 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   errors,
   highlightedField,
 }) => {
-  console.log('PropertyForm render, errors:', errors, 'form values:', form.getValues());
   return (
     <form onSubmit={form.handleSubmit((data) => {
-      console.log('Datos del formulario antes de validación:', data);
       onSubmit(data);
     })} className="property-form">
       {/* Main image field */}
@@ -468,7 +466,15 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
         <div className="flex items-center gap-4">
           <Button type="submit" disabled={loading} variant="primary">
             <IoSaveOutline className="text-xl" />
-            <span>{loading ? 'Wird erstellt...' : 'Immobilie erstellen'}</span>
+            <span>
+              {loading
+                ? mode === 'edit'
+                  ? 'Wird gespeichert...'
+                  : 'Wird erstellt...'
+                : mode === 'edit'
+                  ? 'Speichern'
+                  : 'Immobilie erstellen'}
+            </span>
           </Button>
           <Link href="/admin/properties">
             <Button type="button" variant="secondary">
