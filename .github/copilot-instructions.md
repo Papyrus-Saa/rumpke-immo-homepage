@@ -1,51 +1,55 @@
+
 # Copilot Instructions for Rumpke Immo Homepage
 
-## Project Overview
-- This is a Next.js (App Router) TypeScript project for a real estate platform, with both public and admin interfaces.
-- The codebase is organized under `src/app/` with clear separation between public pages (e.g., `immobilien/`) and admin dashboard (`admin/`).
-- Data models and interfaces are in `src/hooks/interfaces/`.
-- API routes are in `src/app/api/` and follow RESTful conventions.
+## Project Architecture
+- Next.js (App Router) with TypeScript for a real estate platform.
+- Public pages under `src/app/immobilien/`, admin dashboard under `src/app/admin/`.
+- Data models/interfaces: `src/hooks/interfaces/` (always use these for type safety).
+- API routes: `src/app/api/` (RESTful, match interfaces).
 
 ## Key Patterns & Conventions
-- **Component Structure:**
-  - UI components are in `src/components/` and `src/app/admin/components/`.
-  - Use functional React components and hooks. Prefer colocating component-specific logic and styles.
-  - Admin features are modularized by domain (e.g., `agents/`, `properties/`, `categories/`).
+- **Components:**
+  - UI: `src/components/` (shared), `src/app/admin/components/` (admin-specific).
+  - Functional React components and hooks; colocate logic/styles when possible.
+  - Admin features modularized by domain (e.g., `agents/`, `properties/`).
 - **Styling:**
-  - Use CSS modules or global styles in `globals.css`. Some components have their own `.css` files.
+  - Use CSS modules or global styles (`globals.css`). Component-level `.css` files allowed.
 - **State Management:**
-  - Uses React Context (see `src/context/`) and custom hooks (see `src/app/admin/hooks/`, `src/context/hooks/`).
-  - UI state is managed in `src/store/ui/`.
+  - React Context (`src/context/`), custom hooks (`src/app/admin/hooks/`, `src/context/hooks/`).
+  - UI state: `src/store/ui/`.
 - **Data Fetching:**
-  - Uses React Query (see `ReactQueryProvider.tsx`).
-  - API endpoints are under `src/app/api/`.
+  - React Query (`src/app/providers/ReactQueryProvider.tsx`).
+  - API endpoints: `/api/` (use fetch/React Query).
 - **Type Safety:**
-  - All data models/interfaces are TypeScript (`.ts`/`.tsx`).
-  - Always import and use types from `src/hooks/interfaces/`.
+  - All models/interfaces are TypeScript. Import from `src/hooks/interfaces/`.
 
 ## Developer Workflows
-- **Development:**
-  - Copy `.env.template` to `.env` and set environment variables.
-  - Install dependencies: `npm install`
-  - Start database: `docker compose up -d`
-  - Run dev server: `npm run dev`
-- **Testing:**
-  - No explicit test setup found; add tests in `__tests__/` or alongside components if needed.
+- **Setup:**
+  - Copy `.env.template` to `.env` and configure variables.
+  - Install: `npm install`
+  - Start DB: `docker compose up -d`
+  - Dev server: `npm run dev`
 - **Linting/Formatting:**
-  - Lint config: `eslint.config.mjs`. Run `npx eslint .`.
-  - Format with Prettier if configured.
+  - Lint: `npx eslint .` (config: `eslint.config.mjs`)
+  - Format: Prettier (if configured)
+- **Testing:**
+  - No test setup found; add tests in `__tests__/` or next to components if needed.
 
 ## Integration & Data Flow
-- **Admin and Public Separation:**
-  - Admin dashboard (`src/app/admin/`) is isolated from public pages.
-  - Shared logic/components should be placed in `src/components/` or `src/hooks/`.
+- **Admin/Public Separation:**
+  - Admin: `src/app/admin/` (isolated)
+  - Public: `src/app/immobilien/`
+  - Shared logic/components: `src/components/`, `src/hooks/`
 - **API Communication:**
-  - Use fetch/React Query to interact with backend via `/api/` routes.
-  - Data models must match interfaces in `src/hooks/interfaces/`.
+  - Use fetch/React Query for `/api/` routes
+  - Data models must match `src/hooks/interfaces/`
+- **Cross-component Communication:**
+  - Use context/hooks for shared state (see `src/context/`, `src/store/ui/`)
 
 ## Examples
-- To add a new property type, update `src/hooks/interfaces/property-interface.ts` and relevant admin components.
-- For a new admin feature, create a folder in `src/app/admin/` and follow the modular structure.
+- Add property type: update `src/hooks/interfaces/property-interface.ts` and admin components.
+- New admin feature: create folder in `src/app/admin/` (modular structure).
+- Shared UI: place in `src/components/`.
 
 ## References
 - Main entry: `src/app/layout.tsx`

@@ -3,6 +3,7 @@
 # dependencies
 
 .env
+.github/
 
 
 /node_modules

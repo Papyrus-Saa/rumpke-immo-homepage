@@ -5,7 +5,7 @@ import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
 import { useRouter } from "next/navigation";
 import { IoAddOutline } from "react-icons/io5";
 import { useUIStore, OperationType, getOperationTypeColor } from "@/store/ui/ui-store";
-import Button from "@/components/ui/Button";
+// import Button from "@/components/ui/Button";
 import PropertiesAdminGrid from "../components/properties/components/PropertiesAdminGrid";
 import { useEffect, useState } from "react";
 import { getProperties } from "@/utils/admin-client";
@@ -44,26 +44,24 @@ export default function PropertiesPage() {
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold mb-4">Immobilien</h1>
         <div className="flex gap-2">
-          <Button
+          <button
             type="button"
-            variant="primary"
             onClick={() => handleCreate(OperationType.SELL)}
-            className="mb-4 text-xs font-semibold transition-colors flex items-center gap-2 bg-white dark:bg-neutral-900"
-            style={{ minWidth: 80, borderLeft: `4px solid ${getOperationTypeColor(OperationType.SELL)}` }}
+            className="mb-4 text-xs font-semibold transition-colors flex items-center gap-2 border-l-4 text-black dark:text-black p-1 rounded cursor-pointer hover:text-white"
+            style={{ minWidth: 80, borderLeftColor: getOperationTypeColor(OperationType.SELL), backgroundColor: 'var(--color-buy)' }}
           >
             <IoAddOutline className="text-base" />
             Kauf
-          </Button>
-          <Button
+          </button>
+          <button
             type="button"
-            variant="primary"
             onClick={() => handleCreate(OperationType.RENT)}
-            className="mb-4 text-xs font-semibold transition-colors flex items-center gap-2 bg-white dark:bg-neutral-900"
-            style={{ minWidth: 80, borderLeft: `4px solid ${getOperationTypeColor(OperationType.RENT)}` }}
+            className="mb-4 text-xs font-semibold transition-colors flex items-center gap-2 border-l-4 text-black dark:text-black  p-1 rounded cursor-pointer hover:text-white"
+            style={{ minWidth: 80, borderLeftColor: getOperationTypeColor(OperationType.RENT), backgroundColor: 'var(--color-rent)' }}
           >
             <IoAddOutline className="text-base" />
             Miete
-          </Button>
+          </button>
         </div>
       </div>
       {loading ? (
