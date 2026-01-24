@@ -50,6 +50,15 @@ input::placeholder, textarea::placeholder {
   animation: slide-in 0.3s ease-out;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 
 @theme {
 --color-bg-d: #0E0E12;

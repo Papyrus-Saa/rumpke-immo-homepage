@@ -9,6 +9,7 @@ import InputNumber from "./InputNumber";
 import InputSelect from "./InputSelect";
 
 
+
 interface InlineEditFieldProps {
   label: string;
   value: string | number;
