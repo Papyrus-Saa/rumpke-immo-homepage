@@ -10,7 +10,7 @@ import SuccessToast from "./SuccessToast";
 import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
 import { PiPencilCircleDuotone } from "react-icons/pi";
 import Button from "@/components/ui/Button";
-import { deleteProperty } from "@/utils/admin-client";
+import { deleteProperty, updateProperty } from "@/utils/admin-client";
 import Link from "next/link";
 
 const statusColorVars: Record<PropertyAdminPanel["status"], string> = {
@@ -56,22 +56,26 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
   const [showConfirm, setShowConfirm] = useState(false);
 
 
-  const handleInlineSave = (field: keyof PropertyAdminPanel, value: string | number | boolean) => {
+  const handleInlineSave = async (field: keyof PropertyAdminPanel, value: string | number | boolean) => {
     if (value === "error") {
       setErrorMsg("Fehler beim Speichern. Bitte versuchen Sie es erneut.");
       setShowError(true);
       setTimeout(() => setShowError(false), 2500);
       return;
     }
+    // Actualiza localmente para feedback inmediato
     setEditValues(prev => ({ ...prev, [field]: value }));
-    if (field === "status") {
-      setToastMsg("Status erfolgreich geändert!");
-    } else {
-      setToastMsg("Erfolgreich gespeichert!");
+    try {
+ 
+      await updateProperty(property.id, { [field]: value });
+      setToastMsg(field === "status" ? "Status erfolgreich geändert!" : "Erfolgreich gespeichert!");
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2000);
+    } catch (err: any) {
+      setErrorMsg("Fehler beim Speichern. Bitte versuchen Sie es erneut.");
+      setShowError(true);
+      setTimeout(() => setShowError(false), 2500);
     }
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 2000);
-
   };
 
 
