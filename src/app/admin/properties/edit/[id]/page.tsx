@@ -155,6 +155,7 @@ export default function EditPropertyPage() {
               getInputClassName={getInputClassName}
               errors={form.formState.errors}
               highlightedField={highlightedField || undefined}
+              operationTypeOverride={property?.operation ?? null}
             />
             {saveSuccess && (
               <div className="mt-4 text-green-600 font-semibold">Erfolgreich gespeichert!</div>

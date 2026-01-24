@@ -37,6 +37,7 @@ function isFieldError(error: unknown): error is import("react-hook-form").FieldE
 
 
 
+
 interface PropertyFormProps {
   form: UseFormReturn<any>;
   onSubmit: (data: any) => void;
@@ -46,6 +47,7 @@ interface PropertyFormProps {
   getInputClassName: (field: string) => string;
   errors: any;
   highlightedField?: string;
+  operationTypeOverride?: OperationType | null;
 }
 
 
@@ -59,8 +61,11 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   getInputClassName,
   errors,
   highlightedField,
+  operationTypeOverride,
 }) => {
-  const operationType = useUIStore(s => s.operationType);
+  // Usa el prop si está, si no el store
+  const storeOperationType = useUIStore(s => s.operationType);
+  const operationType = operationTypeOverride ?? storeOperationType;
   const isSell = operationType === OperationType.SELL;
   return (
     <form onSubmit={form.handleSubmit((data) => {

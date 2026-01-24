@@ -102,25 +102,6 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
         </div>
         <div>
           <Controller
-            name="operation"
-            control={control}
-            render={({ field }) => (
-              <InputSelect
-                name={field.name}
-                label="Vermarktungsart *"
-                options={operationOptions}
-                value={field.value ?? ''}
-                onChange={e => field.onChange(e.target.value)}
-                error={errors.operation?.message}
-                required
-                placeholder="Vermarktungsart auswählen"
-                className={getInputClassName('operation')}
-              />
-            )}
-          />
-        </div>
-        <div>
-          <Controller
             name="type"
             control={control}
             render={({ field }) => (

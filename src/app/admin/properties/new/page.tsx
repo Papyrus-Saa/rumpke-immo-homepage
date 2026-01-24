@@ -9,20 +9,16 @@ import { useRouter } from 'next/navigation';
 import { IoArrowBackOutline, IoSaveOutline, IoPricetagOutline, IoInformationCircleOutline } from 'react-icons/io5';
 import { usePropertyForm } from '@/app/admin/hooks/properties/components/usePropertyForm';
 import QuickFieldSearchInput from '@/app/admin/hooks/properties/components/QuickFieldSearchInput';
-
-
-
+import { useUIStore } from '@/store/ui/ui-store';
+import { useEffect } from 'react';
 
 import {
   allFields,
   furnishedOptions,
 } from '@/app/admin/hooks/properties/components/propertyFormFields';
 import z from 'zod';
-import ImageUrlOrUploadInput from '../../hooks/properties/components/ImageUrlOrUploadInput';
 import PropertyForm from '../../components/properties/components/PropertyForm';
 import { createProperty } from '@/utils/admin-client';
-
-
 
 export default function NewPropertyPage() {
   if (typeof window !== 'undefined' && !localStorage.getItem('admin_token')) {
@@ -30,11 +26,17 @@ export default function NewPropertyPage() {
     return null;
   }
 
+  const operationType = useUIStore(s => s.operationType);
   const router = useRouter();
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (!operationType) {
+      router.replace('/admin/properties');
+    }
+  }, [operationType, router]);
 
   const form = useForm<z.infer<typeof propertyFormSchemaZod>>({
     resolver: zodResolver(propertyFormSchemaZod),
@@ -48,7 +50,6 @@ export default function NewPropertyPage() {
     },
   });
 
-
   const {
     searchQuery,
     setSearchQuery,
@@ -59,16 +60,17 @@ export default function NewPropertyPage() {
     setSearchResults,
   } = usePropertyForm({ allFields, errors: form.formState.errors });
 
-
   const onSubmit = async (rawData: z.infer<typeof propertyFormSchemaZod>) => {
-
-
     setLoading(true);
     setError('');
     setSuccess('');
     try {
 
-      await createProperty(rawData);
+      const dataToSend = {
+        ...rawData,
+        operation: operationType,
+      };
+      await createProperty(dataToSend);
 
       setSuccess('Immobilie erfolgreich erstellt!');
       setTimeout(() => router.push('/admin/properties'), 1500);
