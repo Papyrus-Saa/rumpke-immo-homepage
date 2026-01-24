@@ -1,7 +1,6 @@
 'use client';
 
 
-
 import SidebarItem from "./SidebarItem";
 import { useState } from "react";
 import { IoHomeOutline, IoBusinessOutline, IoMapOutline, IoChatbubbleEllipsesOutline, IoBriefcaseOutline, IoStarOutline, IoMailOutline, IoAlbumsOutline, IoChevronForwardOutline } from "react-icons/io5"
@@ -18,7 +17,7 @@ const SidebarDesktop = () => {
   const [openDienstleistungen, setOpenDienstleistungen] = useState(false);
 
   return (
-    <nav className="hidden md:block  h-screen sticky top-0 px-2 py-6 dark:border-primary-dark">
+    <nav className=" hidden md:block  h-screen sticky top-0 px-2 py-6 dark:border-primary-dark">
       <div className="sticky top-0 z-20 bg-bg-l dark:bg-bg-d pb-4">
         <Title
           title="Rumpke Immobilien"

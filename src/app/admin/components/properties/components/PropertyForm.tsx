@@ -2,6 +2,7 @@ import PropertyLocationSection from "./PropertyLocationSection";
 import PropertyBasicInfoSection from "./PropertyBasicInfoSection";
 import ImageUrlOrUploadInput from "@/app/admin/hooks/properties/components/ImageUrlOrUploadInput";
 import React from "react";
+import { useUIStore, OperationType } from '@/store/ui/ui-store';
 import { UseFormReturn, Controller } from "react-hook-form";
 import { IoInformationCircleOutline, IoPricetagOutline, IoSaveOutline } from "react-icons/io5";
 import InputNumber from "./InputNumber";
@@ -59,6 +60,8 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   errors,
   highlightedField,
 }) => {
+  const operationType = useUIStore(s => s.operationType);
+  const isSell = operationType === OperationType.SELL;
   return (
     <form onSubmit={form.handleSubmit((data) => {
       onSubmit(data);
@@ -103,53 +106,62 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
           Zusätzliche Kosten
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <Controller
-              name="community_fees"
-              control={form.control}
-              render={({ field }) => (
-                <InputNumber
-                  name={field.name}
-                  label="Nebenkosten"
-                  placeholder="150"
-                  value={field.value ?? ''}
-                  onChange={e => {
-                    const value = e.target.value;
-                    field.onChange(value === '' || isNaN(Number(value)) ? undefined : Number(value));
-                  }}
-                  error={errors.community_fees?.message}
-                />
-              )}
-            />
-          </div>
-
-          <div>
-            <Controller
-              name="deposit"
-              control={form.control}
-              render={({ field }) => (
-                <InputNumber
-                  name={field.name}
-                  label="Kaution"
-                  placeholder="3000"
-                  value={field.value ?? ''}
-                  onChange={e => {
-                    const value = e.target.value;
-                    field.onChange(value === '' || isNaN(Number(value)) ? undefined : Number(value));
-                  }}
-                  error={errors.deposit?.message}
-                />
-              )}
-            />
-          </div>
-
+          {!isSell && (
+            <div>
+              <Controller
+                name="community_fees"
+                control={form.control}
+                render={({ field }) => (
+                  <InputNumber
+                    name={field.name}
+                    label="Nebenkosten"
+                    placeholder="150"
+                    value={field.value ?? ''}
+                    onChange={e => {
+                      const value = e.target.value;
+                      field.onChange(value === '' || isNaN(Number(value)) ? undefined : Number(value));
+                    }}
+                    error={errors.community_fees?.message}
+                  />
+                )}
+              />
+            </div>
+          )}
+          {!isSell && (
+            <div>
+              <Controller
+                name="deposit"
+                control={form.control}
+                render={({ field }) => (
+                  <InputNumber
+                    name={field.name}
+                    label="Kaution"
+                    placeholder="3000"
+                    value={field.value ?? ''}
+                    onChange={e => {
+                      const value = e.target.value;
+                      field.onChange(value === '' || isNaN(Number(value)) ? undefined : Number(value));
+                    }}
+                    error={errors.deposit?.message}
+                  />
+                )}
+              />
+            </div>
+          )}
           <div className="md:col-span-3">
-            <InputText
-              label="Provisionsinfo"
-              placeholder="z.B. 3% des Kaufpreises"
-              {...form.register('commission_info')}
-              className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              error={errors.commission_info?.message}
+            <Controller
+              name="commission_info"
+              control={form.control}
+              render={({ field }) => (
+                <InputText
+                  label="Provisionsinfo"
+                  placeholder="z.B. 3% des Kaufpreises"
+                  value={field.value ?? ''}
+                  onChange={field.onChange}
+                  className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  error={errors.commission_info?.message}
+                />
+              )}
             />
           </div>
         </div>
@@ -340,34 +352,58 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <div>
-            <InputText
-              label="Küchentyp"
-              placeholder="z.B. Einbauküche"
-              {...form.register('kitchen_type')}
-              className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              error={errors.kitchen_type?.message}
+            <Controller
+              name="kitchen_type"
+              control={form.control}
+              render={({ field }) => (
+                <InputText
+                  label="Küchentyp"
+                  placeholder="z.B. Einbauküche"
+                  value={field.value ?? ''}
+                  onChange={field.onChange}
+                  className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  error={errors.kitchen_type?.message}
+                />
+              )}
             />
           </div>
 
           <div>
-            <InputText
-              label="Heizung"
-              placeholder="z.B. Zentralheizung"
-              {...form.register('heating')}
-              className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              error={errors.heating?.message}
+            <Controller
+              name="heating"
+              control={form.control}
+              render={({ field }) => (
+                <InputText
+                  label="Heizung"
+                  placeholder="z.B. Zentralheizung"
+                  value={field.value ?? ''}
+                  onChange={field.onChange}
+                  className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  error={errors.heating?.message}
+                />
+              )}
             />
           </div>
 
-          <div>
-            <InputSelect
-              label="Möblierung"
-              options={furnishedOptions}
-              {...form.register('furnished')}
-              className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              error={errors.furnished?.message}
-            />
-          </div>
+          {!isSell && (
+            <div>
+              <Controller
+                name="furnished"
+                control={form.control}
+                render={({ field }) => (
+                  <InputSelect
+                    name={field.name}
+                    label="Möblierung"
+                    options={furnishedOptions}
+                    value={field.value ?? ''}
+                    onChange={e => field.onChange(e.target.value)}
+                    className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    error={errors.furnished?.message}
+                  />
+                )}
+              />
+            </div>
+          )}
 
           <div>
             <InputSelect
@@ -399,38 +435,40 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
             />
           </div>
 
-          <div>
-            <Controller
-              name="available_from"
-              control={form.control}
-              render={({ field }) => {
-                let inputValue = '';
-                if (field.value instanceof Date && !isNaN(field.value.getTime())) {
-                  const d = field.value;
-                  inputValue = d.toISOString().slice(0, 10);
-                } else if (typeof field.value === 'string') {
-                  inputValue = field.value;
-                }
-                return (
-                  <InputDate
-                    name={field.name}
-                    label="Verfügbar ab"
-                    value={inputValue}
-                    onChange={e => {
-                      const value = e.target.value;
-                      if (!value) {
-                        field.onChange(undefined);
-                      } else {
-                        const d = new Date(value);
-                        field.onChange(isNaN(d.getTime()) ? undefined : d);
-                      }
-                    }}
-                    error={errors.available_from?.message}
-                  />
-                );
-              }}
-            />
-          </div>
+          {!isSell && (
+            <div>
+              <Controller
+                name="available_from"
+                control={form.control}
+                render={({ field }) => {
+                  let inputValue = '';
+                  if (field.value instanceof Date && !isNaN(field.value.getTime())) {
+                    const d = field.value;
+                    inputValue = d.toISOString().slice(0, 10);
+                  } else if (typeof field.value === 'string') {
+                    inputValue = field.value;
+                  }
+                  return (
+                    <InputDate
+                      name={field.name}
+                      label="Verfügbar ab"
+                      value={inputValue}
+                      onChange={e => {
+                        const value = e.target.value;
+                        if (!value) {
+                          field.onChange(undefined);
+                        } else {
+                          const d = new Date(value);
+                          field.onChange(isNaN(d.getTime()) ? undefined : d);
+                        }
+                      }}
+                      error={errors.available_from?.message}
+                    />
+                  );
+                }}
+              />
+            </div>
+          )}
         </div>
 
         <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
@@ -439,24 +477,38 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
           </h2>
           <div className="space-y-4">
             <div>
-              <InputTextarea
-                label="Beschreibung"
-                placeholder="Detaillierte Beschreibung der Immobilie..."
-                rows={6}
-                {...form.register('description')}
-                error={errors.description?.message}
-                className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-vertical"
+              <Controller
+                name="description"
+                control={form.control}
+                render={({ field }) => (
+                  <InputTextarea
+                    label="Beschreibung"
+                    placeholder="Detaillierte Beschreibung der Immobilie..."
+                    rows={6}
+                    value={field.value ?? ''}
+                    onChange={field.onChange}
+                    error={errors.description?.message}
+                    className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-vertical"
+                  />
+                )}
               />
             </div>
 
             <div>
-              <InputTextarea
-                label="Interne Notizen"
-                placeholder="Nur für interne Verwendung..."
-                rows={3}
-                {...form.register('notes_internal')}
-                error={errors.notes_internal?.message}
-                className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-vertical"
+              <Controller
+                name="notes_internal"
+                control={form.control}
+                render={({ field }) => (
+                  <InputTextarea
+                    label="Interne Notizen"
+                    placeholder="Nur für interne Verwendung..."
+                    rows={3}
+                    value={field.value ?? ''}
+                    onChange={field.onChange}
+                    error={errors.notes_internal?.message}
+                    className="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-vertical"
+                  />
+                )}
               />
             </div>
           </div>

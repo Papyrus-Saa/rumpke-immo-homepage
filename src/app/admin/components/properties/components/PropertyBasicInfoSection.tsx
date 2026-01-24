@@ -9,6 +9,7 @@ import { propertyFormSchemaZod } from '@/app/admin/hooks/properties/components/p
 import { Controller } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { getAgents } from '@/utils/admin-client';
+import { useUIStore, OperationType, getOperationTypeColor } from '@/store/ui/ui-store';
 
 
 interface Props {
@@ -28,11 +29,24 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
     });
   }, []);
 
+  const operationType = useUIStore(s => s.operationType);
+  const operationLabel = operationType === OperationType.SELL ? 'KAUF' : operationType === OperationType.RENT ? 'MIETE' : '';
+  const operationColor = getOperationTypeColor(operationType);
   return (
     <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6 mb-4">
-      <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4 flex items-center gap-2">
-        Grundinformationen (Pflichtfelder)
-      </h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d flex items-center gap-2">
+          Grundinformationen (Pflichtfelder)
+        </h2>
+        {operationLabel && (
+          <span
+            className="text-base font-bold uppercase tracking-wider"
+            style={{ color: operationColor }}
+          >
+            {operationLabel}
+          </span>
+        )}
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* ...existing code... */}
         <div>
@@ -87,57 +101,108 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
           />
         </div>
         <div>
-          <InputSelect
-            label="Vermarktungsart *"
-            options={operationOptions}
-            {...register('operation')}
-            error={errors.operation?.message}
-            className={getInputClassName('operation')}
+          <Controller
+            name="operation"
+            control={control}
+            render={({ field }) => (
+              <InputSelect
+                name={field.name}
+                label="Vermarktungsart *"
+                options={operationOptions}
+                value={field.value ?? ''}
+                onChange={e => field.onChange(e.target.value)}
+                error={errors.operation?.message}
+                required
+                placeholder="Vermarktungsart auswählen"
+                className={getInputClassName('operation')}
+              />
+            )}
           />
         </div>
         <div>
-          <InputSelect
-            label="Typ *"
-            options={typeOptions.map(opt => ({ value: opt.value, label: opt.label.charAt(0).toUpperCase() + opt.label.slice(1) }))}
-            {...register('type')}
-            error={errors.type?.message}
-            className={getInputClassName('type')}
+          <Controller
+            name="type"
+            control={control}
+            render={({ field }) => (
+              <InputSelect
+                name={field.name}
+                label="Typ *"
+                options={typeOptions.map(opt => ({ value: opt.value, label: opt.label.charAt(0).toUpperCase() + opt.label.slice(1) }))}
+                value={field.value ?? ''}
+                onChange={e => field.onChange(e.target.value)}
+                error={errors.type?.message}
+                required
+                placeholder="Typ auswählen"
+                className={getInputClassName('type')}
+              />
+            )}
           />
         </div>
         <div>
-          <InputSelect
-            label="Status *"
-            options={statusOptions}
-            {...register('status')}
-            error={errors.status?.message}
-            className={getInputClassName('status')}
+          <Controller
+            name="status"
+            control={control}
+            render={({ field }) => (
+              <InputSelect
+                name={field.name}
+                label="Status *"
+                options={statusOptions}
+                value={field.value ?? ''}
+                onChange={e => field.onChange(e.target.value)}
+                error={errors.status?.message}
+                required
+                placeholder="Status auswählen"
+                className={getInputClassName('status')}
+              />
+            )}
           />
         </div>
         <div className="md:col-span-3">
-          <InputText
-            label="Adresse *"
-            placeholder="Straße und Hausnummer"
-            {...register('address_line')}
-            error={errors.address_line?.message}
-            className={getInputClassName('address_line')}
+          <Controller
+            name="address_line"
+            control={control}
+            render={({ field }) => (
+              <InputText
+                label="Straße und Hausnummer *"
+                placeholder="z.B. Musterstraße 12"
+                value={field.value ?? ''}
+                onChange={field.onChange}
+                error={errors.address_line?.message}
+                className={getInputClassName('address_line')}
+              />
+            )}
           />
         </div>
         <div>
-          <InputText
-            label="Stadt *"
-            placeholder="Stadt"
-            {...register('city')}
-            error={errors.city?.message}
-            className={getInputClassName('city')}
+          <Controller
+            name="city"
+            control={control}
+            render={({ field }) => (
+              <InputText
+                label="Stadt *"
+                placeholder="Stadt"
+                value={field.value ?? ''}
+                onChange={field.onChange}
+                error={errors.city?.message}
+                className={getInputClassName('city')}
+              />
+            )}
           />
         </div>
         <div>
-          <InputText
-            label="Postleitzahl *"
-            placeholder="PLZ"
-            {...register('postal_code')}
-            error={errors.postal_code?.message}
-            className={getInputClassName('postal_code')}
+          <Controller
+            name="postal_code"
+            control={control}
+            render={({ field }) => (
+              <InputText
+                label="Postleitzahl *"
+                placeholder="PLZ"
+                value={field.value ?? ''}
+                onChange={field.onChange}
+                error={errors.postal_code?.message}
+                className={getInputClassName('postal_code')}
+              />
+            )}
           />
         </div>
 
@@ -241,28 +306,41 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
           />
         </div>
         <div>
-          <InputSelect
-            label="Währung *"
-            options={currencyOptions}
-            {...register('currency')}
-            error={errors.currency?.message}
-            defaultChecked="EUR"
-            className={getInputClassName('currency')}
+          <Controller
+            name="currency"
+            control={control}
+            render={({ field }) => (
+              <InputSelect
+                name={field.name}
+                label="Währung *"
+                options={currencyOptions}
+                value={field.value ?? ''}
+                onChange={e => field.onChange(e.target.value)}
+                error={errors.currency?.message}
+                required
+                placeholder="Währung auswählen"
+                className={getInputClassName('currency')}
+              />
+            )}
           />
         </div>
         <div>
-          <InputSelect
-            label={<span>Kategorie <span style={{ color: 'currentColor' }}>*</span></span>}
-            options={[
-              { value: 'haus', label: 'Haus' },
-              { value: 'wohnung', label: 'Wohnung' },
-              { value: 'gewerbe', label: 'Gewerbe' },
-              { value: 'grundstueck', label: 'Grundstück' },
-              { value: 'sonstige', label: 'Sonstige' },
-            ]}
-            {...register('category')}
-            error={errors.category?.message}
-            className={getInputClassName('category')}
+          <Controller
+            name="category"
+            control={control}
+            render={({ field }) => (
+              <InputSelect
+                name={field.name}
+                label={<span>Kategorie <span style={{ color: 'currentColor' }}>*</span></span>}
+                options={[{ value: 'haus', label: 'Haus' }, { value: 'wohnung', label: 'Wohnung' }, { value: 'gewerbe', label: 'Gewerbe' }, { value: 'grundstueck', label: 'Grundstück' }, { value: 'sonstige', label: 'Sonstige' }]}
+                value={field.value ?? ''}
+                onChange={e => field.onChange(e.target.value)}
+                error={errors.category?.message}
+                required
+                placeholder="Kategorie auswählen"
+                className={getInputClassName('category')}
+              />
+            )}
           />
         </div>
       </div>
