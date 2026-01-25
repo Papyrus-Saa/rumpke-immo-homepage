@@ -63,12 +63,13 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
   highlightedField,
   operationTypeOverride,
 }) => {
-  // Usa el prop si está, si no el store
+
   const storeOperationType = useUIStore(s => s.operationType);
   const operationType = operationTypeOverride ?? storeOperationType;
   const isSell = operationType === OperationType.SELL;
   return (
     <form onSubmit={form.handleSubmit((data) => {
+      // ...existing code...
       onSubmit(data);
     })} className="property-form">
       {/* Main image field */}
@@ -90,14 +91,14 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
           />
         )}
       />
-      {/* Property basic info section */}
+
       <PropertyBasicInfoSection
         register={form.register}
         errors={errors}
         getInputClassName={getInputClassName}
         control={form.control}
       />
-      {/* Property location section */}
+
       <PropertyLocationSection
         register={form.register}
         errors={errors}
@@ -521,7 +522,14 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
 
         {/* Botones de acción */}
         <div className="flex items-center gap-4">
-          <Button type="submit" disabled={loading} variant="primary">
+          <Button
+            type="button"
+            disabled={loading}
+            variant="primary"
+            onClick={() => {
+              form.handleSubmit(onSubmit)();
+            }}
+          >
             <IoSaveOutline className="text-xl" />
             <span>
               {loading
@@ -539,6 +547,18 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
             </Button>
           </Link>
         </div>
+        {/* Mensaje si no hay cambios (no dirty) */}
+        {!form.formState.isDirty && (
+          <div
+            className="mt-2 flex items-center gap-2 text-orange-600 bg-orange-50 dark:bg-orange-900/40 rounded px-4 py-2 animate-pulse border border-orange-300 dark:border-orange-700 transition-all duration-300"
+            style={{ minHeight: 40 }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2.25m0 3.75h.008v.008H12v-.008zm.75-9.75a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className="font-medium">No hay cambios para guardar.</span>
+          </div>
+        )}
       </div>
       {children}
     </form>

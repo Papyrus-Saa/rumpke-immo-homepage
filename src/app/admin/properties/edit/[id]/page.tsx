@@ -91,18 +91,27 @@ export default function EditPropertyPage() {
     getPropertyById(id)
       .then(data => {
         const normalized = normalizePropertyNumbers(data);
+
+        if (normalized.available_from && typeof normalized.available_from === 'string') {
+          const parsed = new Date(normalized.available_from);
+          normalized.available_from = isNaN(parsed.getTime()) ? undefined : parsed;
+        }
         setProperty(normalized);
-        form.reset(normalized);
       })
       .catch(err => setError(err.message || "Error al cargar la vivienda"))
       .finally(() => setLoading(false));
   }, [id]);
 
+  useEffect(() => {
+    if (property) {
+      form.reset(property);
+    }
+  }, [property]);
+
   const handleSubmit = async (data: any) => {
     setSaving(true);
     setSaveError("");
     setSaveSuccess(false);
-    console.log('DATOS A ENVIAR AL BACKEND:', data);
     if (!id || typeof id !== 'string') {
       setSaveError("Ungültige Immobilien-ID.");
       setSaving(false);
@@ -111,11 +120,8 @@ export default function EditPropertyPage() {
     try {
       const normalized = normalizePropertyNumbers(data);
       await updateProperty(id, normalized);
-      // Refrescar datos desde el backend tras guardar
-      const updated = await getPropertyById(id);
-      setProperty(normalizePropertyNumbers(updated));
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 2000);
+      // Redirigir tras éxito
+      router.push("/admin/properties");
     } catch (err: any) {
       setSaveError(err.message || "Fehler beim Speichern.");
     } finally {

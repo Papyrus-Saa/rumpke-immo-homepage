@@ -66,7 +66,7 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
     // Actualiza localmente para feedback inmediato
     setEditValues(prev => ({ ...prev, [field]: value }));
     try {
- 
+
       await updateProperty(property.id, { [field]: value });
       setToastMsg(field === "status" ? "Status erfolgreich geändert!" : "Erfolgreich gespeichert!");
       setShowToast(true);
@@ -98,7 +98,7 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
       >
         <div className="w-full h-full flex flex-col items-center justify-center">
 
-          <div className="relative bg-card-bg-l dark:bg-card-bg-d text-card-text-l dark:text-card-text-d  shadow-2xl px-6 py-2 w-[70%] overflow-y-auto flex flex-col gap-8 rounded">
+          <div className="relative bg-card-bg-l dark:bg-card-bg-d text-card-text-l dark:text-card-text-d  shadow-2xl px-6 py-2 w-[90%] overflow-y-auto flex flex-col gap-8 rounded">
             <button
               type="button"
               className="mx-auto"
@@ -119,15 +119,20 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
                   />
                 )}
               </div>
-              AQUI
+              {/* <span></span> */}
             </div>
             <div className="flex gap-16 items-start px-2 rounded">
               <div className="flex-1 flex flex-col gap-4">
                 <h2 className="text-xl font-bold mb-2">Hauptdaten</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 mb-8">
-                  <InlineEditField label="Agent" value={editValues.agent} type="select" options={agentsLoading || agentsError ? [] : agents.map(a => `${a.first_name} ${a.last_name}`)} onSave={val => handleInlineSave('agent', val)} />
+                  <InlineEditField
+                    label="Titel"
+                    value={editValues.title && editValues.title.trim() !== '' ? editValues.title : "Ohne Titel"}
+                    type="text"
+                    onSave={val => handleInlineSave('title', val)}
+                  />
                   <InlineEditField label="Eingentümer" value={editValues.owner || "-"} type="text" onSave={val => handleInlineSave('owner', val)} />
-                  <InlineEditField label="Vermarktungsart" value={editValues.operation === "SELL" ? "Kauf" : "Miete"} type="select" options={["Kauf", "Miete"]} onSave={val => handleInlineSave('operation', val === "Kauf" ? "SELL" : "RENT")} />
+
                   <InlineEditField
                     label="Vermarktungsart"
                     value={editValues.operation === "SELL" ? "Kauf" : "Miete"}
@@ -155,11 +160,8 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
                   <InlineEditField label="Schlafzimmer" value={editValues.bedrooms} type="number" onSave={val => handleInlineSave('bedrooms', val)} />
                   <InlineEditField label="Badezimmer" value={editValues.bathrooms} type="number" onSave={val => handleInlineSave('bathrooms', val)} />
                   <InlineEditField label="Preis" value={editValues.price_amount} type="number" onSave={val => handleInlineSave('price_amount', val)} />
-                  <InlineEditField label="Währung" value={editValues.currency} type="select" options={["EUR", "USD", "CHF"]} onSave={val => handleInlineSave('currency', val)} />
 
                   <InlineEditField label="Aufzug" value={editValues.has_elevator === true ? 'Ja' : editValues.has_elevator === false ? 'Nein' : '-'} type="text" onSave={val => handleInlineSave('has_elevator', val === 'Ja')} />
-                  <InlineEditField label="Garage" value={editValues.garage === true ? 'Ja' : editValues.garage === false ? 'Nein' : '-'} type="text" onSave={val => handleInlineSave('garage', val === 'Ja')} />
-                  <InlineEditField label="Abstellraum" value={editValues.storage_room === true ? 'Ja' : editValues.storage_room === false ? 'Nein' : '-'} type="text" onSave={val => handleInlineSave('storage_room', val === 'Ja')} />
                 </div>
 
                 <div className="grid grid-cols-4 gap-6">
@@ -336,18 +338,9 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
             type="text"
             onSave={val => handleInlineSave('title', val)}
           />
-          <InlineEditField
-            label="Makler"
-            value={agentName}
-            type="select"
-            options={agentsLoading || agentsError ? [] : agents.map(a => a.first_name + ' ' + a.last_name)}
-            onSave={val => {
-              const selectedAgent = agents.find(a => a.first_name + ' ' + a.last_name === val);
-              if (selectedAgent) handleInlineSave('agent', selectedAgent.id);
-            }}
-          />
+
           <InlineEditField label="Eingentümer" value={editValues.owner || "-"} type="text" onSave={val => handleInlineSave('owner', val)} />
-          {/* <InlineEditField label="Vermarktungsart" value={editValues.operation === "SELL" ? "Kauf" : "Miete"} type="select" options={["Kauf", "Miete"]} onSave={val => handleInlineSave('operation', val === "Kauf" ? "SELL" : "RENT")} /> */}
+
           <InlineEditField
             label="Vermarktungsart"
             value={editValues.operation === "SELL" ? "Kauf" : "Miete"}
