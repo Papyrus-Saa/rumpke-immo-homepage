@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { OperationType } from '@/store/ui/ui-store';
 import PropertyTypeCorner from './PropertyTypeCorner';
 
+type PropertyStatus = 'PUBLISHED' | 'RESERVED' | 'SOLD' | 'RENTED' | 'DRAFT' | 'HIDDEN';
+
 interface PropertyCardProps {
   id: string;
   slug: string;
@@ -15,14 +17,50 @@ interface PropertyCardProps {
   rooms?: number;
   built_area_m2?: string | number | null;
   plot_area_m2?: string | number | null;
+  status?: PropertyStatus;
   available_from?: string;
   deposit?: string | number | null;
   furnished?: string | null;
 }
 
 const PropertyCard: React.FC<{ property: PropertyCardProps }> = ({ property }) => {
+
+  let statusLabel = '';
+  let statusColor = '';
+  let cardOpacity = '';
+  switch (property.status) {
+    case 'RESERVED':
+      statusLabel = 'Reserviert';
+      statusColor = 'var(--color-status-reserved)';
+      cardOpacity = 'opacity-60';
+      break;
+    case 'SOLD':
+      statusLabel = 'Verkauft';
+      statusColor = 'var(--color-status-sold)';
+      cardOpacity = 'opacity-60';
+      break;
+    case 'RENTED':
+      statusLabel = 'Vermietet';
+      statusColor = 'var(--color-status-rented)';
+      cardOpacity = 'opacity-60';
+      break;
+    default:
+      statusLabel = '';
+      statusColor = '';
+      cardOpacity = '';
+  }
+
+  const isDisabled = property.status === 'RESERVED' || property.status === 'SOLD' || property.status === 'RENTED';
   return (
-    <div className="relative cursor-pointer bg-white dark:bg-card-bg-d border border-transparent dark:border-admin-border-d rounded shadow hover:shadow-lg transition overflow-hidden group">
+    <div className={`relative ${isDisabled ? '' : 'cursor-pointer'} bg-white dark:bg-card-bg-d border border-transparent dark:border-admin-border-d rounded shadow hover:shadow-lg transition overflow-hidden group ${cardOpacity}`}>
+      {statusLabel && (
+        <span
+          className="absolute top-2 right-2 z-10 px-2 py-1 rounded text-xs font-semibold"
+          style={{ background: statusColor, color: '#fff' }}
+        >
+          {statusLabel}
+        </span>
+      )}
       <PropertyTypeCorner type={property.operationType} style={{ top: 8, left: 8 }} size={8} />
       <div className="relative w-full h-40">
         {property.image ? (

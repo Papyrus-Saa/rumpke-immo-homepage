@@ -2,7 +2,15 @@ import PropertiesGrid from '@/components/properties/PropertiesGrid';
 import { OperationType } from '@/store/ui/ui-store';
 import { Title } from '@/components/ui/title/Title';
 
-export default async function WohnungPage() {
+const typeMap: Record<string, string> = {
+  haus: 'Häuser',
+  grundstueck: 'Grundstücke',
+  gewerbe: 'Gewerbe',
+  wohnung: 'Wohnungen',
+  garage: 'Garagen',
+};
+
+export default async function KategorieTypePage({ params }: { params: { type: string } }) {
   const res = await fetch('http://localhost:3000/property', { cache: 'no-store' });
   if (!res.ok) {
     return <div className="p-4 font-semibold text-error" >Eigenschaften konnten nicht geladen werden.</div>;
@@ -49,26 +57,12 @@ export default async function WohnungPage() {
   }
 
   // Filtrar propiedades por tipo de la ruta
-  const type = 'wohnung';
-  const title = 'Alle Wohnungen';
+  const type = params.type.toLowerCase();
+  const title = `Alle ${typeMap[type] || type}`;
   const filteredProperties = properties.filter((p: any) => (p.type || '').toLowerCase() === type);
 
   if (!filteredProperties.length) {
-    return (
-      <main className="px-2 py-6">
-        <Title
-          title="Willkommen bei Rumpke Immobilien"
-          className="text-center text-3xl md:text-4xl font-bold text-black dark:text-white"
-        />
-        <div className="text-center text-xl md:text-2xl font-medium text-black dark:text-white mt-1 mb-6">
-          – Mehr als nur 4 Wände –
-        </div>
-        <h1 className="text-2xl font-bold mb-6">{title}</h1>
-        <div className="flex items-center justify-center min-h-[40vh] w-full">
-          <span className="text-lg font-semibold text-gray-500 dark:text-gray-300">Zurzeit gibt es keine Wohnungen in dieser Kategorie.</span>
-        </div>
-      </main>
-    );
+    return <Loader />;
   }
 
   return (

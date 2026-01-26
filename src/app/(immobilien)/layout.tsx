@@ -1,18 +1,19 @@
+'use client';
 
 
+import { Inter } from "next/font/google";
 import Footer from "@/components/ui/footer/Footer";
 import Sidebar from "@/components/ui/sidebar/Sidebar";
 import SidebarDesktop from "@/components/ui/sidebar/SidebarDesktop";
 import { Title } from "@/components/ui/title/Title";
 import Topmenu from "@/components/ui/top-menu/TopMenu";
 
-
-
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 
 export default function PropertiesLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <div className={inter.className}>
       <div className="">
         <div className="">
           <Topmenu />
@@ -22,7 +23,7 @@ export default function PropertiesLayout({ children }: { children: React.ReactNo
           <Title
             title="Rumpke Immobilien"
             subtitle="Finde deine Traumimmobilie"
-            className='flex-1 md:hidden text-primary mb-4 ml-2'
+            className='flex-1 md:hidden mb-4 ml-2'
           />
           <Sidebar />
           <div className="flex">
@@ -31,9 +32,9 @@ export default function PropertiesLayout({ children }: { children: React.ReactNo
               {children}
             </div>
           </div>
-            <Footer/>
+          <Footer />
         </div>
       </div>
-    </>
+    </div>
   );
 }

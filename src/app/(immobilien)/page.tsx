@@ -1,12 +1,12 @@
 
-
-
 import PropertiesGrid from '@/components/properties/PropertiesGrid';
-
-
 import { OperationType } from '@/store/ui/ui-store';
+import { Title } from '@/components/ui/title/Title';
 
-export default async function ImmobilienPage() {
+
+
+
+export default async function ImmobilienPage({ searchParams, params }: { searchParams?: Record<string, string>, params?: Record<string, string> }) {
   const res = await fetch('http://localhost:3000/property', { cache: 'no-store' });
   if (!res.ok) {
     return <div className="p-4 font-semibold text-error" >Eigenschaften konnten nicht geladen werden.</div>;
@@ -19,7 +19,10 @@ export default async function ImmobilienPage() {
       error = true;
     } else {
       properties = await res.json();
-      properties = properties.map((p: any) => ({
+
+      properties = properties.filter((p: any) =>
+        p.status === 'PUBLISHED' || p.status === 'RESERVED' || p.status === 'SOLD' || p.status === 'RENTED'
+      ).map((p: any) => ({
         ...p,
         operationType:
           p.operation === 'SELL'
@@ -53,10 +56,43 @@ export default async function ImmobilienPage() {
     return <Loader />;
   }
 
+
+  // Diccionario de tipos
+  const typeMap: Record<string, string> = {
+    haus: 'Häuser',
+    grundstueck: 'Grundstücke',
+    gewerbe: 'Gewerbe',
+    wohnung: 'Wohnungen',
+    garage: 'Garagen',
+  };
+
+  // Detecta el tipo por query param o por segmento de ruta
+  let type = searchParams?.type || '';
+  if (!type && typeof params !== 'undefined' && params.type) {
+    type = params.type;
+  }
+
+  const title = type ? `Alle ${typeMap[type.toLowerCase()] || type}` : 'Alle Immobilien';
+
+  let filteredProperties = properties;
+  if (type) {
+    filteredProperties = properties.filter((p: any) => {
+      const propType = (p.type || '').toLowerCase();
+      return propType === type.toLowerCase();
+    });
+  }
+
   return (
     <main className="px-2 py-6">
-      <h1 className="text-2xl font-bold mb-6 text-primary">Alle Immobilien</h1>
-      <PropertiesGrid properties={properties} />
+      <Title
+        title="Willkommen bei Rumpke Immobilien"
+        className="text-center text-3xl md:text-4xl font-bold text-black dark:text-white"
+      />
+      <div className="text-center text-xl md:text-2xl font-medium text-black dark:text-white mt-1 mb-6">
+        – Mehr als nur 4 Wände –
+      </div>
+      <h1 className="text-2xl font-bold mb-6">{title}</h1>
+      <PropertiesGrid properties={filteredProperties} />
     </main>
   );
 }
