@@ -295,7 +295,7 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
 
   const borderColor = editValues.operation === 'SELL' ? 'var(--color-buy)' : 'var(--color-rent)';
 
-  // Obtener el objeto agente a partir del id
+
   const agentObj = agents.find(a => a.id === editValues.agent);
   const agentName = agentObj ? `${agentObj.first_name} ${agentObj.last_name}` : "Ohne Namen";
 
@@ -305,6 +305,20 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
       className="rounded shadow-md px-5 py-2 gap-3 min-h-[340px] w-full mx-auto bg-card-bg-l dark:bg-card-bg-d text-card-text-l dark:text-card-text-d"
     >
 
+      {(editValues.created_at || editValues.updated_at) && (
+        <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2">
+          <div>
+            {editValues.created_at && (
+              <span>Erstellt am: {new Date(editValues.created_at).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(',', '')}</span>
+            )}
+          </div>
+          <div>
+            {editValues.updated_at && (
+              <span>Aktualisiert am: {new Date(editValues.updated_at).toLocaleDateString('de-DE', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(',', '')}</span>
+            )}
+          </div>
+        </div>
+      )}
       <div className="flex gap-4 items-start">
         <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
           {editValues.main_image && (

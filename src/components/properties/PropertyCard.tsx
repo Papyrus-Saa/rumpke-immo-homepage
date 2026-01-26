@@ -15,12 +15,14 @@ interface PropertyCardProps {
   rooms?: number;
   built_area_m2?: string | number | null;
   plot_area_m2?: string | number | null;
+  available_from?: string;
+  deposit?: string | number | null;
+  furnished?: string | null;
 }
 
 const PropertyCard: React.FC<{ property: PropertyCardProps }> = ({ property }) => {
   return (
     <div className="relative cursor-pointer bg-white dark:bg-card-bg-d border border-transparent dark:border-admin-border-d rounded shadow hover:shadow-lg transition overflow-hidden group">
-      {/* Esquinita de color según tipo */}
       <PropertyTypeCorner type={property.operationType} style={{ top: 8, left: 8 }} size={8} />
       <div className="relative w-full h-40">
         {property.image ? (
@@ -61,6 +63,21 @@ const PropertyCard: React.FC<{ property: PropertyCardProps }> = ({ property }) =
           )}
         </div>
         {property.price && <div className="text-primary font-semibold mb-1">{property.price}</div>}
+
+
+        {property.operationType === OperationType.RENT && (
+          <div className="flex flex-col gap-1 mt-2 text-xs">
+            {property.available_from && (
+              <div><b>Verfügbar ab:</b> {new Date(property.available_from).toLocaleDateString('de-DE')}</div>
+            )}
+            {property.deposit && (
+              <div><b>Kaution:</b> {property.deposit}</div>
+            )}
+            {property.furnished && property.furnished.toLowerCase() !== 'nein' && property.furnished.toLowerCase() !== 'no' && (
+              <div><b>Möbliert</b></div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

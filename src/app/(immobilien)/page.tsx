@@ -32,6 +32,9 @@ export default async function ImmobilienPage() {
         title: p.title,
         slug: p.slug,
         id: p.id,
+        available_from: p.available_from,
+        deposit: p.deposit,
+        furnished: p.furnished,
       }));
     }
   } catch {

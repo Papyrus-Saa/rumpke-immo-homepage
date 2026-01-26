@@ -60,4 +60,8 @@ export interface PropertyAdminPanel {
   description?: string;
   notes_internal?: string;
   is_new?: boolean;
+
+
+  created_at?: string;
+  updated_at?: string;
 }

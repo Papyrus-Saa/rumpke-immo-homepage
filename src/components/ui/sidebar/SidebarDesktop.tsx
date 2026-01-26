@@ -18,7 +18,7 @@ const SidebarDesktop = () => {
 
   return (
     <nav className=" hidden md:block  h-screen sticky top-0 px-2 py-6 dark:border-primary-dark">
-      <div className="sticky top-0 z-20 bg-bg-l dark:bg-bg-d pb-4">
+      <div className="sticky top-0 z-20 ">
         <Title
           title="Rumpke Immobilien"
           subtitle="Finde deine Traumimmobilie"

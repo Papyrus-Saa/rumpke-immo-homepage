@@ -547,7 +547,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
             </Button>
           </Link>
         </div>
-        {/* Mensaje si no hay cambios (no dirty) */}
+
         {!form.formState.isDirty && (
           <div
             className="mt-2 flex items-center gap-2 text-orange-600 bg-orange-50 dark:bg-orange-900/40 rounded px-4 py-2 animate-pulse border border-orange-300 dark:border-orange-700 transition-all duration-300"
@@ -556,7 +556,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2.25m0 3.75h.008v.008H12v-.008zm.75-9.75a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span className="font-medium">No hay cambios para guardar.</span>
+            <span className="font-medium">Keine Änderungen zum Speichern.</span>
           </div>
         )}
       </div>
