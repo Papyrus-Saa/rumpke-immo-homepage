@@ -6,7 +6,7 @@ import { useUIStore } from '@/store/ui/ui-store'
 import { RumpkeLogo } from '@/components/ui/logo/RumpkeLogo'
 import Link from 'next/link'
 import CategoryButton from '../category-button/CategoryButton'
-import { useGlobalColor } from '@/context/GlobalColorContext';
+
 
 
 
@@ -15,7 +15,7 @@ import { useGlobalColor } from '@/context/GlobalColorContext';
 const Topmenu = () => {
 
   const openSidemenu = useUIStore((state) => state.openSidemenu);
-  const { setColorType } = useGlobalColor();
+
 
   return (
     <>

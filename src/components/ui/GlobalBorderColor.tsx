@@ -1,8 +1,8 @@
 "use client";
-import { useGlobalColor } from '@/context/GlobalColorContext';
+import { useBorderColor } from '@/hooks/useBorderColor';
 
 export default function GlobalBorderColor() {
-  const { color } = useGlobalColor();
+  const color = useBorderColor();
   return (
     <>
       <div className="fixed top-0 right-0 z-20 w-full h-px" style={{ background: color }} />

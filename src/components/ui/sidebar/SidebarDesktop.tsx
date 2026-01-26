@@ -26,11 +26,13 @@ const SidebarDesktop = () => {
         />
       </div>
 
+      <SidebarItem href="/" icon={<IoAlbumsOutline size={20} />} >Start</SidebarItem>
       <SidebarItem href="/auf-karte-erkunden" icon={<IoMapOutline size={20} />} >Auf Karte erkunden</SidebarItem>
-      <SidebarItem href="/kategorie/wohnungen" icon={<IoBusinessOutline size={20} />} >Wohnungen</SidebarItem>
-      <SidebarItem href="/kategorie/haeuser" icon={<IoHomeOutline size={20} />} >Häuser</SidebarItem>
-      <SidebarItem href="/kategorie/luxus" icon={<IoStarOutline size={20} />} >Luxus</SidebarItem>
-      <SidebarItem href="/kategorie/alle-immobilien" icon={<IoAlbumsOutline size={20} />} >Alle Immobilien</SidebarItem>
+      <SidebarItem href="/kategorie/haus" icon={<IoHomeOutline size={20} />} >Haus</SidebarItem>
+      <SidebarItem href="/kategorie/wohnung" icon={<IoBusinessOutline size={20} />} >Wohnung</SidebarItem>
+      <SidebarItem href="/kategorie/gewerbe" icon={<IoBriefcaseOutline size={20} />} >Gewerbe</SidebarItem>
+      <SidebarItem href="/kategorie/grundstueck" icon={<IoMapOutline size={20} />} >Grundstück</SidebarItem>
+      <SidebarItem href="/kategorie/sonstige" icon={<IoAlbumsOutline size={20} />} >Sonstige</SidebarItem>
       <button
         type="button"
         className="flex items-center mt-4 pl-1 py-1 w-full hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded transition-all cursor-pointer focus:outline-none"

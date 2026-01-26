@@ -5,12 +5,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { GlobalColorProvider } from "@/context/GlobalColorContext";
-
-
 import CompanyTitle from "@/components/ui/companyTitle/CompanyTitle";
 import Script from "next/script";
 import GlobalBorderColor from "@/components/ui/GlobalBorderColor";
+
 
 
 
@@ -38,15 +36,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Script src="https://widget.cloudinary.com/v2.0/global/all.js" strategy="beforeInteractive" />
         <ThemeProvider>
-          <GlobalColorProvider>
-            <ReactQueryProvider>
-              <div className="bg-bg-l text-zinc-800 dark:bg-bg-d dark:text-zinc-100 transition-colors duration-100 ease-out xl:px-6">
-                <GlobalBorderColor />
-                {children}
-              </div>
-            </ReactQueryProvider>
-            <CompanyTitle />
-          </GlobalColorProvider>
+          <ReactQueryProvider>
+            <div className="bg-bg-l text-zinc-800 dark:bg-bg-d dark:text-zinc-100 transition-colors duration-100 ease-out xl:px-6">
+              <GlobalBorderColor />
+              {children}
+            </div>
+          </ReactQueryProvider>
+          <CompanyTitle />
         </ThemeProvider>
       </body>
     </html>

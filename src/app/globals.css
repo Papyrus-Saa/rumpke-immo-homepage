@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
-/* Placeholder color for admin forms */
+
 input::placeholder, textarea::placeholder {
-  color: #9CA3AF; /* gray-400 for light mode */
+  color: #9CA3AF;
   opacity: 1;
 }
 .dark input::placeholder, .dark textarea::placeholder {
-  color: #D1D5DB; /* gray-300 for dark mode */
+  color: #D1D5DB;
   opacity: 1;
 }
 

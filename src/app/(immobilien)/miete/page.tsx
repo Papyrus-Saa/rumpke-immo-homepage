@@ -1,13 +1,13 @@
 "use client";
 import { useEffect } from 'react';
-import { useGlobalColor } from '@/context/GlobalColorContext';
+import { useUIStore, OperationType } from '@/store/ui/ui-store';
 
 export default function MietePage() {
-  const { setColorType } = useGlobalColor();
+  const { setOperationType, clearOperationType } = useUIStore();
   useEffect(() => {
-    setColorType('rent');
-    return () => setColorType('primary');
-  }, [setColorType]);
+    setOperationType(OperationType.RENT);
+    return () => clearOperationType();
+  }, [setOperationType, clearOperationType]);
   return (
     <div className="">
       <h1>Hello Miete Page</h1>
