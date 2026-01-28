@@ -1,9 +1,12 @@
 "use client";
 import { ThemeSwitch } from '@/context/ThemeSwitsh';
 import Link from 'next/link';
+
+import { useLeadStatusCounts } from './hooks/leads/useLeadStatusCounts';
 import { IoHomeOutline, IoBusinessOutline, IoPeopleOutline, IoMailOutline, IoFolderOutline, IoStarOutline, IoPricetagOutline, IoImageOutline, IoTrendingUpOutline, IoTimerOutline, IoSettingsOutline, IoMenuOutline, IoCloseOutline, IoLogOutOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import LeadBadge from './components/leads/LeadBadge';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -31,6 +34,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
 
+  const { newCount, inProgressCount } = useLeadStatusCounts();
   return (
     <div className="min-h-screen bg-bg-l dark:bg-bg-d">
       <aside className="fixed left-0 top-0 h-full w-64 bg-card-bg-l dark:bg-card-bg-d border-r border-gray-200 dark:border-neutral-700 overflow-y-auto">
@@ -74,6 +78,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             <IoMailOutline className="text-xl" />
             <span>Anfragen</span>
+            <LeadBadge newCount={newCount} />
           </Link>
 
           <Link

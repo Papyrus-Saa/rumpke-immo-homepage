@@ -52,7 +52,7 @@ const PropertyCard: React.FC<{ property: PropertyCardProps }> = ({ property }) =
 
   const isDisabled = property.status === 'RESERVED' || property.status === 'SOLD' || property.status === 'RENTED';
   return (
-    <div className={`relative ${isDisabled ? '' : 'cursor-pointer'} bg-white dark:bg-card-bg-d border border-transparent dark:border-admin-border-d rounded shadow hover:shadow-lg transition overflow-hidden group ${cardOpacity}`}>
+    <div className={`relative ${isDisabled ? '' : 'cursor-pointer'} bg-white dark:bg-card-bg-d border border-transparent dark:border-admin-border-d rounded shadow hover:shadow-lg transition overflow-hidden group ${cardOpacity} max-w-[350px] max-h-[420px]`}>
       {statusLabel && (
         <span
           className="absolute top-2 right-2 z-10 px-2 py-1 rounded text-xs font-semibold"

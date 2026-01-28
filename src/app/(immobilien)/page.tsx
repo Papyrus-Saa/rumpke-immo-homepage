@@ -91,6 +91,7 @@ export default async function ImmobilienPage({ searchParams, params }: { searchP
       <div className="text-center text-xl md:text-2xl font-medium text-black dark:text-white mt-1 mb-6">
         – Mehr als nur 4 Wände –
       </div>
+
       <h1 className="text-2xl font-bold mb-6">{title}</h1>
       <PropertiesGrid properties={filteredProperties} />
     </main>

@@ -22,7 +22,7 @@ const SidebarDesktop = () => {
         <Title
           title="Rumpke Immobilien"
           subtitle="Finde deine Traumimmobilie"
-          className='flex-1 text-primary mb-14'
+          className='flex-1  mb-14'
         />
       </div>
 
