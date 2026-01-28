@@ -5,7 +5,7 @@ import PropertyTypeCorner from './PropertyTypeCorner';
 
 type PropertyStatus = 'PUBLISHED' | 'RESERVED' | 'SOLD' | 'RENTED' | 'DRAFT' | 'HIDDEN';
 
-interface PropertyCardProps {
+type PropertyData = {
   id: string;
   slug: string;
   title: string;
@@ -21,9 +21,21 @@ interface PropertyCardProps {
   available_from?: string;
   deposit?: string | number | null;
   furnished?: string | null;
+};
+
+interface PropertyCardProps {
+  property: PropertyData;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-const PropertyCard: React.FC<{ property: PropertyCardProps }> = ({ property }) => {
+const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick, className, style }) => {
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    console.log('Card click:', property);
+    if (onClick) onClick(e);
+  };
 
   let statusLabel = '';
   let statusColor = '';
@@ -52,7 +64,11 @@ const PropertyCard: React.FC<{ property: PropertyCardProps }> = ({ property }) =
 
   const isDisabled = property.status === 'RESERVED' || property.status === 'SOLD' || property.status === 'RENTED';
   return (
-    <div className={`relative ${isDisabled ? '' : 'cursor-pointer'} bg-white dark:bg-card-bg-d border border-transparent dark:border-admin-border-d rounded shadow hover:shadow-lg transition overflow-hidden group ${cardOpacity} max-w-[350px] max-h-[420px]`}>
+    <div
+      className={`relative ${isDisabled ? 'opacity-60 pointer-events-none' : 'cursor-pointer hover:shadow-lg'} bg-white dark:bg-card-bg-d border border-transparent dark:border-admin-border-d rounded shadow transition overflow-hidden group ${cardOpacity} max-w-[350px] max-h-[420px] ${className || ''}`}
+      onClick={handleClick}
+      style={style}
+    >
       {statusLabel && (
         <span
           className="absolute top-2 right-2 z-10 px-2 py-1 rounded text-xs font-semibold"
@@ -61,7 +77,7 @@ const PropertyCard: React.FC<{ property: PropertyCardProps }> = ({ property }) =
           {statusLabel}
         </span>
       )}
-      <PropertyTypeCorner type={property.operationType} style={{ top: 8, left: 8 }} size={8} />
+      <PropertyTypeCorner type={property.operationType} style={{ bottom: 8, right: 8 }} size={8} />
       <div className="relative w-full h-40">
         {property.image ? (
           <Image

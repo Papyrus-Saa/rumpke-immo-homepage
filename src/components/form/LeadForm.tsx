@@ -1,0 +1,155 @@
+'use client';
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+export const schema = yup.object().shape({
+  type: yup.mixed<'CONTACT' | 'VALUATION' | 'VISIT_REQUEST'>()
+    .oneOf(['CONTACT', 'VALUATION', 'VISIT_REQUEST'])
+    .required(),
+  property_id: yup.string().nullable().default(null),
+  name: yup.string().required("Name ist erforderlich"),
+  email: yup.string().email("Ungültige E-Mail-Adresse").required("E-Mail ist erforderlich"),
+  phone: yup.string().required("Telefon ist erforderlich"),
+  message: yup.string().required("Nachricht ist erforderlich"),
+  consent: yup.boolean().oneOf([true], "Zustimmung ist erforderlich").default(false),
+  source: yup.string().nullable().default(null),
+});
+
+type LeadFormValues = {
+  type: 'CONTACT' | 'VALUATION' | 'VISIT_REQUEST';
+  property_id: string | null;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  consent: boolean;
+  source: string | null;
+};
+
+
+interface LeadFormProps {
+  type: 'CONTACT' | 'VALUATION' | 'VISIT_REQUEST';
+  propertyId: string;
+  source: string;
+}
+
+export default function LeadForm({
+  type = "CONTACT",
+  propertyId = "",
+  source = "web"
+}: LeadFormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    reset,
+  } = useForm<LeadFormValues>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      type,
+      property_id: propertyId ?? null,
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      consent: false,
+      source: source ?? null,
+    },
+  });
+
+  const onSubmit: SubmitHandler<LeadFormValues> = async (data) => {
+
+    alert(JSON.stringify(data, null, 2));
+    reset({
+      type,
+      property_id: propertyId || null,
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      consent: false,
+      source: source || null,
+    });
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="max-w-lg mx-auto bg-card-bg-l dark:bg-card-bg-d p-8 rounded shadow-lg border border-card-secondary-bg-l dark:border-card-secondary-bg-d space-y-6 duration-100"
+    >
+      <div>
+        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Art der Anfrage *</label>
+        <select
+          {...register("type")}
+          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition"
+        >
+          <option value="CONTACT">Kontakt</option>
+          <option value="VALUATION">Bewertung</option>
+          <option value="VISIT_REQUEST">Besichtigung</option>
+        </select>
+        {errors.type && <p className="text-error text-xs mt-1">{errors.type.message}</p>}
+      </div>
+      <input type="hidden" {...register("property_id")} />
+      <input type="hidden" {...register("source")} />
+
+      <div>
+        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Name *</label>
+        <input
+          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
+          {...register("name")}
+        />
+        {errors.name && <p className="text-error text-xs mt-1">{errors.name.message}</p>}
+      </div>
+
+      <div>
+        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">E-Mail *</label>
+        <input
+          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
+          {...register("email")}
+        />
+        {errors.email && <p className="text-error text-xs mt-1">{errors.email.message}</p>}
+      </div>
+
+      <div>
+        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Telefon *</label>
+        <input
+          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
+          {...register("phone")}
+        />
+        {errors.phone && <p className="text-error text-xs mt-1">{errors.phone.message}</p>}
+      </div>
+
+      <div>
+        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Nachricht *</label>
+        <textarea
+          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
+          rows={4}
+          {...register("message")}
+        />
+        {errors.message && <p className="text-error text-xs mt-1">{errors.message.message}</p>}
+      </div>
+
+      <div className="flex items-center">
+        <input type="checkbox" id="consent" className="mr-2 accent-primary" {...register("consent")} />
+        <label htmlFor="consent" className="text-card-text-l dark:text-card-text-d">
+          Ich akzeptiere die Datenschutzerklärung *
+        </label>
+      </div>
+      {errors.consent && <p className="text-error text-xs mt-1">{errors.consent.message}</p>}
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="mt-4 w-full py-3 rounded-lg font-bold shadow-md transition disabled:opacity-60
+          bg-primary text-white hover:bg-primary-dark
+          dark:bg-primary-dark dark:hover:bg-primary dark:text-white cursor-pointer"
+      >
+        {isSubmitting ? 'Senden...' : 'Absenden'}
+      </button>
+      {isSubmitSuccessful && (
+        <p className="text-success text-sm mt-2">Vielen Dank für Ihre Anfrage!</p>
+      )}
+    </form>
+  );
+}

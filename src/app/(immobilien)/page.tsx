@@ -1,7 +1,11 @@
-
 import PropertiesGrid from '@/components/properties/PropertiesGrid';
+
+
 import { OperationType } from '@/store/ui/ui-store';
 import { Title } from '@/components/ui/title/Title';
+import LeadForm from '@/components/form/LeadForm';
+import ClientOnly from '@/components/form/ClientOnly';
+
 
 
 
@@ -57,16 +61,14 @@ export default async function ImmobilienPage({ searchParams, params }: { searchP
   }
 
 
-  // Diccionario de tipos
   const typeMap: Record<string, string> = {
     haus: 'Häuser',
     grundstueck: 'Grundstücke',
     gewerbe: 'Gewerbe',
     wohnung: 'Wohnungen',
-    garage: 'Garagen',
   };
 
-  // Detecta el tipo por query param o por segmento de ruta
+
   let type = searchParams?.type || '';
   if (!type && typeof params !== 'undefined' && params.type) {
     type = params.type;
@@ -94,6 +96,11 @@ export default async function ImmobilienPage({ searchParams, params }: { searchP
 
       <h1 className="text-2xl font-bold mb-6">{title}</h1>
       <PropertiesGrid properties={filteredProperties} />
+      <div className="mt-12">
+        <ClientOnly>
+          <LeadForm type="CONTACT" propertyId="" source="web" />
+        </ClientOnly>
+      </div>
     </main>
   );
 }

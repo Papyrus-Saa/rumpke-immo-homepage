@@ -13,8 +13,8 @@ const PropertyTypeCorner: React.FC<PropertyTypeCornerProps> = ({ type, size = 7,
     <span
       style={{
         position: 'absolute',
-        top: 0,
-        left: 0,
+        bottom: 0,
+        right: 0,
         width: size,
         height: size,
         borderTopLeftRadius: 2,
