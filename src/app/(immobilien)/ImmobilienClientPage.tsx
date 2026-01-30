@@ -1,11 +1,15 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+
 import PropertiesGrid from '@/components/properties/PropertiesGrid';
+import { useRouter } from 'next/navigation';
+
 
 import { Title } from '@/components/ui/title/Title';
 import LeadForm from '@/components/form/LeadForm';
 import ClientOnly from '@/components/form/ClientOnly';
+
 
 export default function ImmobilienClientPage() {
   const searchParams = useSearchParams();
@@ -13,12 +17,7 @@ export default function ImmobilienClientPage() {
   const [properties, setProperties] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState<any | null>(null);
-
-
-  useEffect(() => {
-    console.log('selectedProperty:', selectedProperty);
-  }, [selectedProperty]);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchProperties() {
@@ -81,7 +80,11 @@ export default function ImmobilienClientPage() {
       <h1 className="text-2xl font-bold mb-6">Alle Immobilien</h1>
       <PropertiesGrid
         properties={properties}
-        onSelectProperty={setSelectedProperty}
+        onSelectProperty={(property) => {
+          if (property && property.slug) {
+            router.push(`/object/${property.slug}`);
+          }
+        }}
       />
       <div className="mt-12">
         <ClientOnly>

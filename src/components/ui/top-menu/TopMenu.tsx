@@ -19,7 +19,7 @@ const Topmenu = () => {
 
   return (
     <>
-      <div className='flex justify-between items-center md:mb-8 py-4 sm:px-12'>
+      <div className='flex justify-between items-center md:mb-4 py-4 sm:px-12'>
         <Link href={'/'}>
           <div className="flex items-center">
             <RumpkeLogo className="w-full h-full" aria-label="Rumpke Immobilien Logo" />

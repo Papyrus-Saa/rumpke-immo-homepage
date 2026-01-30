@@ -29,12 +29,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     router.replace('/admin/login');
   };
 
+  const { newCount, inProgressCount } = useLeadStatusCounts();
+
   if (pathname === '/admin/login') {
     return <>{children}</>;
   }
-
-
-  const { newCount, inProgressCount } = useLeadStatusCounts();
   return (
     <div className="min-h-screen bg-bg-l dark:bg-bg-d">
       <aside className="fixed left-0 top-0 h-full w-64 bg-card-bg-l dark:bg-card-bg-d border-r border-gray-200 dark:border-neutral-700 overflow-y-auto">
@@ -46,7 +45,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             Immobilien Management
           </p>
         </div>
-        {/* Navigation */}
+
         <nav className="p-4 space-y-1">
           <Link
             href="/admin/dashboard"
@@ -161,14 +160,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 Webseite ansehen
               </Link>
 
-              <button
-                type="button"
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2 text-red-600 dark:text-red-400 hover:text-white hover:bg-red-600 dark:hover:bg-red-700 transition-colors rounded-lg cursor-pointer text-xs"
-              >
-                <IoLogOutOutline className="text-lg" />
-                Abmelden
-              </button>
+              {isLoggedIn ? (
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 px-4 py-2 text-red-600 dark:text-red-400 hover:text-white hover:bg-red-600 dark:hover:bg-red-700 transition-colors rounded-lg cursor-pointer text-xs"
+                >
+                  <IoLogOutOutline className="text-lg" />
+                  Abmelden
+                </button>
+              ) : (
+                <Link
+                  href="/admin/login"
+                  className="flex items-center gap-2 px-4 py-2 text-green-600 dark:text-green-400 hover:text-white hover:bg-green-600 dark:hover:bg-green-700 transition-colors rounded-lg cursor-pointer text-xs"
+                >
+                  Anmelden
+                </Link>
+              )}
             </div>
           </div>
         </header>
