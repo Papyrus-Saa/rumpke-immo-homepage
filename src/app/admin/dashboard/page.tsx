@@ -2,7 +2,6 @@
 import { useDashboardSummary } from '@/app/admin/hooks/dashboard/components/useDashboardSummary';
 import { IoHomeOutline, IoCheckmarkCircle, IoTimeOutline, IoKeyOutline, IoDocumentTextOutline, IoEyeOffOutline, IoPeopleOutline, IoPersonOutline, IoMailOutline, IoPricetagOutline, IoGridOutline, IoCalendarOutline } from 'react-icons/io5';
 
-// Línea 4: Configuración de KPIs con iconos y colores
 const kpiSections = [
   {
     title: 'Immobilien',

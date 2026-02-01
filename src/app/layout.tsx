@@ -28,7 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider>
           <ReactQueryProvider>
             <div className="bg-bg-l text-zinc-800 dark:bg-bg-d dark:text-zinc-100 transition-colors duration-100 ease-out xl:px-6">
-              <GlobalBorderColor />
+              {/* <GlobalBorderColor /> */}
               {children}
             </div>
           </ReactQueryProvider>

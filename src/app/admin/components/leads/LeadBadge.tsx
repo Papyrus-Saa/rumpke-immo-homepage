@@ -5,6 +5,7 @@ interface LeadBadgeProps {
 }
 
 export default function LeadBadge({ newCount }: LeadBadgeProps) {
+  console.log('LeadBadge newCount:', newCount);
   if (newCount === 0) return null;
   return (
     <span

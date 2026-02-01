@@ -1,3 +1,12 @@
+export async function updateLeadStatus(id: string, status: string): Promise<any> {
+  return apiFetch<any>(`http://localhost:3000/lead/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  });
+}
+export async function getLeads(): Promise<any[]> {
+  return apiFetch<any[]>('http://localhost:3000/lead');
+}
 export async function deleteProperty(id: string): Promise<any> {
   return apiFetch<any>(`http://localhost:3000/property/${id}`, {
     method: 'DELETE',

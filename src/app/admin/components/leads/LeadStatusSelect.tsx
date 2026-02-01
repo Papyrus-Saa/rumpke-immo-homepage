@@ -5,19 +5,20 @@ interface LeadStatusSelectProps {
   onChange: (newStatus: string) => void;
 }
 
+
 const STATUS_OPTIONS = [
-  { value: "NEU", label: "Neu", color: "text-primary" },
-  { value: "IN_BEARBEITUNG", label: "In Bearbeitung", color: "text-warning" },
-  { value: "ABGESCHLOSSEN", label: "Abgeschlossen", color: "text-success" },
+  { value: "NEW", label: "Neu", color: "text-primary" },
+  { value: "IN_PROGRESS", label: "In Bearbeitung", color: "text-warning" },
+  { value: "DONE", label: "Abgeschlossen", color: "text-success" },
 ];
 
 function statusColor(status: string) {
   switch (status) {
-    case "NEU":
+    case "NEW":
       return "text-primary";
-    case "IN_BEARBEITUNG":
+    case "IN_PROGRESS":
       return "text-warning";
-    case "ABGESCHLOSSEN":
+    case "DONE":
       return "text-success";
     default:
       return "text-admin-text-l dark:text-admin-text-d";

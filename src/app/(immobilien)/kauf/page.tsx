@@ -4,6 +4,7 @@ import PropertiesGrid from '@/components/properties/PropertiesGrid';
 import { OperationType } from '@/store/ui/ui-store';
 import { Title } from '@/components/ui/title/Title';
 import { useProperties } from '@/hooks/useProperties';
+import { useBorderColor } from '@/hooks/useBorderColor';
 
 export default function KaufPage() {
   const { data, isLoading, isError } = useProperties();
@@ -42,6 +43,8 @@ export default function KaufPage() {
   if (!filteredProperties.length) {
     return (
       <main className="px-2 py-6">
+        <div className="fixed top-0 right-0 z-50 w-full h-px" bg-red-600/>
+        {/* <div className="fixed bottom-0 right-0 z-20 w-full h-1"  /> */}
         <Title
           title="Willkommen bei Rumpke Immobilien"
           className="text-center text-3xl md:text-4xl font-bold text-black dark:text-white"

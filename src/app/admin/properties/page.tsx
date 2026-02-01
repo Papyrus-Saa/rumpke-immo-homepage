@@ -3,6 +3,7 @@
 
 import { PropertyAdminPanel } from "@/interfaces/PropertyAdminPanel";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { IoAddOutline } from "react-icons/io5";
 import { useUIStore, OperationType, getOperationTypeColor } from "@/store/ui/ui-store";
 import PropertiesAdminGrid from "../components/properties/components/PropertiesAdminGrid";

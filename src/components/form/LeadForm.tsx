@@ -2,6 +2,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useState } from "react";
 
 export const schema = yup.object().shape({
   type: yup.mixed<'CONTACT' | 'VALUATION' | 'VISIT_REQUEST'>()
@@ -58,19 +59,40 @@ export default function LeadForm({
     },
   });
 
-  const onSubmit: SubmitHandler<LeadFormValues> = async (data) => {
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-    alert(JSON.stringify(data, null, 2));
-    reset({
-      type,
-      property_id: propertyId || null,
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-      consent: false,
-      source: source || null,
-    });
+  const onSubmit: SubmitHandler<LeadFormValues> = async (data) => {
+    setSubmitSuccess(false);
+    setSubmitError("");
+    try {
+
+      const payload = {
+        ...data,
+        property_id: data.property_id && data.property_id.length > 0 ? data.property_id : null,
+      };
+      const res = await fetch("http://localhost:3000/lead", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error();
+      reset({
+        type,
+        property_id: propertyId || null,
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+        consent: false,
+        source: source || null,
+      });
+      setSubmitSuccess(true);
+    } catch (error) {
+      setSubmitError("Etwas ist schief gelaufen. Bitte versuchen Sie es später erneut.");
+    }
   };
 
   return (
@@ -147,8 +169,11 @@ export default function LeadForm({
       >
         {isSubmitting ? 'Senden...' : 'Absenden'}
       </button>
-      {isSubmitSuccessful && (
+      {submitSuccess && (
         <p className="text-success text-sm mt-2">Vielen Dank für Ihre Anfrage!</p>
+      )}
+      {submitError && (
+        <p className="text-error text-sm mt-2">{submitError}</p>
       )}
     </form>
   );

@@ -1,26 +1,11 @@
 'use client';
-
-import React, { useState } from "react";
+import { IoSadOutline } from 'react-icons/io5';
+import React, { useState, useEffect } from "react";
+import { getLeads, updateLeadStatus } from '@/utils/admin-client';
 import LeadMessageCell from "./LeadMessageCell";
 import LeadStatusSelect from "./LeadStatusSelect";
 
-const initialLeads = [
-  {
-    id: "b1a2c3d4-5678-1234-9abc-def012345678",
-    type: "KONTAKT",
-    property: { title: "Schöne zentrale Wohnung" },
-    name: "Juan Pérez",
-    email: "juan.perez@email.com",
-    phone: "+34123456789",
-    message: "Ich interessiere mich für diese Immobilie. Könnten Sie mir bitte weitere Informationen zukommen lassen? Vielen Dank im Voraus! Ich freue mich auf Ihre Antwort. Mit freundlichen Grüßen, Juan Pérez. Ich interessiere mich für diese Immobilie. Könnten Sie mir bitte weitere Informationen zukommen lassen? Vielen Dank im Voraus! Ich freue mich auf Ihre Antwort. Mit freundlichen Grüßen, Juan Pérez.",
-    consent: true,
-    status: "NEU",
-    created_at: "2026-01-28T10:00:00.000Z",
-    updated_at: "2026-01-28T10:00:00.000Z",
-    source: "web",
-  },
-  // ...weitere Leads
-];
+
 
 function statusColor(status: string) {
   switch (status) {
@@ -35,15 +20,11 @@ function statusColor(status: string) {
   }
 }
 
-export function useLeadStatusCounts() {
-  const [mockLeads] = useState(initialLeads);
-  const newCount = mockLeads.filter(l => l.status === 'NEU').length;
-  const inProgressCount = mockLeads.filter(l => l.status === 'IN_BEARBEITUNG').length;
-  return { newCount, inProgressCount };
-}
 
 export default function LeadsTable() {
-  const [mockLeads, setMockLeads] = useState(initialLeads);
+  const [leads, setLeads] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [expanded, setExpanded] = useState<string | null>(null);
   const MAX_LENGTH = 30;
 
@@ -55,6 +36,39 @@ export default function LeadsTable() {
     BEWERTUNG: 'Bewertung',
     BESICHTIGUNG: 'Besichtigung',
   };
+
+  useEffect(() => {
+    async function fetchLeads() {
+      setLoading(true);
+      setError("");
+      try {
+        const data = await getLeads();
+        setLeads(data);
+      } catch (err: any) {
+        setError(err.message || "Fehler beim Laden der Leads");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchLeads();
+    window.addEventListener('lead:created', fetchLeads);
+    return () => window.removeEventListener('lead:created', fetchLeads);
+  }, []);
+
+  if (loading) return <div className="text-center py-8 text-admin-text-l dark:text-admin-text-d">Lade Anfragen...</div>;
+  if (error) return <div className="text-center py-8 text-error">{error}</div>;
+  if (!leads.length) {
+    return (
+      <div className="bg-bg-l dark:bg-bg-d rounded p-4 shadow-sm border border-admin-border-l dark:border-admin-border-d">
+        <h2 className="text-lg font-semibold mb-4 text-admin-text-l dark:text-admin-text-d">Anfragen</h2>
+        <div className="flex flex-col items-center justify-center py-12">
+          <IoSadOutline className="text-5xl text-gray-400 mb-4" />
+          <div className="text-center text-xl text-gray-500 dark:text-gray-300">Zurzeit gibt es keine Anfragen.</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-bg-l dark:bg-bg-d rounded p-4 shadow-sm border border-admin-border-l dark:border-admin-border-d">
       <h2 className="text-lg font-semibold mb-4 text-admin-text-l dark:text-admin-text-d">Anfragen</h2>
@@ -74,7 +88,7 @@ export default function LeadsTable() {
             </tr>
           </thead>
           <tbody>
-            {mockLeads.map((lead) => {
+            {leads.map((lead) => {
               const isLong = lead.message.length > MAX_LENGTH;
               const isExpanded = expanded === lead.id;
               return (
@@ -102,8 +116,26 @@ export default function LeadsTable() {
                   </td>
                   <td className="p-2 font-semibold">
                     <LeadStatusSelect
-                      value={lead.status}
-                      onChange={newStatus => setMockLeads(leads => leads.map(l => l.id === lead.id ? { ...l, status: newStatus } : l))}
+                      value={
+                        lead.status === "NEU" ? "NEW" :
+                          lead.status === "IN_BEARBEITUNG" ? "IN_PROGRESS" :
+                            lead.status === "ABGESCHLOSSEN" ? "DONE" :
+                              lead.status
+                      }
+                      onChange={async newStatus => {
+                        // Map newStatus back to German for UI, but send backend value
+                        const backendStatus = newStatus;
+                        // Optimistically update UI (store backend value)
+                        setLeads(leads => leads.map(l => l.id === lead.id ? { ...l, status: backendStatus } : l));
+                        try {
+                          await updateLeadStatus(lead.id, backendStatus);
+                          window.dispatchEvent(new Event('lead:updated'));
+                        } catch (err) {
+                          // Revert UI if error
+                          setLeads(leads => leads.map(l => l.id === lead.id ? { ...l, status: lead.status } : l));
+                          alert('Fehler beim Aktualisieren des Status.');
+                        }
+                      }}
                     />
                   </td>
                   <td className="p-2 text-admin-text-l dark:text-admin-text-d">{new Date(lead.created_at).toLocaleDateString()}</td>
