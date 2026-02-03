@@ -72,7 +72,7 @@ export default function ImmobilienClientPage() {
     <main className="py-6">
       <Title
         title="Willkommen bei Rumpke Immobilien"
-        className="px-1 sm:px-0 text-center text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold "
+        className="px-1 sm:px-0 text-center text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold"
       />
       <div className="text-center sm:text-xl md:text-2xl sm:mb-12 font-medium  mt-1 mb-6">
         – Mehr als nur 4 Wände –

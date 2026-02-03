@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import CompanyTitle from "@/components/ui/companyTitle/CompanyTitle";
 import Script from "next/script";
 import GlobalBorderColor from "@/components/ui/GlobalBorderColor";
+import ContactButtom from '@/components/ui/contact-buttom/ContactTooltip';
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -28,7 +29,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider>
           <ReactQueryProvider>
             <div className="bg-bg-l text-zinc-800 dark:bg-bg-d dark:text-zinc-100 transition-colors duration-100 ease-out xl:px-6">
-              {/* <GlobalBorderColor /> */}
+              <ContactButtom/>
+              <GlobalBorderColor />
               {children}
             </div>
           </ReactQueryProvider>

@@ -33,7 +33,7 @@ const PropertiesGrid: React.FC<PropertiesGridProps> = ({ properties, onSelectPro
         <h2 className="text-xl sm:text-2xl font-bold mb-6 px-1 sm:px-0">{title}</h2>
         <p className="px-2 sm:px-0 mb-6 dark:text-admin-text-d text-admin-text-l mt-2">{subtitle}</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:px-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:px-1">
         {properties.map((property) => (
           <PropertyCard
             key={property.id}

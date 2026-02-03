@@ -2,7 +2,7 @@ import React from "react";
 
 export default function () {
   return (
-    <section className="max-w-3xl mx-auto  py-10">
+    <section className="mx-auto">
       <h1 className="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">Verkauf & Vermietung von Immobilien</h1>
       <p className="text-base md:text-lg text-center mb-8 text-gray-800 dark:text-gray-200">
         Ihr Erfolg ist unser Anspruch. Bei Rumpke Immobilien stehen Ihre Immobilienbedürfnisse im Mittelpunkt. Egal, ob Sie eine Immobilie vermieten oder verkaufen möchten – wir bieten Ihnen einen umfassenden Service, der keine Wünsche offenlässt.
@@ -10,7 +10,7 @@ export default function () {
 
       <div className="grid md:grid-cols-2 gap-8 mb-10">
         {/* Verkauf */}
-        <div className="duration-100 bg-white/80 dark:bg-black/40 rounded shadow p-6 flex flex-col">
+        <div className="duration-100 bg-card-bg-l dark:bg-card-bg-d rounded shadow p-6 flex flex-col">
           <h2 className="text-xl font-semibold text-primary mb-3">Verkauf – Erreichen Sie den besten Preis</h2>
           <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-200">
             <li><b>Professionelle Immobilienbewertung:</b> Wir ermitteln den aktuellen Marktwert Ihrer Immobilie unter Berücksichtigung aller relevanten Faktoren. Dies bildet die Grundlage für eine erfolgreiche Verkaufsstrategie.</li>
@@ -20,7 +20,7 @@ export default function () {
           </ul>
         </div>
         {/* Vermietung */}
-        <div className="duration-100  bg-white/80 dark:bg-black/40 rounded shadow p-6 flex flex-col">
+        <div className="duration-100  bg-card-bg-l dark:bg-card-bg-d rounded shadow p-6 flex flex-col">
           <h2 className="text-xl font-semibold text-primary mb-3">Vermietung – Finden Sie den perfekten Mieter</h2>
           <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-200">
             <li><b>Marktgerechte Mietpreisfindung:</b> Wir analysieren den Markt und ermitteln den optimalen Mietpreis für Ihre Immobilie. So stellen wir sicher, dass Sie einen fairen Ertrag erzielen.</li>

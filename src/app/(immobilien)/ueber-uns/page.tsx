@@ -3,7 +3,7 @@ import AboutPortrait from '@/components/ui/About/AboutPortrait';
 
 export default function UeberUnsPage() {
   return (
-    <section className="duration-100 max-w-4xl mx-auto px-4 py-6 bg-white/80 dark:bg-black/40 rounded animate-fade-in">
+    <section className="duration-100 border-admin-text-d/40 dark:border-admin-text-d/10 border mx-auto px-4 py-6 bg-card-bg-l dark:bg-card-bg-d rounded animate-fade-in">
       <div className="flex flex-col md:flex-row md:items-start md:gap-10">
         <div className="shrink-0 flex justify-center md:justify-start md:w-1/3">
           <AboutPortrait />

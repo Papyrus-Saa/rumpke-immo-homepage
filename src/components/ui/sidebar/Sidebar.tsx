@@ -58,11 +58,11 @@ const Sidebar = () => {
             size={20}
             className="absolute top-2 left-2"
           />
-          <input
+          {/* <input
             type="text"
             placeholder="Suche..."
             className="w-full pl-8 pr-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#171717] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
-          />
+          /> */}
         </div>
         <SidebarItem href="/" icon={<IoAlbumsOutline size={20} />} >Start</SidebarItem>
       <SidebarItem href="/auf-karte-erkunden" icon={<IoMapOutline size={20} />} >Auf Karte erkunden</SidebarItem>
@@ -96,14 +96,6 @@ const Sidebar = () => {
         <SidebarItem href="/ueber-uns" icon={<IoChatbubbleEllipsesOutline size={20} className="mr-2" />}>Über uns</SidebarItem>
         <SidebarItem href="/kontakt" icon={<IoMailOutline size={20} className="mr-2" />}>Kontakt</SidebarItem>
         <SidebarItem href="/blog" icon={<IoDiamondOutline size={20} className="mr-2" />}>Blog</SidebarItem>
-        <SidebarItem
-          href="#"
-          icon={<IoLanguageOutline size={20} className="mr-2" />}
-        >
-          <span className="flex-1">Sprache</span>
-          <LanguageSwitcher />
-        </SidebarItem>
-
         <div className="flex py-1 mt-3 justify-start items-center hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded">
           <ThemeSwitch />
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ImmobilienbewertungPage() {
   return (
-    <section className="max-w-3xl mx-auto  py-10">
+    <section className=" mx-auto">
       <h1 className="text md:text-3xl font-bold text-primary mb-6 text-center">Immobilienbewertung – Der erste Schritt zu Ihrem Erfolg</h1>
       <p className="text-base md:text-lg text-center mb-8 text-gray-800 dark:text-gray-200">
         Eine präzise Immobilienbewertung ist entscheidend, wenn es darum geht, den richtigen Verkaufspreis zu erzielen oder eine fundierte Entscheidung über Ihre Immobilie zu treffen. Bei Rumpke Immobilien bieten wir Ihnen eine professionelle und transparente Bewertung Ihrer Immobilie, die auf fundierten Marktkenntnissen und langjähriger Erfahrung basiert.
@@ -10,7 +10,7 @@ export default function ImmobilienbewertungPage() {
 
       <div className="grid md:grid-cols-2 gap-8 mb-10">
         {/* Warum eine professionelle Immobilienbewertung? */}
-        <div className="duration-100 bg-white/80 dark:bg-black/40 rounded shadow p-6 flex flex-col">
+        <div className="duration-100 bg-card-bg-l dark:bg-card-bg-d rounded shadow p-6 flex flex-col">
           <h2 className="text-xl font-semibold text-primary mb-3">Warum eine professionelle Immobilienbewertung?</h2>
           <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-200">
             <li><b>Marktorientierte Preisfindung:</b> Der Wert Ihrer Immobilie wird durch eine Vielzahl von Faktoren beeinflusst – Lage, Zustand, Größe, Ausstattung und vieles mehr. Wir analysieren all diese Aspekte und vergleichen sie mit aktuellen Marktdaten, um den optimalen Preis zu ermitteln.</li>
@@ -19,7 +19,7 @@ export default function ImmobilienbewertungPage() {
           </ul>
         </div>
         {/* Bewertungsprozess */}
-        <div className="duration-100 bg-white/80 dark:bg-black/40 rounded shadow p-6 flex flex-col">
+        <div className="duration-100 bg-card-bg-l dark:bg-card-bg-d rounded shadow p-6 flex flex-col">
           <h2 className="text-xl font-semibold text-primary mb-3">Unser Bewertungsprozess</h2>
           <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-200">
             <li><b>Erstgespräch und Objektbesichtigung:</b> Wir beginnen mit einem persönlichen Gespräch, in dem wir Ihre Wünsche und Ziele besprechen. Anschließend nehmen wir eine detaillierte Besichtigung Ihrer Immobilie vor, um alle relevanten Merkmale zu erfassen.</li>

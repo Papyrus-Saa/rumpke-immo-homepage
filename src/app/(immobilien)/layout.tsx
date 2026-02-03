@@ -23,7 +23,7 @@ export default function PropertiesLayout({ children }: { children: React.ReactNo
           <Title
             title="Rumpke Immobilien"
             subtitle="Finde deine Traumimmobilie"
-            className='flex-1 md:hidden mb-4 ml-2'
+            className='flex-1 md:hidden mb-4 ml-2 text-primary'
           />
           <Sidebar />
           <div className="flex">

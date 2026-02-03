@@ -17,12 +17,12 @@ const SidebarDesktop = () => {
   const [openDienstleistungen, setOpenDienstleistungen] = useState(false);
 
   return (
-    <nav className=" hidden md:block  h-screen sticky top-0 px-2 py-6 dark:border-primary-dark">
+    <nav className=" hidden md:block  h-fit sticky top-0 px-2 py-6 ">
       <div className="sticky top-0 z-20 ">
         <Title
           title="Rumpke Immobilien"
           subtitle="Finde deine Traumimmobilie"
-          className='flex-1  mb-14'
+          className='flex-1 mb-14 text-primary'
         />
       </div>
 
@@ -35,7 +35,7 @@ const SidebarDesktop = () => {
       <SidebarItem href="/kategorie/sonstige" icon={<IoAlbumsOutline size={20} />} >Sonstige</SidebarItem>
       <button
         type="button"
-        className="flex items-center mt-4 pl-1 py-1 w-full hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded transition-all cursor-pointer focus:outline-none"
+        className="flex items-center mt-4 pl-1 py-1 w-full hover:bg-primary/50 hover:text-black dark:hover:text-white dark:hover:bg-primary-dark/50 rounded transition-all cursor-pointer focus:outline-none"
         onClick={() => setOpenDienstleistungen((v) => !v)}
       >
         <IoBriefcaseOutline size={20} className="mr-2" />
@@ -57,14 +57,7 @@ const SidebarDesktop = () => {
       )}
       <SidebarItem href="/ueber-uns" icon={<IoChatbubbleEllipsesOutline size={20} />} >Über uns</SidebarItem>
       <SidebarItem href="/kontakt" icon={<IoMailOutline size={20} />} >Kontakt</SidebarItem>
-      <SidebarItem
-        href="#"
-        icon={<IoLanguageOutline size={20} className="mr-2" />}
-      >
-        <span className="flex-1">Sprache</span>
-        <LanguageSwitcher />
-      </SidebarItem>
-      <div className="flex py-1 mt-3 justify-start items-center hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded">
+      <div className="flex py-1 mt-3 justify-start items-center hover:bg-primary/50 hover:text-black dark:hover:text-white dark:hover:bg-primary-dark/50 rounded">
         <ThemeSwitch />
       </div>
     </nav>
