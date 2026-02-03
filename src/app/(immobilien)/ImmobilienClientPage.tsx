@@ -69,15 +69,21 @@ export default function ImmobilienClientPage() {
   if (error) return <div className="p-4 font-semibold text-error">Eigenschaften konnten nicht geladen werden.</div>;
 
   return (
-    <main className="px-2 py-6">
+    <main className="py-6">
       <Title
         title="Willkommen bei Rumpke Immobilien"
-        className="text-center text-3xl md:text-4xl font-bold text-black dark:text-white"
+        className="px-1 sm:px-0 text-center text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold "
       />
-      <div className="text-center text-xl md:text-2xl font-medium text-black dark:text-white mt-1 mb-6">
+      <div className="text-center sm:text-xl md:text-2xl sm:mb-12 font-medium  mt-1 mb-6">
         – Mehr als nur 4 Wände –
       </div>
-      <h1 className="text-2xl font-bold mb-6">Alle Immobilien</h1>
+
+      <Title
+        title="Bei Rumpke Immobilien überzeugen wir durch persönliche Beratung, langjährige Erfahrung, umfassende Marktkenntnisse und maßgeschneiderte Lösungen! Egal ob Kauf, Verkauf oder Vermietung – hier wird jeder Kunde individuell betreut.
+Vertrauen Sie auf Kompetenz und Leidenschaft."
+        className="px-2 sm:px-0 mb-6 dark:text-admin-text-d text-admin-text-l"
+      />
+      <h1 className="text-xl sm:text-2xl font-bold mb-6 px-1 sm:px-0">Alle Immobilien</h1>
       <PropertiesGrid
         properties={properties}
         onSelectProperty={(property) => {

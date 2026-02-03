@@ -98,7 +98,7 @@ export default function LeadForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-lg mx-auto bg-card-bg-l dark:bg-card-bg-d p-8 rounded shadow-lg border border-card-secondary-bg-l dark:border-card-secondary-bg-d space-y-6 duration-100"
+      className="md:max-w-lg mx-auto  bg-card-bg-l dark:bg-card-bg-d p-8 rounded shadow-lg border border-card-secondary-bg-l dark:border-card-secondary-bg-d space-y-6 duration-100"
     >
       <div>
         <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Art der Anfrage *</label>

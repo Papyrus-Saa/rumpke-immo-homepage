@@ -123,15 +123,12 @@ export default function LeadsTable() {
                               lead.status
                       }
                       onChange={async newStatus => {
-                        // Map newStatus back to German for UI, but send backend value
                         const backendStatus = newStatus;
-                        // Optimistically update UI (store backend value)
                         setLeads(leads => leads.map(l => l.id === lead.id ? { ...l, status: backendStatus } : l));
                         try {
                           await updateLeadStatus(lead.id, backendStatus);
                           window.dispatchEvent(new Event('lead:updated'));
                         } catch (err) {
-                          // Revert UI if error
                           setLeads(leads => leads.map(l => l.id === lead.id ? { ...l, status: lead.status } : l));
                           alert('Fehler beim Aktualisieren des Status.');
                         }
