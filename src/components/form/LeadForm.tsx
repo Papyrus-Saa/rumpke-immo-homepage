@@ -98,7 +98,7 @@ export default function LeadForm({
 
   return (
     <>
-      <div className="grid gap-2 lg:grid-cols-2 items-stretch w-full h-full">
+      <div className="items-stretch w-full h-full">
         <div className="">
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -180,9 +180,6 @@ export default function LeadForm({
               <p className="text-error text-sm mt-2">{submitError}</p>
             )}
           </form>
-        </div>
-        <div className="">
-          <ContactAside />
         </div>
       </div>
     </>

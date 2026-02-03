@@ -10,6 +10,7 @@ import { Title } from '@/components/ui/title/Title';
 import LeadForm from '@/components/form/LeadForm';
 import ClientOnly from '@/components/form/ClientOnly';
 import PersonalServiceCard from '@/components/personal-service-card/PersonalServiceCard';
+import ContactAside from '@/components/form/ContactAside';
 
 
 export default function ImmobilienClientPage() {
@@ -82,7 +83,7 @@ export default function ImmobilienClientPage() {
       <Title
         title="Bei Rumpke Immobilien überzeugen wir durch persönliche Beratung, langjährige Erfahrung, umfassende Marktkenntnisse und maßgeschneiderte Lösungen! Egal ob Kauf, Verkauf oder Vermietung – hier wird jeder Kunde individuell betreut.
 Vertrauen Sie auf Kompetenz und Leidenschaft."
-        className="px-2 sm:px-0 mb-6 dark:text-admin-text-d text-admin-text-l"
+        className="px-2 sm:px-0 mb-6 dark:text-admin-text-d text-admin-text-l sm:w-[70%] mx-auto sm:text-center text-base sm:text-lg font-medium"
       />
 
       <h1 className="text-xl sm:text-2xl font-bold mb-6 px-1 sm:px-0">Alle Immobilien</h1>
@@ -93,12 +94,15 @@ Vertrauen Sie auf Kompetenz und Leidenschaft."
             router.push(`/object/${property.slug}`);
           }
         }}
-        />
-        <PersonalServiceCard/>
-      <div className="mt-12">
+      />
+      <PersonalServiceCard />
+      <div className="mt-12 grid gap-2 lg:grid-cols-2">
         <ClientOnly>
           <LeadForm type="CONTACT" propertyId="" source="web" />
         </ClientOnly>
+        <div className="">
+          <ContactAside />
+        </div>
       </div>
     </main>
   );
