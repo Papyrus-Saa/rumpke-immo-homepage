@@ -6,7 +6,6 @@ import { useState } from "react";
 import { IoCloseOutline, IoSearchOutline, IoHomeOutline, IoBusinessOutline, IoDiamondOutline, IoMapOutline, IoChatbubbleEllipsesOutline, IoBriefcaseOutline, IoStarOutline, IoMailOutline, IoChevronForwardOutline } from "react-icons/io5"
 
 import { ThemeSwitch } from "@/context/ThemeSwitsh";
-import LanguageSwitcher from "@/components/ui/Language-switcher/LanguageSwitcher";
 import { IoLanguageOutline } from "react-icons/io5";
 import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";

@@ -5,7 +5,6 @@ import SidebarItem from "./SidebarItem";
 import { useState } from "react";
 import { IoHomeOutline, IoBusinessOutline, IoMapOutline, IoChatbubbleEllipsesOutline, IoBriefcaseOutline, IoStarOutline, IoMailOutline, IoAlbumsOutline, IoChevronForwardOutline } from "react-icons/io5"
 import { ThemeSwitch } from "@/context/ThemeSwitsh";
-import LanguageSwitcher from "@/components/ui/Language-switcher/LanguageSwitcher";
 import { IoLanguageOutline } from "react-icons/io5";
 import { Title } from "../title/Title";
 

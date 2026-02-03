@@ -20,7 +20,7 @@ const ContactTooltip = () => {
             rel="noopener noreferrer"
             className="link"
           >
-            <IoLogoFacebook size={20} />
+            <IoLogoFacebook size={20} className='hover:bg-[#1877F3] rounded' />
           </Link>
           <div className="tooltip text-xs text-bg-l dark:text-admin-border-l bg-[#1877F3] py-1 px-2 rounded">Facebook</div>
         </li>
@@ -32,7 +32,7 @@ const ContactTooltip = () => {
             rel="noopener noreferrer"
             className="link"
           >
-            <IoLogoWhatsapp size={20}  />
+            <IoLogoWhatsapp size={20} className='hover:bg-[#25D366] rounded' />
           </Link>
           <div className="tooltip text-xs text-bg-l dark:text-admin-border-l bg-[#25D366] py-1 px-2 rounded">Beta</div>
         </li>
@@ -44,9 +44,9 @@ const ContactTooltip = () => {
             rel="noopener noreferrer"
             className="link"
           >
-            <IoMailOutline size={20} />
+            <IoMailOutline size={20} className='hover:bg-admin-border-d rounded' />
           </Link>
-          <div className="tooltip text-xs text-bg-l dark:text-admin-border-l bg-primary dark:bg-primary-dark py-1 px-2 rounded">Kontakt</div>
+          <div className="tooltip text-xs text-bg-l dark:text-admin-border-l bg-admin-border-d py-1 px-2 rounded">Kontakt</div>
         </li>
         <li className="icon-content">
           <Link
@@ -57,7 +57,7 @@ const ContactTooltip = () => {
             rel="noopener noreferrer"
             className="link"
           >
-            <IoLogoInstagram size={20} />
+            <IoLogoInstagram size={20} className='hover:bg-[#E4405F] rounded' />
           </Link>
           <div className="tooltip text-xs text-bg-l dark:text-admin-border-l bg-[#E4405F] py-1 px-2 rounded">Instagram</div>
         </li>

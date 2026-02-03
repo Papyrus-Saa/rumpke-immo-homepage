@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
+import ContactAside from "./ContactAside";
 
 export const schema = yup.object().shape({
   type: yup.mixed<'CONTACT' | 'VALUATION' | 'VISIT_REQUEST'>()
@@ -96,85 +97,94 @@ export default function LeadForm({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="md:max-w-lg mx-auto  bg-card-bg-l dark:bg-card-bg-d p-8 rounded shadow-lg border border-card-secondary-bg-l dark:border-card-secondary-bg-d space-y-6 duration-100"
-    >
-      <div>
-        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Art der Anfrage *</label>
-        <select
-          {...register("type")}
-          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition"
-        >
-          <option value="CONTACT">Kontakt</option>
-          <option value="VALUATION">Bewertung</option>
-          <option value="VISIT_REQUEST">Besichtigung</option>
-        </select>
-        {errors.type && <p className="text-error text-xs mt-1">{errors.type.message}</p>}
-      </div>
-      <input type="hidden" {...register("property_id")} />
-      <input type="hidden" {...register("source")} />
+    <>
+      <div className="grid gap-2 lg:grid-cols-2 items-stretch w-full h-full">
+        <div className="">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col justify-between mx-auto bg-card-bg-l dark:bg-card-bg-d p-8 rounded border border-card-secondary-bg-l dark:border-card-secondary-bg-d  duration-100 h-full"
+          >
+            <div>
+              <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Art der Anfrage *</label>
+              <select
+                {...register("type")}
+                className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition"
+              >
+                <option value="CONTACT">Kontakt</option>
+                <option value="VALUATION">Bewertung</option>
+                <option value="VISIT_REQUEST">Besichtigung</option>
+              </select>
+              {errors.type && <p className="text-error text-xs mt-1">{errors.type.message}</p>}
+            </div>
+            <input type="hidden" {...register("property_id")} />
+            <input type="hidden" {...register("source")} />
 
-      <div>
-        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Name *</label>
-        <input
-          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
-          {...register("name")}
-        />
-        {errors.name && <p className="text-error text-xs mt-1">{errors.name.message}</p>}
-      </div>
+            <div>
+              <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Name *</label>
+              <input
+                className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
+                {...register("name")}
+              />
+              {errors.name && <p className="text-error text-xs mt-1">{errors.name.message}</p>}
+            </div>
 
-      <div>
-        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">E-Mail *</label>
-        <input
-          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
-          {...register("email")}
-        />
-        {errors.email && <p className="text-error text-xs mt-1">{errors.email.message}</p>}
-      </div>
+            <div>
+              <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">E-Mail *</label>
+              <input
+                className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
+                {...register("email")}
+              />
+              {errors.email && <p className="text-error text-xs mt-1">{errors.email.message}</p>}
+            </div>
 
-      <div>
-        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Telefon *</label>
-        <input
-          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
-          {...register("phone")}
-        />
-        {errors.phone && <p className="text-error text-xs mt-1">{errors.phone.message}</p>}
-      </div>
+            <div>
+              <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Telefon *</label>
+              <input
+                className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
+                {...register("phone")}
+              />
+              {errors.phone && <p className="text-error text-xs mt-1">{errors.phone.message}</p>}
+            </div>
 
-      <div>
-        <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Nachricht *</label>
-        <textarea
-          className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
-          rows={4}
-          {...register("message")}
-        />
-        {errors.message && <p className="text-error text-xs mt-1">{errors.message.message}</p>}
-      </div>
+            <div>
+              <label className="block mb-2 font-semibold text-card-text-l dark:text-card-text-d">Nachricht *</label>
+              <textarea
+                className="w-full px-4 py-2 rounded-lg border border-admin-border-l dark:border-admin-border-d  text-card-text-l dark:text-card-text-d focus:outline-none focus:ring-2 focus:ring-primary transition placeholder:text-card-text-l dark:placeholder:text-card-text-d"
+                rows={4}
+                {...register("message")}
+              />
+              {errors.message && <p className="text-error text-xs mt-1">{errors.message.message}</p>}
+            </div>
 
-      <div className="flex items-center">
-        <input type="checkbox" id="consent" className="mr-2 accent-primary" {...register("consent")} />
-        <label htmlFor="consent" className="text-card-text-l dark:text-card-text-d">
-          Ich akzeptiere die Datenschutzerklärung *
-        </label>
-      </div>
-      {errors.consent && <p className="text-error text-xs mt-1">{errors.consent.message}</p>}
+            <div className="flex items-center">
+              <input type="checkbox" id="consent" className="mr-2 accent-primary" {...register("consent")} />
+              <label htmlFor="consent" className="text-card-text-l dark:text-card-text-d">
+                Ich akzeptiere die Datenschutzerklärung *
+              </label>
+            </div>
+            {errors.consent && <p className="text-error text-xs mt-1">{errors.consent.message}</p>}
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="mt-4 w-full py-3 rounded-lg font-bold shadow-md transition disabled:opacity-60
-          bg-primary text-white hover:bg-primary-dark
-          dark:bg-primary-dark dark:hover:bg-primary dark:text-white cursor-pointer"
-      >
-        {isSubmitting ? 'Senden...' : 'Absenden'}
-      </button>
-      {submitSuccess && (
-        <p className="text-success text-sm mt-2">Vielen Dank für Ihre Anfrage!</p>
-      )}
-      {submitError && (
-        <p className="text-error text-sm mt-2">{submitError}</p>
-      )}
-    </form>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="mt-4 w-full py-3 rounded-lg font-bold shadow-md transition disabled:opacity-60
+              bg-primary text-white hover:bg-primary-dark
+              dark:bg-primary-dark dark:hover:bg-primary dark:text-white cursor-pointer"
+            >
+              {isSubmitting ? 'Senden...' : 'Absenden'}
+            </button>
+            {submitSuccess && (
+              <p className="text-success text-sm mt-2">Vielen Dank für Ihre Anfrage!</p>
+            )}
+            {submitError && (
+              <p className="text-error text-sm mt-2">{submitError}</p>
+            )}
+          </form>
+        </div>
+        <div className="">
+          <ContactAside />
+        </div>
+      </div>
+    </>
   );
 }
