@@ -61,7 +61,7 @@ input[type=number] {
 
 
 @theme {
---color-bg-d: #0E0E12;
+--color-bg-d: #0D0F0F;
 --color-bg-l: #F5F5F5;
 --color-card-text-l: #6E6E6E;
 --color-card-text-d: #BDBDBD;
@@ -78,7 +78,7 @@ input[type=number] {
 --color-primary: #5A9C8E;
 --color-primary-dark: #145241;
 --color-secondary: #F2FCFC;
---color-secondary-dark: #212F36 ;
+--color-secondary-dark: #142121;
 
 
 /* Status colors */
