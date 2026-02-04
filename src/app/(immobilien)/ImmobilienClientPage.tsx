@@ -11,6 +11,7 @@ import LeadForm from '@/components/form/LeadForm';
 import ClientOnly from '@/components/form/ClientOnly';
 import PersonalServiceCard from '@/components/personal-service-card/PersonalServiceCard';
 import ContactAside from '@/components/form/ContactAside';
+import Button from '@/components/ui/Button';
 
 
 export default function ImmobilienClientPage() {
@@ -73,18 +74,31 @@ export default function ImmobilienClientPage() {
   return (
     <main className="">
       <Title
-        title="Willkommen bei Rumpke Immobilien"
-        className="px-1 sm:px-0 text-center text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold"
+        title="Immobilien. Persönlich. Durchdacht. "
+        className="px-1 sm:px-0 mb-6 text-center text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold"
       />
-      <div className="text-center sm:text-xl md:text-2xl sm:mb-12 font-medium  mt-1 mb-6">
-        – Mehr als nur 4 Wände –
-      </div>
-
       <Title
-        title="Bei Rumpke Immobilien überzeugen wir durch persönliche Beratung, langjährige Erfahrung, umfassende Marktkenntnisse und maßgeschneiderte Lösungen! Egal ob Kauf, Verkauf oder Vermietung – hier wird jeder Kunde individuell betreut.
-Vertrauen Sie auf Kompetenz und Leidenschaft."
+        title="Wir begleiten Sie beim Kauf, Verkauf und
+                der Vermietung von Immobilien – persönlich,                 transparent und mit regionaler Expertise."
         className="px-2 sm:px-0 mb-6 dark:text-admin-text-d text-admin-text-l sm:w-[70%] mx-auto sm:text-center text-base sm:text-lg font-medium"
       />
+
+      <div className='flex w-fit mx-auto gap-4'>
+        <Button
+          variant="secondary"
+          className="mb-8 mx-auto block"
+          onClick={() => router.push('/contact?subject=Immobilienberatung')}
+        >
+          Kostenlose Bewertung
+        </Button>
+        <Button
+          variant="primary"
+          className="mb-8 mx-auto block"
+          onClick={() => router.push('/kontakt')}
+        >
+          Kontakt aufnehmen
+        </Button>
+      </div>
 
       <h1 className="text-xl sm:text-2xl font-bold mb-6 px-1 sm:px-0">Alle Immobilien</h1>
       <PropertiesGrid

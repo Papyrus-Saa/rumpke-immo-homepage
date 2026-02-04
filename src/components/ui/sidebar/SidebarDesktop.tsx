@@ -20,7 +20,7 @@ const SidebarDesktop = () => {
       <div className="sticky top-0 z-20 ">
         <Title
           title="Rumpke Immobilien"
-          subtitle="Finde deine Traumimmobilie"
+          subtitle="- Mehr als nur 4 Wände -"
           className='flex-1 mb-14 text-primary'
         />
       </div>
