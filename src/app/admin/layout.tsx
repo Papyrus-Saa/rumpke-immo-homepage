@@ -36,7 +36,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
   return (
     <div className="min-h-screen bg-bg-l dark:bg-bg-d">
-      <aside className="fixed left-0 top-0 h-full w-64 bg-card-bg-l dark:bg-card-bg-d border-r border-gray-200 dark:border-neutral-700 overflow-y-auto">
+      <aside className="fixed left-0 top-0 h-full w-64 bg-secondary dark:bg-secondary-dark border-r border-gray-200 dark:border-neutral-700 overflow-y-auto">
         <div className="p-6 border-b border-gray-200 dark:border-neutral-700">
           <h1 className="text-xl font-bold text-gray-900 dark:text-white">
             Rumpke Admin
@@ -138,7 +138,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </nav>
       </aside>
       <main className="ml-64 min-h-screen">
-        <header className="sticky top-0 z-10 bg-card-bg-l dark:bg-card-bg-d border-b border-gray-200 dark:border-neutral-700 px-6 py-4">
+        <header className="sticky top-0 z-10 bg-secondary dark:bg-secondary-dark border-b border-gray-200 dark:border-neutral-700 px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button className="lg:hidden text-gray-700 dark:text-gray-300">

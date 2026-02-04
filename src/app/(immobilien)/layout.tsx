@@ -28,7 +28,7 @@ export default function PropertiesLayout({ children }: { children: React.ReactNo
           <Sidebar />
           <div className="flex">
             <SidebarDesktop />
-            <div className="flex-1 max-w-[1200px] mx-auto">
+            <div className="flex-1 max-w-[1300px] mx-auto">
               {children}
             </div>
           </div>

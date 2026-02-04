@@ -1,0 +1,47 @@
+import { IoPersonCircleOutline, IoLocationOutline, IoShieldCheckmarkOutline } from 'react-icons/io5';
+
+const features = [
+  {
+    icon: <IoPersonCircleOutline size={24} />,
+    title: 'Persönlicher Service',
+    text: 'Individuelle Beratung und Begleitung – persönlich, nahbar und zuverlässig.',
+  },
+  {
+    icon: <IoLocationOutline size={24} />,
+    title: 'Lokale Expertise',
+    text: 'Tiefes Verständnis für den regionalen Markt und Ihre Bedürfnisse.',
+  },
+  {
+    icon: <IoShieldCheckmarkOutline size={24} />,
+    title: 'Transparenz & Fairness',
+    text: 'Klare Kommunikation, faire Konditionen und absolute Verlässlichkeit.',
+  },
+];
+
+const WhyChooseRumpke = () => {
+  return (
+    <section className="w-full py-12">
+      <div className="max-w-3xl mx-auto px-2 sm:px-0">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">Warum Rumpke Immobilien?</h2>
+        <div className="flex flex-col gap-6">
+          {features.map((feature) => (
+            <div key={feature.title} className="flex items-start gap-4 bg-primary dark:bg-primary-dark rounded-lg p-4 duration-100">
+              <div className="shrink-0 text-white">
+                {feature.icon}
+              </div>
+              <div>
+                <div className="font-semibold text-lg mb-1 text-white">{feature.title}</div>
+                <div className="text-sm text-white">{feature.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default WhyChooseRumpke;
+
+
+

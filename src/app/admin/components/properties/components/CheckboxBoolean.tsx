@@ -22,7 +22,7 @@ const CheckboxBoolean: React.FC<CheckboxBooleanProps> = ({
         type="checkbox"
         required={required}
         {...rest}
-        className={`w-5 h-5 text-primary bg-card-bg-l dark:bg-card-bg-d border-admin-border-l dark:border-admin-border-d rounded focus:ring-2 focus:ring-orange-600 ${error ? 'border-error' : ''} ${highlighted ? 'ring-2 ring-warning bg-warning/10' : ''}`}
+        className={`w-5 h-5 text-primary bg-secondary dark:bg-secondary-dark border-admin-border-l dark:border-admin-border-d rounded focus:ring-2 focus:ring-orange-600 ${error ? 'border-error' : ''} ${highlighted ? 'ring-2 ring-warning bg-warning/10' : ''}`}
       />
       <label htmlFor={name} className="text-sm font-medium text-admin-text-l dark:text-admin-text-d">
         {label} {required && <span className="text-error">*</span>}

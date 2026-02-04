@@ -82,7 +82,7 @@ export default function DashboardPage() {
                   return (
                     <div
                       key={kpi.key}
-                      className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border border-transparent hover:border-primary/20"
+                      className="bg-secondary dark:bg-secondary-dark rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border border-transparent hover:border-primary/20"
                     >
                       <div className="flex items-start justify-between mb-4">
                         <div className={`p-3 rounded-lg bg-card-secondary-bg-l dark:bg-card-secondary-bg-d ${kpi.color}`}>

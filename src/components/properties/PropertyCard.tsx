@@ -65,7 +65,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick, classNam
   const isDisabled = property.status === 'RESERVED' || property.status === 'SOLD' || property.status === 'RENTED';
   return (
     <div
-      className={`relative ${isDisabled ? 'opacity-60 pointer-events-none' : 'cursor-pointer hover:shadow-lg hover:border-2 dark:hover:border-primary-dark hover:border-primary/20 transition-all duration-200'} bg-white dark:bg-card-bg-d border border-transparent dark:border-admin-border-d  rounded shadow overflow-hidden group ${cardOpacity} w-full max-w-full sm:max-w-[350px] max-h-[480px] sm:max-h-[420px] hover:rounded-br-2xl ${className || ''}`}
+      className={`relative ${isDisabled ? 'opacity-60 pointer-events-none' : 'cursor-pointer hover:shadow-lg hover:border-2 dark:hover:border-primary-dark hover:border-primary/20 transition-all duration-200'} bg-secondary dark:bg-secondary-dark border border-transparent dark:border-admin-border-d  rounded shadow overflow-hidden group ${cardOpacity} w-full max-w-full sm:max-w-[350px] max-h-[480px] sm:max-h-[420px] hover:rounded-br-2xl ${className || ''}`}
       onClick={handleClick}
       style={style}
     >

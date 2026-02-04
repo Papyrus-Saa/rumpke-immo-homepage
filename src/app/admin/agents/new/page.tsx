@@ -150,7 +150,7 @@ export default function NewAgentPage() {
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
+        <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4">
             Basisinformationen
           </h2>
@@ -254,7 +254,7 @@ export default function NewAgentPage() {
           </div>
 
           {/* Berufsbezeichnung (Mehrsprachig) */}
-          <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
+          <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow p-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <IoSchoolOutline className="text-xl" />
               Berufsbezeichnung (Mehrsprachig)
@@ -275,7 +275,7 @@ export default function NewAgentPage() {
           </div>
 
           {/* Biografie (Mehrsprachig) */}
-          <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6 mt-6">
+          <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow p-6 mt-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span className="text-xl">📝</span>
               Biografie (Mehrsprachig)

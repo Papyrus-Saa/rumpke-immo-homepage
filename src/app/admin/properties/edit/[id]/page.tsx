@@ -144,7 +144,7 @@ export default function EditPropertyPage() {
           Bearbeiten Sie die Daten der ausgewählten Immobilie
         </p>
       </div>
-      <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6 border border-admin-border-l dark:border-admin-border-d">
+      <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow p-6 border border-admin-border-l dark:border-admin-border-d">
         {loading ? (
           <span className="text-admin-text-l dark:text-admin-text-d">Lade Immobiliendaten...</span>
         ) : error ? (

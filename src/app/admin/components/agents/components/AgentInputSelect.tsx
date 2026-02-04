@@ -40,7 +40,7 @@ const AgentInputSelect: React.FC<AgentInputSelectProps> = ({
         {...register(name, { required })}
         disabled={disabled}
         multiple={multiple}
-        className={`w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
+        className={`w-full px-4 py-2 bg-secondary dark:bg-secondary-dark border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
       >
         {placeholder && !multiple && <option value="">{placeholder}</option>}
         {options.map((opt) => (

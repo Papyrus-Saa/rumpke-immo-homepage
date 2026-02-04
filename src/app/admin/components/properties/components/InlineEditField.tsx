@@ -90,21 +90,21 @@ const InlineEditField: React.FC<InlineEditFieldProps> = ({ label, value, display
                 options={options.map(opt => ({ value: opt, label: opt }))}
                 error={errors.field?.message as string}
                 {...register("field")}
-                className="border border-admin-border-l dark:border-admin-border-d rounded px-2 py-1 bg-card-bg-l dark:bg-card-bg-d"
+                className="border border-admin-border-l dark:border-admin-border-d rounded px-2 py-1 bg-secondary dark:bg-secondary-dark"
               />
             ) : type === "number" ? (
               <InputNumber
                 label={label}
                 error={errors.field?.message as string}
                 {...register("field")}
-                className="border border-admin-border-l dark:border-admin-border-d rounded px-2 py-1 bg-card-bg-l dark:bg-card-bg-d"
+                className="border border-admin-border-l dark:border-admin-border-d rounded px-2 py-1 bg-secondary dark:bg-secondary-dark"
               />
             ) : (
               <InputText
                 label={label}
                 error={errors.field?.message as string}
                 {...register("field")}
-                className="border border-admin-border-l dark:border-admin-border-d rounded px-2 py-1 bg-card-bg-l dark:bg-card-bg-d"
+                className="border border-admin-border-l dark:border-admin-border-d rounded px-2 py-1 bg-secondary dark:bg-secondary-dark"
               />
             )}
             <button

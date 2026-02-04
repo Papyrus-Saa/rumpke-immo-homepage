@@ -34,7 +34,7 @@ const AgentInputText: React.FC<AgentInputTextProps> = ({
         placeholder={placeholder}
         disabled={disabled}
         {...register(name, { required })}
-        className={`w-full px-4 py-2 bg-card-bg-l dark:bg-card-bg-d border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
+        className={`w-full px-4 py-2 bg-secondary dark:bg-secondary-dark border border-admin-border-l dark:border-admin-border-d rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${error ? 'border-error' : ''}`}
       />
       {error && <p className="mt-1 text-xs text-error">{error.message}</p>}
     </div>

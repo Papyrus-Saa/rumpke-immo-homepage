@@ -33,7 +33,7 @@ export default function PropertyBasicInfoSection({ register, errors, getInputCla
   const operationLabel = operationType === OperationType.SELL ? 'KAUF' : operationType === OperationType.RENT ? 'MIETE' : '';
   const operationColor = getOperationTypeColor(operationType);
   return (
-    <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6 mb-4">
+    <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow p-6 mb-4">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d flex items-center gap-2">
           Grundinformationen (Pflichtfelder)

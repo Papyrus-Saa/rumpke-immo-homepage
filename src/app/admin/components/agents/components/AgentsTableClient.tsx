@@ -111,10 +111,10 @@ export default function AgentsTableClient({ initialAgents }: { initialAgents: Ag
         </Link>
       </div>
 
-      <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow overflow-hidden">
+      <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-card-bg-l dark:bg-card-bg-d border-b border-admin-border-l dark:border-admin-border-d">
+            <thead className="bg-secondary dark:bg-secondary-dark border-b border-admin-border-l dark:border-admin-border-d">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-admin-text-l dark:text-admin-text-d uppercase tracking-wider">
                   Makler

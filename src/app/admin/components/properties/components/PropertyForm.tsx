@@ -106,7 +106,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
         control={form.control}
       />
 
-      <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6 mb-4">
+      <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow p-6 mb-4">
         <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4 flex items-center gap-2">
           <IoPricetagOutline className="text-xl text-primary" />
           Zusätzliche Kosten
@@ -173,7 +173,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
         </div>
       </div>
 
-      <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
+      <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow p-6">
         <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4 flex items-center gap-2">
           <IoInformationCircleOutline className="text-xl text-primary" />
           Eigenschaften
@@ -477,7 +477,7 @@ const PropertyForm: React.FC<PropertyFormProps> = ({
           )}
         </div>
 
-        <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6">
+        <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4">
             Medien & Beschreibung
           </h2>

@@ -8,9 +8,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<string, string> = {
   primary:
-    "bg-primary dark:bg-primary-dark dark:hover:bg-primary/40 hover:bg-primary/80 disabled:bg-gray-400 text-white",
+    "bg-primary dark:bg-primary-dark hover:bg-primary-dark dark:hover:bg-primary disabled:bg-gray-400 text-white",
   secondary:
-    "bg-secondary dark:bg-secondary-dark hover:bg-secondary/70 dark:hover:bg-secondary/50 text-white",
+    "bg-secondary dark:bg-secondary-dark hover:dark:text-primary-dark hover:bg-secondary-dark dark:hover:bg-secondary  hover:text-white duration-100",
   danger:
     "bg-red-600 hover:bg-red-700 text-white",
 };

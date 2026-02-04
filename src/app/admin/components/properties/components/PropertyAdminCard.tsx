@@ -98,7 +98,7 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
       >
         <div className="w-full h-full flex flex-col items-center justify-center">
 
-          <div className="relative bg-card-bg-l dark:bg-card-bg-d text-card-text-l dark:text-card-text-d  shadow-2xl px-6 py-2 w-[90%] overflow-y-auto flex flex-col gap-8 rounded">
+          <div className="relative bg-secondary dark:bg-secondary-dark text-card-text-l dark:text-card-text-d  shadow-2xl px-6 py-2 w-[90%] overflow-y-auto flex flex-col gap-8 rounded">
             <button
               type="button"
               className="mx-auto"
@@ -302,7 +302,7 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
   return (
     <div
       style={{ borderLeft: `2px solid ${borderColor}` }}
-      className="rounded shadow-md px-5 py-2 gap-3 min-h-[340px] w-full mx-auto bg-card-bg-l dark:bg-card-bg-d text-card-text-l dark:text-card-text-d"
+      className="rounded shadow-md px-5 py-2 gap-3 min-h-[340px] w-full mx-auto bg-secondary dark:bg-secondary-dark text-card-text-l dark:text-card-text-d"
     >
 
       {(editValues.created_at || editValues.updated_at) && (

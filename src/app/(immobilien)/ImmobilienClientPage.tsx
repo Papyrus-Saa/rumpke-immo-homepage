@@ -12,6 +12,9 @@ import ClientOnly from '@/components/form/ClientOnly';
 import PersonalServiceCard from '@/components/personal-service-card/PersonalServiceCard';
 import ContactAside from '@/components/form/ContactAside';
 import Button from '@/components/ui/Button';
+import TargetAudienceSection from '@/components/target-audience-section/TargetAudienceSection';
+import WhyChooseRumpke from '@/components/why-choose-rumpke/WhyChooseRumpke';
+import ServicesSection from '@/components/services-section/ServicesSection';
 
 
 export default function ImmobilienClientPage() {
@@ -79,11 +82,11 @@ export default function ImmobilienClientPage() {
       />
       <Title
         title="Wir begleiten Sie beim Kauf, Verkauf und
-                der Vermietung von Immobilien – persönlich,                 transparent und mit regionaler Expertise."
+                der Vermietung von Immobilien – persönlich, transparent und mit regionaler Expertise."
         className="px-2 sm:px-0 mb-6 dark:text-admin-text-d text-admin-text-l sm:w-[70%] mx-auto sm:text-center text-base sm:text-lg font-medium"
       />
 
-      <div className='flex w-fit mx-auto gap-4'>
+      <div className='flex w-fit mx-auto gap-4 mb-12'>
         <Button
           variant="secondary"
           className="mb-8 mx-auto block"
@@ -100,7 +103,9 @@ export default function ImmobilienClientPage() {
         </Button>
       </div>
 
-      <h1 className="text-xl sm:text-2xl font-bold mb-6 px-1 sm:px-0">Alle Immobilien</h1>
+      <TargetAudienceSection />
+
+      <h1 className="text-xl sm:text-2xl font-bold mb-6 px-2 sm:px-0">Alle Immobilien</h1>
       <PropertiesGrid
         properties={properties}
         onSelectProperty={(property) => {
@@ -109,8 +114,10 @@ export default function ImmobilienClientPage() {
           }
         }}
       />
+      <WhyChooseRumpke />
+      <ServicesSection />
       <PersonalServiceCard />
-      <div className="mt-12 grid gap-2 lg:grid-cols-2">
+      <div className="grid gap-2 lg:grid-cols-2">
         <ClientOnly>
           <LeadForm type="CONTACT" propertyId="" source="web" />
         </ClientOnly>

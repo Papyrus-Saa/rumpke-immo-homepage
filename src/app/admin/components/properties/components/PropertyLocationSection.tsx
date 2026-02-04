@@ -13,7 +13,7 @@ interface Props {
 
 const PropertyLocationSection = ({ register, errors, getInputClassName, control }: Props) => {
   return (
-    <div className="bg-card-bg-l dark:bg-card-bg-d rounded-lg shadow p-6 mb-4">
+    <div className="bg-secondary dark:bg-secondary-dark rounded-lg shadow p-6 mb-4">
       <h2 className="text-lg font-semibold text-admin-text-l dark:text-admin-text-d mb-4 flex items-center gap-2">
         Weitere Standortinformationen
       </h2>
