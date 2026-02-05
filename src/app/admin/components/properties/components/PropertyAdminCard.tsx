@@ -109,7 +109,7 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
             </button>
             <div className="flex justify-between items-center">
               <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
-                {editValues.main_image && (
+                {editValues.main_image && editValues.main_image.startsWith('https://images.unsplash.com/') && (
                   <Image
                     src={editValues.main_image}
                     alt="Immobilienfoto"
@@ -119,7 +119,7 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
                   />
                 )}
               </div>
-              {/* <span></span> */}
+
             </div>
             <div className="flex gap-16 items-start px-2 rounded">
               <div className="flex-1 flex flex-col gap-4">
@@ -321,13 +321,13 @@ const PropertyAdminCard: React.FC<PropertyAdminCardProps> = ({ property, onEdit,
       )}
       <div className="flex gap-4 items-start">
         <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
-          {editValues.main_image && (
+          {editValues.main_image && editValues.main_image.startsWith('https://images.unsplash.com/') && (
             <Image
               src={editValues.main_image}
               alt="Immobilienfoto"
-              width={64}
-              height={64}
-              className="object-cover w-full h-full"
+              width={300}
+              height={200}
+              className="object-cover w-full h-full rounded"
             />
           )}
         </div>

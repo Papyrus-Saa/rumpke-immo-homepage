@@ -52,9 +52,9 @@ export const propertyOptionalGroups = [
       { key: "community_fees", label: "Gemeinschaftskosten" },
       { key: "deposit", label: "Kaution" },
       { key: "commission_info", label: "Provision" },
-      { key: "description", label: "Beschreibung" },
       { key: "notes_internal", label: "Interne Bemerkung" },
-      { key: "is_new", label: "Neubau" }
+      { key: "is_new", label: "Neubau" },
+      { key: "description", label: "Beschreibung" },
     ]
   }
 ];

@@ -44,7 +44,10 @@ export default function ImmobilienClientPage() {
               : p.operation === 'RENT'
                 ? 'RENT'
                 : undefined,
-          image: p.main_image || '',
+          image:
+            p.main_image && p.main_image.startsWith('https://images.unsplash.com/')
+              ? p.main_image
+              : '',
           images: [
             `/properties/fake${(idx % 3) + 1}.jpg`,
             `/properties/fake${((idx + 1) % 3) + 1}.jpg`,
@@ -117,7 +120,7 @@ export default function ImmobilienClientPage() {
           <ContactAside />
         </div>
       </div>
-      <ScrollToTopButton/>
+      <ScrollToTopButton />
     </main>
   );
 }

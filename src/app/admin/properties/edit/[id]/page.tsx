@@ -120,7 +120,6 @@ export default function EditPropertyPage() {
     try {
       const normalized = normalizePropertyNumbers(data);
       await updateProperty(id, normalized);
-      // Redirigir tras éxito
       router.push("/admin/properties");
     } catch (err: any) {
       setSaveError(err.message || "Fehler beim Speichern.");

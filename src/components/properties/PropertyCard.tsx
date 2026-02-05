@@ -65,7 +65,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick, classNam
   const isDisabled = property.status === 'RESERVED' || property.status === 'SOLD' || property.status === 'RENTED';
   return (
     <div
-      className={`relative ${isDisabled ? 'opacity-60 pointer-events-none' : 'cursor-pointer  transition-all duration-200'} bg-secondary dark:bg-secondary-dark  rounded shadow overflow-hidden group ${cardOpacity} w-full max-w-full sm:max-w-[350px] min-h-[420px] sm:min-h-0 max-h-[480px] sm:max-h-[420px] hover:rounded-br-2xl ${className || ''}`}
+      className={`relative ${isDisabled ? 'opacity-60 pointer-events-none' : 'cursor-pointer  transition-all duration-200'} bg-secondary dark:bg-secondary-dark overflow-hidden group ${cardOpacity} w-full max-w-full sm:max-w-[350px] min-h-[420px] sm:min-h-0 max-h-[480px] sm:max-h-[420px] hover:rounded-br-2xl ${className || ''}`}
       onClick={handleClick}
       style={style}
     >
@@ -78,7 +78,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick, classNam
         </span>
       )}
       <PropertyTypeCorner type={property.operationType} style={{ bottom: 8, right: 8 }} size={8} />
-      <div className="relative w-full h-56 sm:h-40">
+      <div className="relative w-full h-56 sm:h-40 ">
         {property.image ? (
           <Image
             src={property.image}

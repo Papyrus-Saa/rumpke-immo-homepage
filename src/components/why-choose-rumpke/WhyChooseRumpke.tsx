@@ -21,11 +21,11 @@ const features = [
 const WhyChooseRumpke = () => {
   return (
     <section className="w-full py-12">
-      <div className="max-w-3xl mx-auto px-2 sm:px-0">
+      <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">Warum Rumpke Immobilien?</h2>
         <div className="flex flex-col gap-6">
           {features.map((feature) => (
-            <div key={feature.title} className="flex items-start gap-4 bg-primary dark:bg-primary-dark rounded-lg p-4 duration-100">
+            <div key={feature.title} className="flex items-start gap-4 bg-primary dark:bg-primary-dark rounded p-4 duration-100">
               <div className="shrink-0 text-white">
                 {feature.icon}
               </div>

@@ -1,16 +1,30 @@
 
-import AboutPortrait from '@/components/ui/About/AboutPortrait';
+import Image from 'next/image';
 
 export default function UeberUnsPage() {
   return (
-    <section className="duration-100 border-admin-text-d/40 dark:border-admin-text-d/10 border mx-auto px-4 py-6 bg-secondary dark:bg-secondary-dark rounded animate-fade-in">
-      <div className="flex flex-col md:flex-row md:items-start md:gap-10">
-        <div className="shrink-0 flex justify-center md:justify-start md:w-1/3">
-          <AboutPortrait />
+    <section className="duration-100 border-admin-text-d/40 dark:border-admin-text-d/10 border mx-auto  py-6 bg-secondary dark:bg-secondary-dark rounded animate-fade-in lg:pl-2">
+      <div className="grid lg:grid-cols-2 md:gap-10">
+        <div className="flex flex-col">
+          <div className="relative w-full md:max-w-md md:mx-auto rounded overflow-hidden flex items-center justify-center shadow-md border border-amber-400/80">
+            <Image
+              src="/imgs/personal-service-pic.jpeg"
+              alt="Ann-Christin Rumpke Portrait"
+              width={384}
+              height={512}
+              className="object-cover w-full h-full"
+              style={{ height: 'auto' }}
+              priority
+            />
+          </div>
+          <div className="mt-4 text-center">
+            <div className="font-semibold text-lg md:text-xl text-gray-900 dark:text-gray-100">Ann-Christin Rumpke</div>
+            <div className="text-xs md:text-sm text-gray-500 dark:text-gray-300 tracking-wide">Immobilienmaklerin & Wertermittlerin</div>
+          </div>
         </div>
-        <div className="w-full space-y-5 mt-4 md:mt-0 flex flex-col items-center md:items-start md:w-2/3">
+        <div className="w-full space-y-5 mt-4 md:mt-0 flex flex-col items-center md:items-start px-2">
           <h1 className="text-lg md:text-xl font-bold mb-2 tracking-wide text-center md:text-left text-primary">Über mich</h1>
-          <p className="text-sm md:text-base font-normal tracking-wide text-center md:text-left max-w-2xl">
+          <p className="text-sm md:text-base font-normal tracking-wide text-center md:text-left">
             Mein Name ist Ann-Christin Rumpke, und ich bin eine erfahrene Immobilienmaklerin mit langjähriger Erfahrung in der Immobilienbranche. Angefangen habe ich mit der WEG- und Mietverwaltung im Angestelltenverhältnis und mich nun dazu entschieden mich hauptsächlich auf die Tätigkeit als Immobilienmaklerin und Wertermittlerin zu spezialisieren.
           </p>
           <p className="text-sm md:text-base font-normal tracking-wide text-center md:text-left max-w-2xl">
