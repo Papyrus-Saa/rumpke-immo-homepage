@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { IoHomeOutline, IoPersonAddOutline, IoKeyOutline, IoArrowForward } from 'react-icons/io5';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const cards = [
   {
@@ -21,11 +21,9 @@ const cards = [
 ];
 
 const TargetAudienceSection = () => {
-  const router = useRouter();
   return (
-    <section className="w-full md:py-2 mb-12 rounded  duration-100 lg:p-1 xl:px-0 bg-secondary dark:bg-secondary-dark">
+    <section className="w-full md:py-2 mb-12 rounded  duration-100 lg:p-4 xl:px-0 bg-secondary dark:bg-secondary-dark">
       <div className="grid gap-2 lg:grid-cols-2 items-stretch">
-        {/* Imagen: primero en móvil */}
         <div className="order-1 md:order-2 flex flex-col items-center justify-center w-full mb-8 md:mb-0">
           <div className="w-full max-w-md flex flex-col items-center justify-center h-full">
             <Image
@@ -58,13 +56,9 @@ const TargetAudienceSection = () => {
                   <div className="text-sm  mb-0">{card.text}</div>
                 </div>
                 <div className="flex items-center ml-4">
-                  <button
-                    onClick={() => router.push('/kontakt')}
-                    className="p-0 bg-transparent hover:scale-125 transition"
-                    aria-label="Kontakt aufnehmen"
-                  >
-                    <IoArrowForward size={18} className="text-white cursor-pointer" />
-                  </button>
+                  <Link href="/kontakt" aria-label="Kontakt aufnehmen">
+                    <IoArrowForward size={18} className="text-white cursor-pointer p-0 bg-transparent hover:scale-125 transition" />
+                  </Link>
                 </div>
               </div>
             ))}

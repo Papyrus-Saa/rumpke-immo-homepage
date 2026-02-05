@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import PropertiesGrid from '@/components/properties/PropertiesGrid';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 import { Title } from '@/components/ui/title/Title';
@@ -15,6 +15,7 @@ import Button from '@/components/ui/Button';
 import TargetAudienceSection from '@/components/target-audience-section/TargetAudienceSection';
 import WhyChooseRumpke from '@/components/why-choose-rumpke/WhyChooseRumpke';
 import ServicesSection from '@/components/services-section/ServicesSection';
+import ScrollToTopButton from '@/components/ui/scroll-to-top/ScrollToTopButton';
 
 
 export default function ImmobilienClientPage() {
@@ -23,7 +24,6 @@ export default function ImmobilienClientPage() {
   const [properties, setProperties] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     async function fetchProperties() {
@@ -87,20 +87,16 @@ export default function ImmobilienClientPage() {
       />
 
       <div className='flex w-fit mx-auto gap-4 mb-12'>
-        <Button
-          variant="secondary"
-          className="mb-8 mx-auto block"
-          onClick={() => router.push('/contact?subject=Immobilienberatung')}
-        >
-          Kostenlose Bewertung
-        </Button>
-        <Button
-          variant="primary"
-          className="mb-8 mx-auto block"
-          onClick={() => router.push('/kontakt')}
-        >
-          Kontakt aufnehmen
-        </Button>
+        <Link href="/contact?subject=Immobilienberatung" className="mb-8 mx-auto block">
+          <Button variant="secondary">
+            Kostenlose Bewertung
+          </Button>
+        </Link>
+        <Link href="/kontakt" className="mb-8 mx-auto block">
+          <Button variant="primary">
+            Kontakt aufnehmen
+          </Button>
+        </Link>
       </div>
 
       <TargetAudienceSection />
@@ -108,11 +104,6 @@ export default function ImmobilienClientPage() {
       <h1 className="text-xl sm:text-2xl font-bold mb-6 px-2 sm:px-0">Alle Immobilien</h1>
       <PropertiesGrid
         properties={properties}
-        onSelectProperty={(property) => {
-          if (property && property.slug) {
-            router.push(`/object/${property.slug}`);
-          }
-        }}
       />
       <WhyChooseRumpke />
       <ServicesSection />
@@ -125,6 +116,7 @@ export default function ImmobilienClientPage() {
           <ContactAside />
         </div>
       </div>
+      <ScrollToTopButton/>
     </main>
   );
 }

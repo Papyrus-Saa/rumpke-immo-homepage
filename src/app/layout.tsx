@@ -29,7 +29,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider>
           <ReactQueryProvider>
             <div className="bg-bg-l text-zinc-800 dark:bg-bg-d dark:text-zinc-100 transition-colors duration-100 ease-out xl:px-6">
-              <ContactButtom/>
+              <div className='hidden md:block fixed top-0 right-6'>
+                <ContactButtom/>
+              </div>
               <GlobalBorderColor />
               {children}
             </div>

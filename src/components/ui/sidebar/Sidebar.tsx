@@ -10,6 +10,7 @@ import { IoLanguageOutline } from "react-icons/io5";
 import { useUIStore } from "@/store/ui/ui-store";
 import clsx from "clsx";
 import { IoAlbumsOutline } from "react-icons/io5";
+import ContactTooltip from "../contact-buttom/ContactTooltip";
 
 
 
@@ -97,6 +98,9 @@ const Sidebar = () => {
         <SidebarItem href="/blog" icon={<IoDiamondOutline size={20} className="mr-2" />}>Blog</SidebarItem>
         <div className="flex py-1 mt-3 justify-start items-center hover:bg-Bghover-l dark:hover:bg-Bghover-d rounded">
           <ThemeSwitch />
+        </div>
+        <div className="mt-6">
+          <ContactTooltip/>
         </div>
       </nav>
     </div>

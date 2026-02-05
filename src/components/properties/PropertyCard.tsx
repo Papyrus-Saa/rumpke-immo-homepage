@@ -65,7 +65,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick, classNam
   const isDisabled = property.status === 'RESERVED' || property.status === 'SOLD' || property.status === 'RENTED';
   return (
     <div
-      className={`relative ${isDisabled ? 'opacity-60 pointer-events-none' : 'cursor-pointer hover:shadow-lg hover:border-2 dark:hover:border-primary-dark hover:border-primary/20 transition-all duration-200'} bg-secondary dark:bg-secondary-dark border border-transparent dark:border-admin-border-d  rounded shadow overflow-hidden group ${cardOpacity} w-full max-w-full sm:max-w-[350px] max-h-[480px] sm:max-h-[420px] hover:rounded-br-2xl ${className || ''}`}
+      className={`relative ${isDisabled ? 'opacity-60 pointer-events-none' : 'cursor-pointer hover:shadow-lg hover:border-2 dark:hover:border-primary-dark hover:border-primary/20 transition-all duration-200'} bg-secondary dark:bg-secondary-dark border border-transparent dark:border-admin-border-d  rounded shadow overflow-hidden group ${cardOpacity} w-full max-w-full sm:max-w-[350px] min-h-[420px] sm:min-h-0 max-h-[480px] sm:max-h-[420px] hover:rounded-br-2xl ${className || ''}`}
       onClick={handleClick}
       style={style}
     >
@@ -78,7 +78,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick, classNam
         </span>
       )}
       <PropertyTypeCorner type={property.operationType} style={{ bottom: 8, right: 8 }} size={8} />
-      <div className="relative w-full h-40">
+      <div className="relative w-full h-56 sm:h-40">
         {property.image ? (
           <Image
             src={property.image}
@@ -99,36 +99,34 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick, classNam
           </div>
         )}
       </div>
-      <div className="p-3">
-        <div className="font-bold text-lg mb-1" title={property.title}>{property.title}</div>
-        <div className="text-sm text-card-text-l dark:text-card-text-d mb-1">
+      <div className="p-3 flex flex-col gap-1 min-h-0 max-h-32 sm:max-h-36 overflow-hidden">
+        <div className="font-bold text-lg mb-1 truncate" title={property.title}>{property.title}</div>
+        <div className="text-sm text-card-text-l dark:text-card-text-d mb-1 truncate">
           {property.city && <span>{property.city}</span>}
           {property.postal_code && <span>{property.city ? ', ' : ''}{property.postal_code}</span>}
         </div>
         <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-card-text-l dark:text-card-text-d mb-1">
           {property.rooms !== undefined && property.rooms !== null && (
-            <span>Zimmer: <b>{property.rooms}</b></span>
+            <span className="truncate">Zimmer: <b>{property.rooms}</b></span>
           )}
           {property.built_area_m2 && (
-            <span>Wohnfläche: <b>ca. {Number(property.built_area_m2).toLocaleString('de-DE')} m²</b></span>
+            <span className="truncate">Wohnfläche: <b>ca. {Number(property.built_area_m2).toLocaleString('de-DE')} m²</b></span>
           )}
           {property.plot_area_m2 && (
-            <span>Grundstück: <b>ca. {Number(property.plot_area_m2).toLocaleString('de-DE')} m²</b></span>
+            <span className="truncate">Grundstück: <b>ca. {Number(property.plot_area_m2).toLocaleString('de-DE')} m²</b></span>
           )}
         </div>
-        {property.price && <div className="text-primary font-semibold mb-1">{property.price}</div>}
-
-
+        {property.price && <div className="text-primary font-semibold mb-1 truncate">{property.price}</div>}
         {property.operationType === OperationType.RENT && (
           <div className="flex flex-col gap-1 mt-2 text-xs">
             {property.available_from && (
-              <div><b>Verfügbar ab:</b> {new Date(property.available_from).toLocaleDateString('de-DE')}</div>
+              <div className="truncate"><b>Verfügbar ab:</b> {new Date(property.available_from).toLocaleDateString('de-DE')}</div>
             )}
             {property.deposit && (
-              <div><b>Kaution:</b> {property.deposit}</div>
+              <div className="truncate"><b>Kaution:</b> {property.deposit}</div>
             )}
             {property.furnished && property.furnished.toLowerCase() !== 'nein' && property.furnished.toLowerCase() !== 'no' && (
-              <div><b>Möbliert</b></div>
+              <div className="truncate"><b>Möbliert</b></div>
             )}
           </div>
         )}

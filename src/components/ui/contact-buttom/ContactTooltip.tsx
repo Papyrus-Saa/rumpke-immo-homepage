@@ -10,7 +10,7 @@ const ContactTooltip = () => {
   if (pathname.startsWith('/admin')) return null;
   return (
     <StyledWrapper>
-      <ul className="flex example-1 fixed right-8 top-0 z-50 pt-1 text-bg-l dark:text-card-text-d bg-primary dark:bg-primary-dark py-1 rounded-b px-2 dark:hover:shadow-primary hover:shadow-primary-dark shadow-md transform duration-300 " >
+      <ul className="flex justify-around example-1  pt-1 text-bg-l dark:text-card-text-d bg-primary dark:bg-primary-dark py-1 rounded-b px-2 dark:hover:shadow-primary hover:shadow-primary-dark shadow-md transform duration-300" >
         <li className="icon-content">
           <Link
             href="https://www.facebook.com/profile.php?id=61572884870790"
@@ -26,23 +26,34 @@ const ContactTooltip = () => {
         </li>
         <li className="icon-content">
           <Link
-            href="#"
+            href="https://wa.me/491723244468"
             aria-label="Whatsapp"
             data-social="whatsapp"
             rel="noopener noreferrer"
+            target="_blank"
             className="link"
           >
             <IoLogoWhatsapp size={20} className='hover:bg-[#25D366] rounded' />
           </Link>
-          <div className="tooltip text-xs text-bg-l dark:text-admin-border-l bg-[#25D366] py-1 px-2 rounded">Beta</div>
+          <div className="tooltip text-xs text-bg-l dark:text-admin-border-l bg-[#25D366] py-1 px-2 rounded">WhatsApp</div>
         </li>
-        <li className="icon-content">
+        <li className="icon-content hidden md:block">
           <Link
-            href="/kontakt"
+            href="/#leadform"
             aria-label="Email"
             data-social="email"
             rel="noopener noreferrer"
-            className="link"
+            className="link "
+            scroll={false}
+            onClick={e => {
+              if (window.location.pathname === '/' || window.location.pathname === '/index') {
+                e.preventDefault();
+                const el = document.getElementById('leadform');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }
+            }}
           >
             <IoMailOutline size={20} className='hover:bg-admin-border-d rounded' />
           </Link>

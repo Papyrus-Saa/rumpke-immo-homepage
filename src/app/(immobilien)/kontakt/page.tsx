@@ -36,7 +36,9 @@ export default function KontaktPage() {
       </div>
       <div className="mt-12">
         <ClientOnly>
-          <LeadForm type="CONTACT" propertyId="" source="web" />
+          <div id="leadform">
+            <LeadForm type="CONTACT" propertyId="" source="web" />
+          </div>
         </ClientOnly>
       </div>
     </section>

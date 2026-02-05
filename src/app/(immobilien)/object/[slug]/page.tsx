@@ -18,6 +18,8 @@ export default function PropertyDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+
+
   useEffect(() => {
     if (!slug) return;
     setLoading(true);
