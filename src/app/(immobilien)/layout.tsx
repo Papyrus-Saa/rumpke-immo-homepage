@@ -14,11 +14,8 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 export default function PropertiesLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={inter.className}>
-      <div className="">
-        <div className="">
+      <div className="xl:px-20">
           <Topmenu />
-        </div>
-
         <div className="md:px-4">
           <Title
             title="Rumpke Immobilien"
@@ -28,7 +25,7 @@ export default function PropertiesLayout({ children }: { children: React.ReactNo
           <Sidebar />
           <div className="flex">
             <SidebarDesktop />
-            <div className="flex-1 max-w-[1300px] mx-auto">
+            <div className="flex-1 max-w-[1300px] mx-auto xl:px-10">
               {children}
             </div>
           </div>

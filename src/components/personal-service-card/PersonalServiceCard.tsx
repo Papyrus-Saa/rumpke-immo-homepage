@@ -18,17 +18,17 @@ const PersonalServiceCard = () => {
       </div>
       <div className="px-2 sm:p-0 flex flex-col justify-between w-full h-full lg:h-90">
         <div>
-          <div className="space-y-4">
-            <h2 className="text-base md:text-lg font-bold dark:text-primary mb-2">Persönlicher Service</h2>
-            <p className="text-base ">Ich nehme mir Zeit für Sie und Ihre individuellen Wünsche. Jeder Kunde wird von einem festen Ansprechpartner betreut, der ihn während des gesamten Prozesses begleitet.</p>
+          <div className="space-y-4 ">
+            <h2 className="text-base md:text-lg font-bold  mb-2">Persönlicher Service</h2>
+            <p className="text-base dark:text-card-text-d text-card-text-l">Ich nehme mir Zeit für Sie und Ihre individuellen Wünsche. Jeder Kunde wird von einem festen Ansprechpartner betreut, der ihn während des gesamten Prozesses begleitet.</p>
           </div>
           <div className="space-y-4">
-            <h2 className="text-base md:text-lg font-bold text-primary mb-2">Lokale Expertise</h2>
-            <p className="text-base ">Als erfahrene Immobilienmaklerin kenne ich den regionalen Markt und seine Besonderheiten. Nutzen Sie unser Netzwerk und unser Know-how zu Ihrem Vorteil.</p>
+            <h2 className="text-base md:text-lg font-bold  mb-2">Lokale Expertise</h2>
+            <p className="text-base dark:text-card-text-d text-card-text-l">Als erfahrene Immobilienmaklerin kenne ich den regionalen Markt und seine Besonderheiten. Nutzen Sie unser Netzwerk und unser Know-how zu Ihrem Vorteil.</p>
           </div>
           <div className="space-y-4">
-            <h2 className="text-base md:text-lg font-bold text-primary mb-2">Transparenz und Vertrauen</h2>
-            <p className="text-base ">Bei uns gibt es keine versteckten Kosten. Wir legen Wert auf eine offene Kommunikation und faire Konditionen.</p>
+            <h2 className="text-base md:text-lg font-bold  mb-2">Transparenz und Vertrauen</h2>
+            <p className="text-base dark:text-card-text-d text-card-text-l">Bei uns gibt es keine versteckten Kosten. Wir legen Wert auf eine offene Kommunikation und faire Konditionen.</p>
           </div>
         </div>
         <div className="flex items-end">

@@ -1,5 +1,11 @@
 import ImmobilienClientPage from "./ImmobilienClientPage";
 
 export default function Page() {
-  return <ImmobilienClientPage />;
+  return (
+    <div className="">
+      <ImmobilienClientPage />
+    </div>
+  )
+
+  ;
 }

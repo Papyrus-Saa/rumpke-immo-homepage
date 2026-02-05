@@ -23,20 +23,21 @@ const cards = [
 const TargetAudienceSection = () => {
   return (
     <section className="w-full md:py-2 mb-12 rounded  duration-100 lg:p-4 xl:px-0 bg-secondary dark:bg-secondary-dark">
-      <div className="grid gap-2 lg:grid-cols-2 items-stretch">
-        <div className="order-1 md:order-2 flex flex-col items-center justify-center w-full mb-8 md:mb-0">
+      <div className="grid gap-2 lg:grid-cols-2 items-stretch ">
+        <div className="order-1 lg:order-2 flex flex-col items-center justify-center w-full mb-8 md:mb-0 ">
           <div className="w-full max-w-md flex flex-col items-center justify-center h-full">
             <Image
-              src="/imgs/whyTrustUsPic.jpg"
+              src="/imgs/whyTrustUsPic-2.jpg"
               alt="Für wen wir da sind"
               width={500}
               height={500}
-              className="md:rounded object-cover w-full shadow-lg max-h-[500px]"
+              className="md:rounded object-cover max-w-full shadow-lg"
+              style={{ width: '100%', height: 'auto' }}
               priority
             />
           </div>
         </div>
-        <div className="order-2 md:order-1 flex flex-col px-2 sm:px-0 justify-center w-full max-w-md mx-auto h-full rounded">
+        <div className="order-2 lg:order-1 flex flex-col px-2 sm:px-0 justify-center w-full max-w-md mx-auto h-full rounded">
           <h2 className="text-xl sm:text-2xl font-bold mb-2">Für wen wir da sind</h2>
           <p className="mb-6 text-base sm:text-lg px-2 sm:px-0 text-card-text-l dark:text-card-text-d ">
             Wir bieten individuelle Unterstützung für verschiedene Zielgruppen – damit jeder die passende Lösung findet.

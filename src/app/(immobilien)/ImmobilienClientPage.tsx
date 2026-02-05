@@ -16,6 +16,7 @@ import TargetAudienceSection from '@/components/target-audience-section/TargetAu
 import WhyChooseRumpke from '@/components/why-choose-rumpke/WhyChooseRumpke';
 import ServicesSection from '@/components/services-section/ServicesSection';
 import ScrollToTopButton from '@/components/ui/scroll-to-top/ScrollToTopButton';
+import HeroComponent from '@/components/ui/hero-component/HeroComponent';
 
 
 export default function ImmobilienClientPage() {
@@ -75,7 +76,7 @@ export default function ImmobilienClientPage() {
   if (error) return <div className="p-4 font-semibold text-error">Eigenschaften konnten nicht geladen werden.</div>;
 
   return (
-    <main className="">
+    <main className=" xl:px-6">
       <Title
         title="Immobilien. Persönlich. Durchdacht. "
         className="px-1 sm:px-0 mb-6 text-center text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bold"
