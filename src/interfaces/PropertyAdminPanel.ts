@@ -1,5 +1,5 @@
 export interface PropertyAdminPanel {
-  id: string; // UUID único para cada propiedad
+  id: string;
   category: 'haus' | 'wohnung' | 'gewerbe' | 'grundstueck' | 'sonstige';
   title: string;
   agent: string;
@@ -16,12 +16,12 @@ export interface PropertyAdminPanel {
   bathrooms: number;
   price_amount: number;
   currency: string;
-  // Foto principal
+
   main_image: string;
 
 
 
-  // --- Opcionales (Mehr anzeigen) ---
+
 
   country?: string;
   latitude?: number;

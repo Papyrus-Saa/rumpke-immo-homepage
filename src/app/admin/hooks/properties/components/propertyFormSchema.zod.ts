@@ -19,7 +19,7 @@ export const propertyFormSchemaZod = z.object({
   currency: z.string().min(1, { message: 'Währung ist erforderlich' }),
   main_image: z.string().url({ message: 'Hauptbild muss eine gültige URL sein' }).min(1, { message: 'Hauptbild ist erforderlich' }),
 
-  // Opcionales
+
   country: z.string().optional(),
   latitude: z.number().optional().nullable(),
   longitude: z.number().optional().nullable(),

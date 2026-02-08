@@ -42,13 +42,13 @@ export function usePropertyForm({ allFields, errors }: UsePropertyFormOptions) {
     setSearchResults([]);
   };
 
-  // Clases de input con highlight
+
   const getInputClassName = (fieldName: string) => {
     const baseClasses = "w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-gray-300 dark:border-neutral-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent";
     return highlightedField === fieldName ? `${baseClasses} ring-2 ring-warning` : baseClasses;
   };
 
-  // Auto-scroll al primer error
+
   useEffect(() => {
     const firstErrorKey = Object.keys(errors)[0];
     if (firstErrorKey) {

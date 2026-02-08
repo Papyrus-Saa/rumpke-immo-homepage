@@ -48,7 +48,7 @@ export default async function HausPage() {
     );
   }
 
-  // Filtrar propiedades por tipo de la ruta
+
   const type = 'haus';
   const title = 'Alle Häuser';
   const filteredProperties = properties.filter((p: any) => (p.type || '').toLowerCase() === type);

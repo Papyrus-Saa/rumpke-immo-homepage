@@ -3,7 +3,7 @@ import { OperationType, OPERATION_TYPE_COLOR } from '@/store/ui/ui-store';
 
 interface PropertyTypeCornerProps {
   type: OperationType;
-  size?: number; // px
+  size?: number;
   style?: React.CSSProperties;
 }
 

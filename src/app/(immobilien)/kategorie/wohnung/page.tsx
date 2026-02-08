@@ -48,7 +48,7 @@ export default async function WohnungPage() {
     );
   }
 
-  // Filtrar propiedades por tipo de la ruta
+
   const type = 'wohnung';
   const title = 'Alle Wohnungen';
   const filteredProperties = properties.filter((p: any) => (p.type || '').toLowerCase() === type);

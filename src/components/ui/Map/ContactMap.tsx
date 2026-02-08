@@ -25,7 +25,7 @@ export default function ContactMap() {
         (el as HTMLElement).style.display = 'none';
       });
     }, 100);
-    // Forzar resize del mapa cuando el div cambia de tamaño
+
     setTimeout(() => {
       if (mapRef.current && mapRef.current.invalidateSize) {
         mapRef.current.invalidateSize();

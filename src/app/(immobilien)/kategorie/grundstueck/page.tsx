@@ -48,7 +48,7 @@ export default async function GrundstueckPage() {
     );
   }
 
-  // Filtrar propiedades por tipo de la ruta
+
   const type = 'grundstueck';
   const title = 'Alle Grundstücke';
   const filteredProperties = properties.filter((p: any) => (p.type || '').toLowerCase() === type);

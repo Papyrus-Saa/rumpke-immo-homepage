@@ -56,7 +56,7 @@ export default async function KategorieTypePage({ params }: { params: { type: st
     );
   }
 
-  // Filtrar propiedades por tipo de la ruta
+
   const type = params.type.toLowerCase();
   const title = `Alle ${typeMap[type] || type}`;
   const filteredProperties = properties.filter((p: any) => (p.type || '').toLowerCase() === type);
