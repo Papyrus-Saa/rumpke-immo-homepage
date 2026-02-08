@@ -15,21 +15,21 @@ export default function PropertiesLayout({ children }: { children: React.ReactNo
   return (
     <div className={inter.className}>
       <div className="xl:px-20">
-          <Topmenu />
+          {/* <Topmenu /> */}
         <div className="md:px-4">
-          <Title
+          {/* <Title
             title="Rumpke Immobilien"
             subtitle="Finde deine Traumimmobilie"
             className='flex-1 md:hidden mb-4 ml-2 text-primary'
-          />
-          <Sidebar />
-          <div className="flex">
+          /> */}
+          {/* <Sidebar /> */}
+          {/* <div className="flex">
             <SidebarDesktop />
             <div className="flex-1 max-w-[1300px] mx-auto xl:px-10">
               {children}
             </div>
-          </div>
-          <Footer />
+          </div> */}
+          {/* <Footer /> */}
         </div>
       </div>
     </div>
