@@ -8,11 +8,9 @@ import CompanyTitle from "@/components/ui/companyTitle/CompanyTitle";
 import Script from "next/script";
 import GlobalBorderColor from "@/components/ui/GlobalBorderColor";
 import ContactButtom from '@/components/ui/contact-buttom/ContactTooltip';
-import Topmenu from '@/components/ui/top-menu/TopMenu';
 import { Title } from '@/components/ui/title/Title';
-import Sidebar from '@/components/ui/sidebar/Sidebar';
-import SidebarDesktop from '@/components/ui/sidebar/SidebarDesktop';
-import Footer from '@/components/ui/footer/Footer';
+
+
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -33,23 +31,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider>
           <ReactQueryProvider>
             <div className="bg-bg-l text-zinc-800 dark:bg-bg-d dark:text-zinc-100 transition-colors duration-100 ease-out">
-              <div className='hidden md:block fixed top-0 right-6 xl:right-36 z-500'>
+              {/* <div className='hidden md:block fixed top-0 right-6 xl:right-36 z-500'>
                 <ContactButtom />
-              </div>
+              </div> */}
               <GlobalBorderColor />
-              <Topmenu />
-              <Title
-                title="Rumpke Immobilien"
-                subtitle="Finde deine Traumimmobilie"
-                className='flex-1 md:hidden mb-4 ml-2 text-primary'
-              />
-              <div className="flex">
                 <div className=" mx-auto">
                   {children}
                 </div>
               </div>
-              <Footer />
-            </div>
           </ReactQueryProvider>
           <CompanyTitle />
         </ThemeProvider>

@@ -17,13 +17,7 @@ const Topmenu = () => {
 
   return (
     <>
-      <div className='relative mb-10 sm:mb-0 flex justify-between items-center md:mb-4 py-4 px-4 '>
-        <Link href={'/'}>
-          <div className="flex items-center">
-            <RumpkeLogo className="md:w-full md:h-full" aria-label="Rumpke Immobilien Logo" />
-          </div>
-        </Link>
-
+      <div className=' flex justify-end items-center  w-full border'>
         <div className='flex'>
           <CategoryButton
             name="Kauf"

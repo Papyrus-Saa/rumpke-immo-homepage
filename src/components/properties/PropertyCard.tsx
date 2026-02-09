@@ -65,7 +65,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick, classNam
   const isDisabled = property.status === 'RESERVED' || property.status === 'SOLD' || property.status === 'RENTED';
   return (
     <div
-      className={`relative ${isDisabled ? 'opacity-60 pointer-events-none' : 'cursor-pointer  transition-all duration-200'} bg-secondary dark:bg-secondary-dark overflow-hidden group ${cardOpacity} w-full max-w-full sm:max-w-[350px] min-h-[420px] sm:min-h-0 max-h-[480px] sm:max-h-[420px] hover:rounded-br-2xl ${className || ''}`}
+      className={`relative ${isDisabled ? 'opacity-60 pointer-events-none' : 'cursor-pointer  transition-all duration-200'} bg-secondary dark:bg-secondary-dark overflow-hidden group p-4 mb-1 ${cardOpacity} w-full  hover:rounded-br-2xl ${className || ''}`}
       onClick={handleClick}
       style={style}
     >
@@ -99,7 +99,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, onClick, classNam
           </div>
         )}
       </div>
-      <div className="p-3 flex flex-col gap-1 min-h-0 max-h-32 sm:max-h-36 overflow-hidden">
+      <div className="p-3 flex flex-col gap-1 min-h-0  overflow-hidden">
         <div className="font-bold text-lg mb-1 truncate" title={property.title}>{property.title}</div>
         <div className="text-sm text-card-text-l dark:text-card-text-d mb-1 truncate">
           {property.city && <span>{property.city}</span>}

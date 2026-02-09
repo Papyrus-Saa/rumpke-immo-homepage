@@ -22,7 +22,7 @@ const cards = [
 
 const TargetAudienceSection = () => {
   return (
-    <section className="w-full md:py-2 mb-12 rounded  duration-100 lg:p-4 xl:px-2 bg-secondary dark:bg-secondary-dark">
+    <section className="w-full md:py-2 mb-12 lg:rounded  duration-100 lg:p-4 p-2 bg-secondary dark:bg-secondary-dark">
       <div className="grid gap-2 lg:grid-cols-2 items-stretch ">
         <div className="order-1 lg:order-2 flex flex-col items-center justify-center w-full mb-8 md:mb-0 ">
           <div className="w-full max-w-md flex flex-col items-center justify-center h-full">

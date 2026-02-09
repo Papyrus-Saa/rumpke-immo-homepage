@@ -20,7 +20,7 @@ const SidebarItem = ({ href, icon, children, color, mt }: SidebarItemProps) => {
     <Link
       onClick={closeSidemenu}
       href={href}
-      className={`flex items-center mt-4 pl-1 py-1 hover:bg-primary/50 hover:text-black dark:hover:text-white dark:hover:bg-primary-dark/50 rounded transition-all  cursor-pointer`}
+      className={`flex items-center mt-4 pl-1 py-1 hover:bg-primary/50 hover:text-black dark:hover:text-white dark:hover:bg-primary-dark/50 rounded transition-all  cursor-pointer w-full`}
     >
       {iconWithMargin}
       {children}

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const PersonalServiceCard = () => {
   return (
-    <section className="flex flex-col md:flex-row items-center md:items-start gap-8 rounded py-6 md:py-10 transition duration-100 dark:bg-secondary-dark bg-secondary md:px-4 mb-12">
+    <section className="flex flex-col xl:flex-row items-center md:items-start gap-8 rounded py-6 md:py-10 transition duration-100 dark:bg-secondary-dark bg-secondary md:px-4 mb-12">
       <div className="w-full md:w-auto flex items-center justify-center">
         <Image
           src="/imgs/personal-service-pic.jpeg"
